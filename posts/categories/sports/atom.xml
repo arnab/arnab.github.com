@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sports | Arnab's Universe]]></title>
+  <link href="http://arnab.github.com/posts/categories/sports/atom.xml" rel="self"/>
+  <link href="http://arnab.github.com/"/>
+  <updated>2013-01-21T15:16:38+05:30</updated>
+  <id>http://arnab.github.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Some pics of my cricket team Eagles]]></title>
+    <link href="http://arnab.github.com/posts/2008/08/some-pics-of-my-cricket-team-eagles/"/>
+    <updated>2008-08-24T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2008/08/some-pics-of-my-cricket-team-eagles</id>
+    <content type="html"><![CDATA[<p>taken with the new iPhone! After the win this saturday.</p>
+
+<p>League details here: <a href="http://arcl.org/Pages/UI/TeamStats.aspx?team_id=1235&amp;league_id=8&amp;season_id=13">http://arcl.org/Pages/UI/TeamStats.aspx?team_id=1235&amp;league_id=8&amp;season_id=13</a></p>
+
+<p>[![][3]][3][![][4]][4]</p>
+]]></content>
+  </entry>
+  
+</feed>

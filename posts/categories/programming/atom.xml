@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | Arnab's Universe]]></title>
+  <link href="http://arnab.github.com/posts/categories/programming/atom.xml" rel="self"/>
+  <link href="http://arnab.github.com/"/>
+  <updated>2013-01-21T15:16:38+05:30</updated>
+  <id>http://arnab.github.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs: change fonts dynamically based on screen resolution]]></title>
+    <link href="http://arnab.github.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/"/>
+    <updated>2012-09-23T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution</id>
+    <content type="html"><![CDATA[<p>I regularly switch between a <a href="http://www.apple.com/thunderbolt/">Thunderbolt display</a> at home and the <a href="http://www.apple.com/macbook-pro/features/">Mac’s native retina display</a> when I’m in a coffee shop or the like.</p>
+
+<p>It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:</p>
+
+<p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Allowing and testing CORS requests in Rails
+]]></title>
+    <link href="http://arnab.github.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails/"/>
+    <updated>2012-09-19T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails</id>
+    <content type="html"><![CDATA[<p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
+
+<blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it possible for AJAX requests to directly talk to HTTP-services outside it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
+
+<p>While there are lots of examples that show how to allow CORS requests in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them. While it’s simple to test the HTTP headers, you may have to look around a little (or a lot) on how to test a HTTP “OPTIONS” request. When you make CORS requests, the browser may make a pre-flight “OPTIONS” request to verify that the server allows CORS.</p>
+
+<p>To make Rails set the right HTTP headers to allow CORS requests, you can do something like this:</p>
+
+<p>A few things to note here:</p>
+
+<ol>
+<li>You can set the <code>Access-Control-Allow-Origin</code> header to your domain to further restrict it.</li>
+<li>While Rails is one place to do this in, you can certainly do this in your webserver (nginx etc.). Again, just google. I prefer things to be more testable – maybe when I see a performance problem, I’d revise this decision (although, performance bottlenecks would probably not be in setting HTTP headers.)</li>
+</ol>
+
+
+<p>Another thing to consider when you allow CORS, is authentication – you should do some HTTP based auth (token auth for example) so only <em>your</em> apps can talk to this service. The thing with JS is, however uglified it is, any developer worth his salt can figure out how to call your backend service after reading your JS by loading your site up in a browser.</p>
+
+<p>In any case, how do you test this? It’s fairly trivial to test that the right HTTP headers were set with something like this:</p>
+
+<pre><code>response.headers[&amp;#039;Access-Control-Allow-Origin&amp;#039;].should == &amp;#039;*&amp;#039;
+</code></pre>
+
+<p>To make a HTTP <code>options</code> request in RSpec, I had to dig through some code. And googling didn’t help here, at least the way I google. Here’s the low-down: RSpec <em>delegates</em> the request methods (like <code>get</code>/<code>post</code>/<code>put</code> etc. in the controller specs) to Rails’ <code>ActionController Tests</code>. All these methods invoke <code>ActionController::TestCase#process</code> with specific args, one of which is the method name. Now Rails master already has support for making “options” requests in tests (thanks to <a href="https://github.com/rails/rails/commit/0303c2325fab253adf5e4a0b738cb469c048f008#L0R438">this commit</a>), but that’s not available in the latest Rails release (3.2.8). I think this would make it’s way into Rails 4. Looking into this commit, we get the idea though: basically we also call the <code>process</code> method with a “OPTIONS” argument for the request-method. Putting it all together, my tests looked something like this:</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Notes on Emacs + CL + Clojure + Slime...]]></title>
+    <link href="http://arnab.github.com/posts/2010/12/notes-on-emacs-cl-clojure-slime/"/>
+    <updated>2010-12-30T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/12/notes-on-emacs-cl-clojure-slime</id>
+    <content type="html"><![CDATA[<p>After a day of struggling finally Emacs+CL+Clojure+Slime setup is working. I noted it all in the <a href="http://www.arnab-deka.com/posts/notes/emacs-setup/">notes section</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick MacBook setup]]></title>
+    <link href="http://arnab.github.com/posts/2010/03/quick-macbook-setup/"/>
+    <updated>2010-03-17T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/03/quick-macbook-setup</id>
+    <content type="html"><![CDATA[<p>Just put in my notes about setting up a MacBook in <a href="http://www.arnab-deka.com/posts/notes/macbook-setup" title="MacBook setup">the notes section here</a>. I’ll keep updating – please add your thoughts in!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing GLPK on a Mac]]></title>
+    <link href="http://arnab.github.com/posts/2010/02/installing-glpk-on-a-mac/"/>
+    <updated>2010-02-26T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/02/installing-glpk-on-a-mac</id>
+    <content type="html"><![CDATA[<blockquote><h2>Obsolation note:</h2>
+
+<p>Thanks to <a href="#comment-2787">Dave Coleman’s comment</a> I found out that glpk is available through homebrew now! So you just need these 2 steps to get glpk now:</p>
+
+<ol>
+<li><a href="http://mxcl.github.com/homebrew/" title="homebrew">homebrew</a></li>
+<li><code>brew install glpk</code></li>
+</ol>
+
+
+<p>If you still want to read on, the old way is still here…</p></blockquote>
+
+<p>So you want copy-paste instructions to install <a href="http://www.gnu.org/software/glpk">GLPK</a> on your Macbook? Here are the steps:</p>
+
+<ol>
+<li>Download the latest version of GLPK from <a href="http://www.gnu.org/software/glpk/#downloading">http://www.gnu.org/software/glpk/#downloading</a></li>
+<li><em>Optional:</em> Follow the instructions to verify the download (you might need to get GNU Privacy Guard or gpg for this. You can get it at <a href="http://gnupg.org">http://gnupg.org</a>)</li>
+<li><p>Say it’s downloaded to your “Downloads” directory, go there and execute the following commands (using the terminal)</p>
+
+<pre><code>cd ~/Downloads
+tar -xzf glpk-4.43.tar.gz
+./configure --prefix=/usr/local # see note [1]
+make
+sudo make install
+</code></pre></li>
+<li><p>At this point, you should have GLPK installed. Verify it:</p>
+
+<pre><code>which glpsol
+/usr/local/bin/glpsol
+</code></pre></li>
+<li><p>… and try help:</p>
+
+<pre><code>glpsol --help
+</code></pre></li>
+</ol>
+
+
+<p>Now that you are all set-up, read up this excellent introduction using GLPK: <a href="http://www.ibm.com/developerworks/linux/library/l-glpk1">http://www.ibm.com/developerworks/linux/library/l-glpk1</a></p>
+
+<p>Notes:
+<a href="http://mxcl.github.com/homebrew/" title="homebrew">2</a> If you want MySQL support (or something “extra”) check out the INSTALL file in the package</p>
+]]></content>
+  </entry>
+  
+</feed>

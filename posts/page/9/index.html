@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Arnab's Universe</title>
+  <meta name="author" content="Arnab Deka">
+
+  
+  <meta name="description" content="I used the Sun Java API Docs online when I used to code in Java: http://java.sun.com/javase/6/docs/api/ And the for Ruby, Ruby Brain is a nice place &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://arnab.github.com/posts/page/9/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37747278-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Arnab's Universe</a></h1>
+  
+    <h2>... and all the parallel ones.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:arnab.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2008/07/got-api/">Got API</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-28T00:00:00+05:30" pubdate data-updated="true">Jul 28<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I used the Sun Java API Docs online when I used to code in Java: <a href="http://java.sun.com/javase/6/docs/api">http://java.sun.com/javase/6/docs/api/</a></p>
+
+<p>And the for Ruby, Ruby Brain is a nice place – <a href="http://www.rubybrain.com">http://www.rubybrain.com/</a> and <a href="http://www.railsbrain.com">http://www.railsbrain.com/</a></p>
+
+<p>Even for DB, the MySQL API docs are good: <a href="http://dev.mysql.com/doc/refman/5.1/en/index.html">http://dev.mysql.com/doc/refman/5.1/en/index.html</a></p>
+
+<p>But today I was introduced to Got API!
+You get most of the stuff you are looking for, all in one place. They have CSS/XML/Javascript, even the famous AJAX libraries, C++, Java, Ruby/Rails… you name it! And a nice interface too.</p>
+
+<p>Check it out: <a href="http://www.gotapi.com">http://www.gotapi.com</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2008/07/ruby-private-class-method/">Ruby Private Class Method</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-18T00:00:00+05:30" pubdate data-updated="true">Jul 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>The following is just so I can remember it… You need not read all this.</p></blockquote>
+
+<p>In Java, if you need a class whose constructor is private – so you can’t instantiate it from anywhere else, you’d do:</p>
+
+<pre><code>public class AClass {
+  private int a;
+  private AClass(int a){
+    super();
+    this.a = a;
+  }
+</code></pre>
+
+<p>In Ruby, it’s a bit different. The why will come later (dynamic language), but just hiding the initialize method is not enough. You can still create an object coz you are actually calling the new method:</p>
+
+<pre><code>irb(main):001:0&gt; class AClass
+irb(main):002:1&gt;   attr_reader :a
+irb(main):003:1&gt;   private
+irb(main):004:1&gt;   def initialize(a)
+irb(main):005:2&gt;     @a = a
+irb(main):006:2&gt;     end
+irb(main):007:1&gt;   def some_other_method
+irb(main):008:2&gt;     "ha"
+irb(main):009:2&gt;     end
+irb(main):010:1&gt;   end
+=&gt; nil
+irb(main):011:0&gt; obj = AClass.new(100)
+=&gt; #&lt;aclass :0xb75768c4 @a=100&gt;
+irb(main):012:0&gt; obj.a
+=&gt; 100
+irb(main):013:0&gt; obj.some_other_method
+NoMethodError: private method `some_other_method&amp;#039; called for #&lt;/aclass&gt;&lt;aclass :0xb75768c4 @a=100&gt;
+        from (irb):13
+        from :0
+irb(main):014:0&gt;
+</code></pre>
+
+<p>You’d have to hide the new method:</p>
+
+<pre><code>class AClass
+  attr_reader :a
+  def initialize(a)
+    @a = a
+  end
+  def self.test
+    "test"
+  end
+  private_class_method :test
+end
+
+puts AClass.test
+</code></pre>
+
+<p>That shows:</p>
+
+<pre><code>test.rb:12: private method `test&amp;#039; called for AClass:Class (NoMethodError)
+</code></pre>
+
+<p></aclass></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2008/07/zembly-super/">Zembly Super!!!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-17T00:00:00+05:30" pubdate data-updated="true">Jul 17<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ok Ok Ok… I’ve not been posting regularly. Mostly a fault of companies like BMW, Nintendo and Amazon…</p>
+
+<p>Yeah, so since my last blog, I got a <a href="http://www.bmwusa.com/Standard/Content/Vehicles/2008/3/328iSedan/Default.aspx">BMW 3-series</a>, an <a href="http://www.amazon.com/o/ASIN/B000FI73MA">Amazon Kindle</a> (as a gift, that too!) and a <a href="http://www.amazon.com/o/ASIN/B0009VXBAQ">Wii</a>. So life’s been busy… driving, reading new stuff and playing fun games! Oh and the introduction of a new person… who keeps me, let’s say, engaged? <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<p>So all that and stuff like what-I’m-going-to-write-about now is basically what is keeping me from writing more blogs… Believe me, I hardly get to stop a think a moment nowadays… Time’s just flying… what with nice increase in office work too. Thank God I like it – I would have stopped coming to office otherwise. No, really!</p>
+
+<p>So I have turned to micro-blogging… Don’t get me worng, I love to write here… but where’s the time? So I turned to twitter recently. If you haven’t seen that yet – try it out – it’s the latest fad. Like sms-ing and blogging… It’s called Twitting! I mean it – go to <a href="http://twitter.com/">twitter</a> right now and see the demo video. It’s cool… and as most people believe, it’s the future… of smsing/blogging/mailing all-in-one.</p>
+
+<p>So if you still wanna see my updates – whatever handful you are anyway – get on to twitter and find me (arnab_deka) and follow me. I’ll still continue to write blogs, but they will be rare – like this.</p>
+
+<p>So today I came across this new shiny thing called zembly.</p>
+
+<p>I think I blogged about : <a href="http://heroku.com/">http://heroku.com/</a> The first online IDE I saw… but that won’t interest most of you as it was only for RubyOnRails.</p>
+
+<p>Look at the new zembly: <a href="http://zembly.com/">http://zembly.com/</a> Visual-<wbr>coding in Javascript in a nice IDE (read Visual Studio, but much nicer, AJAXy and with lots less errors. AND FREE!).</p>
+and the IDE is online! Get APIs for free (like, from, Yahoo, Google, Amazon, Flickr etc.) and publish your WebService/idget/app for free! Quick and easy…</p>
+
+<p>Here’s a Hello-world type WebService I created (I should say it created for me – it was so damn easy):
+<a href="http://zembly.com/things/a7085d0638fb4ec799379ab499eefe71;exec">http://zembly.com/things/<wbr>a7085d0638fb4ec799379ab499eefe<wbr>71;exec</a>?</p>
+
+<p>and put your name in and see:
+<a href="http://zembly.com/things/a7085d0638fb4ec799379ab499eefe71;exec?name=%5Byour%20name%20here%5D">http://zembly.com/things/<wbr>a7085d0638fb4ec799379ab499eefe<wbr>71;exec?name=[your%20name%<wbr>20here]</a></p>
+
+<p>Never thought it would be so easy to craete a web-service! <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<p>BTW, they are open for beta users now – check it out, it’s nice…</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2008/04/a-brief-sabattical-very-hectic-work-and-life-and-million-other-things-later/">A Brief Sabattical, Very Hectic Work and Life and Million Other Things Later&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-30T00:00:00+05:30" pubdate data-updated="true">Apr 30<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So, life moves fast. Very fast.</p>
+
+<p>I have been watching it from the sidelines last few weeks. It only seems like a couple of days since I wrote the last blog. When April began, the very first day I wrote a small blog and thought I am gonna write a whole lotta blogs in April.</p>
+
+<p>But life is fast! And you have no idea how fast it has been for me this April. I probably got involved in, did and am still doing a zillion things, on a personal, social and professional level. I don’t have the urge to mention ‘em all right now, right here…</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2008/04/awesome-gmail/">Awesome Gmail!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-01T00:00:00+05:30" pubdate data-updated="true">Apr 1<span>st</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Now you’ll really know why love gmail so much – send mails from your past! What a rad concept!
+Check it out <a href="http://mail.google.com/mail/help/customtime/index.html">here</a>.</p>
+
+<p>And hey this is my first post in April’08!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/page/10/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/page/8/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    Included file &#8216;asides/about.html&#8217; not found in _includes directory<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/09/state-of-e-commerce-in-india/">State of e-commerce in India</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/">Emacs: change fonts dynamically based on screen resolution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/09/allowing-and-testing-cors-requests-in-rails/">Allowing and testing CORS requests in Rails
+</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties
+</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2010/12/notes-on-emacs-cl-clojure-slime/">Notes on Emacs + CL + Clojure + Slime&#8230;</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/arnab">@arnab</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'arnab',
+            count: 3,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("arnab_deka", 3, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/arnab_deka" class="twitter-follow-button" data-show-count="true">Follow @arnab_deka</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/arnab.deka?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/arnab.deka">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101426291592553950447?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Arnab Deka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

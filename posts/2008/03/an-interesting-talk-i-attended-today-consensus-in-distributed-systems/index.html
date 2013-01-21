@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>An interesting talk I attended today - Consensus in distributed systems - Arnab's Universe</title>
+  <meta name="author" content="Arnab Deka">
+
+  
+  <meta name="description" content="Went to an incredible talk today and was so damn impressed with the presentation and the concepts behind. So wanted to share it with you…&lt;o:p>&lt &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://arnab.github.com/posts/2008/03/an-interesting-talk-i-attended-today-consensus-in-distributed-systems/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37747278-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Arnab's Universe</a></h1>
+  
+    <h2>... and all the parallel ones.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:arnab.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">An Interesting Talk I Attended Today - Consensus in Distributed Systems</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-20T00:00:00+05:30" pubdate data-updated="true">Mar 20<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Went to an incredible talk today and was so damn impressed with the presentation and the concepts behind. So wanted to share it with you…&lt;o:p>&lt;/o:p></p>
+
+<p>Basically the talk was on Consensus among Distributed Systems. So if you have a Master DB and two Slaves – and if the master dies, how do you choose which Slave to promote, automatically?&lt;o:p>&lt;/o:p></p>
+
+<p>Or consider you have some sort of a pool of managers who decide what to do and a bigger pool of workers who do what the managers say. Let’s say a manager dies – how do you choose which worker to promote to a manager? Because all of them might be equally eligible to get promoted (we are talking about systems here not humans).&lt;o:p>&lt;/o:p></p>
+
+<p>The simple way is – go for the majority. So every worker votes and one of them is elected. But then take in some factors such as message losses, network disturbance and partial network failure – now your vote might not have been so accurate after all ha?&lt;o:p>&lt;/o:p></p>
+
+<p>Good Robust systems built to be successful must be fault-tolerant and self-healing. It has to take care of its own – if some process fails, it has to figure out a way to fix it by itself – no human intervention – coz that takes time and money – which is not always easy or affordable. Now if it’s just one system you could somehow make it think of these situations. But make a distributed system where each worker has its own mind! The group (distributed system) has to come to _correct_ decision somehow right?&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>To build such (distributed) systems we need to be able to solve this problem of consensus. A few people have started or already have implemented this (including Google Chubby, Microsoft Autopilot, Amazon S3 etc.)&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>
+So this talk was about all this – must say it was done in a very lively manner – with a skit showing the different parts of the system, the network (where volunteers passed messages and took parts of the system – some _crashed_ too ). Was fun!&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>
+The idea stems from ancient ages and has been modeled to meet the requirements we have today. It’s called Paxos Protocol. Do read up on it – very interesting… You will definitely have nothing but appreciation for the great minds that created the mathematical model in those ancient times and the other great minds who translated it to modern day distributed systems and the other minds who have/are implementing these ideas!&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>Here are some links:&lt;o:p>&lt;/o:p></p>
+
+<ul>
+<li>&lt;o:p> &lt;/o:p>The Consensus problem: <a href="http://en.wikipedia.org/wiki/Consensus_%28computer_science%29">http://en.wikipedia.org/wiki/Consensus_%28computer_science%29</a> &lt;o:p>&lt;/o:p></li>
+<li>&lt;o:p> &lt;/o:p>The algorithm: <a href="http://en.wikipedia.org/wiki/Paxos_algorithm">http://en.wikipedia.org/wiki/Paxos_algorithm</a> &lt;o:p>&lt;/o:p></li>
+<li>&lt;o:p> Pa&lt;/o:p>rt-Time Parliament by Leslie Lamport: <a href="http://research.microsoft.com/users/lamport/pubs/lamport-paxos.pdf">http://research.microsoft.com/users/lamport/pubs/lamport-paxos.pdf</a> &lt;o:p>&lt;/o:p> (I highly recommend this one – very interesting read – and begins in an interesting manner)&lt;o:p>&lt;/o:p></li>
+<li>Leslie Lamport: <a href="http://en.wikipedia.org/wiki/Leslie_Lamport">http://en.wikipedia.org/wiki/Leslie_Lamport</a> &lt;o:p>&lt;/o:p></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Arnab</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-20T00:00:00+05:30" pubdate data-updated="true">Mar 20<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/posts/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab.github.com/posts/2008/03/an-interesting-talk-i-attended-today-consensus-in-distributed-systems/" data-via="arnab_deka" data-counturl="http://arnab.github.com/posts/2008/03/an-interesting-talk-i-attended-today-consensus-in-distributed-systems/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/posts/2008/03/clipboard-diary/" title="Previous Post: Clipboard diary">&laquo; Clipboard diary</a>
+      
+      
+        <a class="basic-alignment right" href="/posts/2008/03/an-ultimate-web-20-experience/" title="Next Post: An ultimate Web 2.0 experience">An ultimate Web 2.0 experience &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    Included file 'asides/about.html' not found in _includes directory<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2012/09/state-of-e-commerce-in-india/">State of e-commerce in India</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/">Emacs: change fonts dynamically based on screen resolution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/09/allowing-and-testing-cors-requests-in-rails/">Allowing and testing CORS requests in Rails
+</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties
+</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2010/12/notes-on-emacs-cl-clojure-slime/">Notes on Emacs + CL + Clojure + Slime...</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/arnab">@arnab</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'arnab',
+            count: 3,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("arnab_deka", 3, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/arnab_deka" class="twitter-follow-button" data-show-count="true">Follow @arnab_deka</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/arnab.deka?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/arnab.deka">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101426291592553950447?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Arnab Deka -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

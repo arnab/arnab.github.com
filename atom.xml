@@ -4,7 +4,7 @@
   <title><![CDATA[Arnab's Universe]]></title>
   <link href="http://arnab.github.com/atom.xml" rel="self"/>
   <link href="http://arnab.github.com/"/>
-  <updated>2013-01-21T14:18:12+05:30</updated>
+  <updated>2013-01-21T15:16:38+05:30</updated>
   <id>http://arnab.github.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -12,5 +12,720 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[State of e-commerce in India]]></title>
+    <link href="http://arnab.github.com/posts/2012/09/state-of-e-commerce-in-india/"/>
+    <updated>2012-09-23T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2012/09/state-of-e-commerce-in-india</id>
+    <content type="html"><![CDATA[<p>So, since moving back to India 4 months ago, we’ve trying to buy stuff off the internet, like we did back in Seattle (oh Amazon), from diapers to audio CDs (whaaaat? I know). While the world is much much better compared to 2006, there are still some Idiocracies in the UX and process. There are the big players (<a href="http://www.flipkart.com/">FlipKart</a>, <a href="http://www.infibeam.com/">infibeam</a> and the like) where (from the 4 months experience) you’d find what you are looking almost 6-7 times out of 10. The long-tail of e-commerce in India is the real deal though – the tail is really really long. I use <a href="http://www.junglee.com/">Junglee.com</a> to find the long time and almost always (9+ out of 10) the things I am looking for are found somewhere. Funny thing is that you’ll never find two things you need in one site. Over these 4 months, I don’t think any of these sites have come up more than once in my search.</p>
+
+<p>To highlight some of the other differences:</p>
+
+<ul>
+<li><strong>No guest checkout</strong>: Almost nobody has guest checkout. Everybody requires you to register and require your email and phone. Most the package tracking is done thru SMS so that’s ok, but I’ve had some spam (email and SMS) originating from here as well. But for the most part, they are well behaved (I don’t know why they need my birthday or gender to ship stuff me though – annyway they get wrong info for such questions <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_wink.gif" alt=";)" /> )</li>
+<li><strong>Weak integration with backend</strong>: More than once I have placed orders (after signing up etc.) only to be informed later that the item is not in stock. The websites are more like marketing websites with a cart/checkout process and it looks like the orders are processed completely separately.</li>
+<li><strong>Cash-On-Delivery</strong>: Almost everyone takes COD orders. I know some people don’t like the idea, but for Indian e-commerce it’s a must. Mostly because if you pay when you order on the site and then you don’t get the thing or get something else, there’s pretty much nothing you can do. Most sites will process a refund but you have to call them a few times to get that done. And some sites only give you a coupon that you can use in their site. So COD is heaven-sent and must-needed for such small sites. <a href="http://www.flipkart.com/s/help/payments">FlipKart has started doing Card-On-Delivery</a>, which is even better!</li>
+<li><strong>Faaaaaast and FREE shipping</strong>: Almost every order I have made has been delivered within a few days. In one-third of the cases it’s within 2 days. And it’s 99% of the time free shipping.
+*</li>
+</ul>
+
+
+<p>To summarize, for the most part, it’s all good. You can find 9/10 things online and of that you can get 9/10 items delivered at your doorstep within a reasonable amount of time and pay after you get/inspect it. But that’s not why I started writing this piece today…</p>
+
+<h2>A uniquely horrible experience at ezmaal.com</h2>
+
+<p>What I wanted to do today was share a very bad experience on one of these small player’s sites today. Remember the band called <a href="http://www.amazon.com/Route-Indian-Music-Hindi-Modern/dp/B0013LKL36/">Silk Route</a>? Heard them on radio and remembered how awesome their music was. Unfortunately the album’s not on spotify or in Amazon/MP3. So I looked up FlipKart (out of stock) and Junglee. That’s where I found <a href="http://www.ezmaal.com/">ezmaal.com</a> – and they had it in stock! So I went through the registration process and signed up for an account.</p>
+
+<p>Now, I use the <a href="https://agilebits.com/onepassword">most excellent 1Password</a> for creating random passwords for every site and to manage signing-in/out. Did the same on ezmaal too – and it was all fine and dandy and got an account created. Now, just before checking out I wanted to see if the login/logout was working (you never know with small sites). So I opened up the site in an <a href="http://support.google.com/chrome/bin/answer.py?hl=en&amp;answer=95464">incognito window</a> and tried loggin in. Here’s the screenshot of what I got back: [![ezmaal login failure][11]][11]
+click to see larger image</p>
+
+<ol>
+<li>They throw a really garbage un-customized ASP.net error in the customer’s face. It means nothing to me!</li>
+<li>They are trying to validate my password for script-injection. I don’t think they are actively doing this, but it’s probably part of ASP.net and they have not tested and not coded to handle login failures. Really really bad if the login on your site throws up gibberish.</li>
+<li><strong>Password displayed on screen</strong>: The worst part is that they print my password three times on the screen, verbatim. Thank God I use 1Password and have a random (and more importantly, different) password on every site. But like most customer’s if I had a one-password-for-all and used that in here, it’s as good as being leaked. If nowhere else, this will be on their server-logs. An employee only need to grep for <code>Password\=</code> in the logs. On top of this, with this kind of an experience, I have no faith that they salt/hash the passwords. I am more willing to believe that they keep it all in cleartext in a SQLServer database.</li>
+</ol>
+
+
+<p>I have seen bad e-commerce sites before, but will I shop at a place which does not care about my online security? No way in hell (yeah, I did not complete that order)!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs: change fonts dynamically based on screen resolution]]></title>
+    <link href="http://arnab.github.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/"/>
+    <updated>2012-09-23T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution</id>
+    <content type="html"><![CDATA[<p>I regularly switch between a <a href="http://www.apple.com/thunderbolt/">Thunderbolt display</a> at home and the <a href="http://www.apple.com/macbook-pro/features/">Mac’s native retina display</a> when I’m in a coffee shop or the like.</p>
+
+<p>It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:</p>
+
+<p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Allowing and testing CORS requests in Rails
+]]></title>
+    <link href="http://arnab.github.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails/"/>
+    <updated>2012-09-19T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails</id>
+    <content type="html"><![CDATA[<p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
+
+<blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it possible for AJAX requests to directly talk to HTTP-services outside it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
+
+<p>While there are lots of examples that show how to allow CORS requests in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them. While it’s simple to test the HTTP headers, you may have to look around a little (or a lot) on how to test a HTTP “OPTIONS” request. When you make CORS requests, the browser may make a pre-flight “OPTIONS” request to verify that the server allows CORS.</p>
+
+<p>To make Rails set the right HTTP headers to allow CORS requests, you can do something like this:</p>
+
+<p>A few things to note here:</p>
+
+<ol>
+<li>You can set the <code>Access-Control-Allow-Origin</code> header to your domain to further restrict it.</li>
+<li>While Rails is one place to do this in, you can certainly do this in your webserver (nginx etc.). Again, just google. I prefer things to be more testable – maybe when I see a performance problem, I’d revise this decision (although, performance bottlenecks would probably not be in setting HTTP headers.)</li>
+</ol>
+
+
+<p>Another thing to consider when you allow CORS, is authentication – you should do some HTTP based auth (token auth for example) so only <em>your</em> apps can talk to this service. The thing with JS is, however uglified it is, any developer worth his salt can figure out how to call your backend service after reading your JS by loading your site up in a browser.</p>
+
+<p>In any case, how do you test this? It’s fairly trivial to test that the right HTTP headers were set with something like this:</p>
+
+<pre><code>response.headers[&amp;#039;Access-Control-Allow-Origin&amp;#039;].should == &amp;#039;*&amp;#039;
+</code></pre>
+
+<p>To make a HTTP <code>options</code> request in RSpec, I had to dig through some code. And googling didn’t help here, at least the way I google. Here’s the low-down: RSpec <em>delegates</em> the request methods (like <code>get</code>/<code>post</code>/<code>put</code> etc. in the controller specs) to Rails’ <code>ActionController Tests</code>. All these methods invoke <code>ActionController::TestCase#process</code> with specific args, one of which is the method name. Now Rails master already has support for making “options” requests in tests (thanks to <a href="https://github.com/rails/rails/commit/0303c2325fab253adf5e4a0b738cb469c048f008#L0R438">this commit</a>), but that’s not available in the latest Rails release (3.2.8). I think this would make it’s way into Rails 4. Looking into this commit, we get the idea though: basically we also call the <code>process</code> method with a “OPTIONS” argument for the request-method. Putting it all together, my tests looked something like this:</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick howto on accessing Rails Properties
+]]></title>
+    <link href="http://arnab.github.com/posts/2011/04/quick-howto-accessing-rails-properties/"/>
+    <updated>2011-04-08T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2011/04/quick-howto-accessing-rails-properties</id>
+    <content type="html"><![CDATA[<p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
+
+<p><strong>Rails 3</strong>: browse the <a href="https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb">source-code at railties/lib/rails/info.rb</a></p>
+
+<p>Or see:</p>
+
+<p><strong>Rails 2</strong>: browse the <a href="https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb">source-code at railties/builtin/rails_info/rails/info.rb</a></p>
+
+<p>Or see:</p>
+
+<p>Till the next time…</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Notes on Emacs + CL + Clojure + Slime...]]></title>
+    <link href="http://arnab.github.com/posts/2010/12/notes-on-emacs-cl-clojure-slime/"/>
+    <updated>2010-12-30T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/12/notes-on-emacs-cl-clojure-slime</id>
+    <content type="html"><![CDATA[<p>After a day of struggling finally Emacs+CL+Clojure+Slime setup is working. I noted it all in the <a href="http://www.arnab-deka.com/posts/notes/emacs-setup/">notes section</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[1Password for Mac. Free. Really.]]></title>
+    <link href="http://arnab.github.com/posts/2010/11/1password-for-mac-free-really/"/>
+    <updated>2010-11-26T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/11/1password-for-mac-free-really</id>
+    <content type="html"><![CDATA[<p>I use and love <a href="http://agilewebsolutions.com/onepassword">1Password</a> on my Mac every day – it has become one of those things I can’t live without, and is easily worth the $40 price.</p>
+
+<p>Yesterday they announced their very generous ThanksGiving offer: <a href="http://agile.ws/ThankYou">Free 1-for-1 license</a>. So I can give away a Free 1Password for Mac license – and since no one else in my family has started using a Mac full-time yet, I will give it away to you!</p>
+
+<p>Just add a comment here – saying why I should give it away to you and wait for a few hours. I will pick one person here and send them the license. Make sure you leave some contact so I can get back to you. How will I pick? The most entertaining comment of course. But yeah – don’t hold me to it, I might just randomly pick someone.</p>
+
+<p>Thank you for playing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[On the Coastal Classic Train to Seward. ...
+]]></title>
+    <link href="http://arnab.github.com/posts/2010/08/on-the-coastal-classic-train-to-seward/"/>
+    <updated>2010-08-14T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/08/on-the-coastal-classic-train-to-seward</id>
+    <content type="html"><![CDATA[<p><img src="http://posterous.com/getfile/files.posterous.com/arnab/nrJwodabpHxsDoxudxwGdGICCFpbecttjjjuIcvrsgzjEqzhyzaJbDcBuHJg/file.jpeg.scaled500.jpg" alt="" /></p>
+
+<p>On the Coastal Classic Train to Seward. Look at the route. #Alaska #vacation via <a href="http://www.osfoora.com">Osfoora</a></p>
+
+<p><a href="http://posterous.com">Posted via email</a> from <a href="http://arnab.posterous.com/on-the-coastal-classic-train-to-seward">arnab’s posterous</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick MacBook setup]]></title>
+    <link href="http://arnab.github.com/posts/2010/03/quick-macbook-setup/"/>
+    <updated>2010-03-17T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/03/quick-macbook-setup</id>
+    <content type="html"><![CDATA[<p>Just put in my notes about setting up a MacBook in <a href="http://www.arnab-deka.com/posts/notes/macbook-setup" title="MacBook setup">the notes section here</a>. I’ll keep updating – please add your thoughts in!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing GLPK on a Mac]]></title>
+    <link href="http://arnab.github.com/posts/2010/02/installing-glpk-on-a-mac/"/>
+    <updated>2010-02-26T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/02/installing-glpk-on-a-mac</id>
+    <content type="html"><![CDATA[<blockquote><h2>Obsolation note:</h2>
+
+<p>Thanks to <a href="#comment-2787">Dave Coleman’s comment</a> I found out that glpk is available through homebrew now! So you just need these 2 steps to get glpk now:</p>
+
+<ol>
+<li><a href="http://mxcl.github.com/homebrew/" title="homebrew">homebrew</a></li>
+<li><code>brew install glpk</code></li>
+</ol>
+
+
+<p>If you still want to read on, the old way is still here…</p></blockquote>
+
+<p>So you want copy-paste instructions to install <a href="http://www.gnu.org/software/glpk">GLPK</a> on your Macbook? Here are the steps:</p>
+
+<ol>
+<li>Download the latest version of GLPK from <a href="http://www.gnu.org/software/glpk/#downloading">http://www.gnu.org/software/glpk/#downloading</a></li>
+<li><em>Optional:</em> Follow the instructions to verify the download (you might need to get GNU Privacy Guard or gpg for this. You can get it at <a href="http://gnupg.org">http://gnupg.org</a>)</li>
+<li><p>Say it’s downloaded to your “Downloads” directory, go there and execute the following commands (using the terminal)</p>
+
+<pre><code>cd ~/Downloads
+tar -xzf glpk-4.43.tar.gz
+./configure --prefix=/usr/local # see note [1]
+make
+sudo make install
+</code></pre></li>
+<li><p>At this point, you should have GLPK installed. Verify it:</p>
+
+<pre><code>which glpsol
+/usr/local/bin/glpsol
+</code></pre></li>
+<li><p>… and try help:</p>
+
+<pre><code>glpsol --help
+</code></pre></li>
+</ol>
+
+
+<p>Now that you are all set-up, read up this excellent introduction using GLPK: <a href="http://www.ibm.com/developerworks/linux/library/l-glpk1">http://www.ibm.com/developerworks/linux/library/l-glpk1</a></p>
+
+<p>Notes:
+<a href="http://mxcl.github.com/homebrew/" title="homebrew">2</a> If you want MySQL support (or something “extra”) check out the INSTALL file in the package</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Russian Peasant Multiplication in Ruby]]></title>
+    <link href="http://arnab.github.com/posts/2010/02/russian-peasant-multiplication-in-ruby/"/>
+    <updated>2010-02-01T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2010/02/russian-peasant-multiplication-in-ruby</id>
+    <content type="html"><![CDATA[<p>Russian Peasant Multiplication: a very simple and elegant way to multiple.</p>
+
+<p>Read more: <a href="http://mathforum.org/dr.math/faq/faq.peasant.html">School-boy example of how and why it works</a> and about <a href="http://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication">Ancient Egyptian Multiplication on wikipedia</a></p>
+
+<p>So here’s my simple implementation: (or as a <a href="http://gist.github.com/290219">gist on github</a>)</p>
+
+<pre><code>module RussianPeasantMultiplication
+  def russian_peasant_multiply(b)
+    numbers_to_add = []
+    a, b = [self, b].sort #So we have the smaller number as the first
+
+    negative_operands = [a, b].select { |n| n &lt; 0 }
+    result_should_be_negative = negative_operands.size.odd? # or negative_operands.size == 1
+
+    # Now get the absoultes
+    a, b = [a, b].map { |n| n.abs }
+
+    while( a &gt; 1 )
+      a = a &gt;&gt; 1 # halv it
+      b = b &lt; &lt; 1 # double it
+      if a.odd? # or (a % 2 == 0 )
+        numbers_to_add &lt;&lt; b
+      else
+      end
+    end
+    result = numbers_to_add.inject(0) { |sum, n| sum += n }
+    result = result * -1 if result_should_be_negative
+    result
+  end
+end
+
+class Integer
+  include RussianPeasantMultiplication
+end
+
+# Tests
+require "test/unit"
+
+class TestInteger &lt; Test::Unit::TestCase
+  def test_russian_peasant_multiply
+    assert_equal(22 * 70, 22.russian_peasant_multiply(70))
+  end
+
+  def test_russian_peasant_multiply_for_negative_numbers
+    assert_equal(-22 * 70, -22.russian_peasant_multiply(70))
+  end
+
+  def test_russian_peasant_multiply_for_negative_arguments
+    assert_equal(22 * -70, 22.russian_peasant_multiply(-70))
+  end
+
+  def test_russian_peasant_multiply_for_negative_numbers_and_arguments
+    assert_equal(-22 * -70, -22.russian_peasant_multiply(-70))
+  end
+
+  def test_russian_peasant_multiply_for_zero
+    assert_equal(0 * -70, 0.russian_peasant_multiply(-70))
+  end
+
+  def test_russian_peasant_multiply_for_zero_arguments
+    assert_equal(-22 * 0, -22.russian_peasant_multiply(0))
+  end
+
+  def test_russian_peasant_multiply_for_zero_numbers_and_arguments
+    assert_equal(0 * 0, 0.russian_peasant_multiply(0))
+  end
+end
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Colorado Pictures (2009 Nov)]]></title>
+    <link href="http://arnab.github.com/posts/2009/12/colorado-pictures-2009-nov/"/>
+    <updated>2009-12-20T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/12/colorado-pictures-2009-nov</id>
+    <content type="html"><![CDATA[<p>Pics from the Colorado trip back in November, 2009 (with Ujwala and Maa). We spent two days in Rocky Mountain National Park and a day over in Colorado Springs and around (Manitou Springs, Pikes Peak – highest peak in that area).</p>
+
+<p>It’s heavenly – have to go there again in Spring 2010 )along with the parks in Wyoming, Montana).</p>
+
+<p>Click on the photo to get to my SmugMug page – feel free to leave a comment <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" />
+[![][3]][3]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails: Table join with specified fields in select]]></title>
+    <link href="http://arnab.github.com/posts/2009/11/rails-join-with-select/"/>
+    <updated>2009-11-01T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/11/rails-join-with-select</id>
+    <content type="html"><![CDATA[<p>Figured this out after a lot of monkeying-around (I mean script/console).</p>
+
+<p>Situation:</p>
+
+<ul>
+<li>I have two tables (Revisions has_many Inputs)</li>
+<li>I can load Revisions and then for each I can find Inputs, but quickly found out that for my situation, it leads to a lot of queries. So I want to load the required fields from both tables together</li>
+</ul>
+
+
+<p>:joins is the only way to do this, using :includes does NOT respect the select clause. Here is the gist I created:</p>
+
+<p>Admittedly, this is hacky, too hacky for my comfort. Comment/suggest a better/cleaner solution?</p>
+
+<p>Note: Found out that there is a gem to do this: <a href="http://code.google.com/p/ar-select-with-include/">ar-select-with-include</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A beautiful foggy autumn morning]]></title>
+    <link href="http://arnab.github.com/posts/2009/10/a-beautiful-foggy-autumn-morning-echo-lake-view-from-my-house-iphonepicb/"/>
+    <updated>2009-10-22T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/10/a-beautiful-foggy-autumn-morning-echo-lake-view-from-my-house-iphonepicb</id>
+    <content type="html"><![CDATA[<p>Echo lake, view from my house. Taken with my iPhone and enhanced with the free Photoshop.com app…</p>
+
+<p><a href="http://posterous.com"><img src="http://posterous.com" alt="" /></a></p>
+
+<p>via tweetie</p>
+
+<p><a href="http://posterous.com">Posted via web</a> from <a href="http://arnab.posterous.com/a-beautiful-foggy-autumn-morning-echo-lake-vi">arnab’s posterous</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Interesting Job Advertisement]]></title>
+    <link href="http://arnab.github.com/posts/2009/09/interesting-job-advertisement/"/>
+    <updated>2009-09-22T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/09/interesting-job-advertisement</id>
+    <content type="html"><![CDATA[<p>A recent job opening advert (from <a href="http://vark.com/jobs#feeng">Aardvark, for a Front-End Web Developers</a>) goes:</p>
+
+<blockquote><p>Required Skills:
+* Fluency in HTML and CSS
+* Experience taking mockups and turning them into standards-compliant HTML/CSS
+* Expertise in achieving cross-browser compatibility in IE, Firefox, and Safari
+* Experience in implementing grid-based layouts in HTML/CSS
+* Experience in an agile development environment</p>
+
+<p>Pluses:
+* Interest in user experience design and graphic design
+* Experience in Javascript and Ruby on Rails
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools
+* Experimental, user focused, and iterative
+* Previous startup experience</p></blockquote>
+
+<p>I felt the Pluses section was very interesting, specially (you kinda see the others on Rails related job boards anyway):
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools</p>
+
+<p>Shows how today’s start-ups value people who are really interested in what they do (and not just in for the money). An encouraging view of the world indeed – now I just have to get on it and get those much needed Plusses into my skills bag <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+
+<p>Note to my employers, friends, well wishers and anyone else interested: This does not mean I am looking for a job! I love the job I have right now and am just happy to see the importance of “passion” in the world’s view of an ideal employee increasing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Guides on my Kindle DX!!! (or any webpage for that matter)
+]]></title>
+    <link href="http://arnab.github.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter/"/>
+    <updated>2009-09-18T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter</id>
+    <content type="html"><![CDATA[<p>I got a <a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a><img src="http://www.assoc-amazon.com/e/ir?t=arnsblo-20&amp;l=as2&amp;o=1&amp;a=B0015TCML0" alt="" /> for a birthday gift! Thanks Ujwala!</p>
+
+<p>And so far I am loving it. It’s better to read on compared to Kindle 1 (which, BTW, Ujwala had gifted to me last year) – and the native PDF support (and the search-anywhere) is awesome! The experimental browser that comes with the DX is much much improved compared to Kindle 1st Gen.</p>
+
+<p>So I was reading more about <a href="http://guides.rubyonrails.org/routing.html">Rails Routing in the rails-guides</a>. And while I was in the bus today morning I wanted to read that on the Kindle (coz it is a pleasure to read on it). So I fired up the guides page on the experimental browser – it works, but reading a PDF or a Kindle-formatted book is so much better.</p>
+
+<p>So I got this simple idea. Print the web page as a PDF and e-mail it to your Kindle. Here’s what I did:</p>
+
+<ol>
+<li>Go to the site</li>
+<li>Print – (PDF format “saved to file” instead of sending it to a printer). I was on Linux – Mac also has the “Print to PDF/PS support by default, for Windows you’ll need to get <a href="http://www.cutepdf.com/">CutePDF</a> installed)</li>
+<li>e-mail it to your Kindle address (I also uploaded it to my dropbox – so I can get it later on) and you are done!</li>
+</ol>
+
+
+<p>(BTW, dropbox is an amazing thing – if you use multiple computers/OS, you have to try this thing. If you are going to try it out (for free), help me out – <a href="https://www.getdropbox.com/referrals/NTEzMDYwMzk">use my Dropbox referral link</a>)</p>
+
+<p>So there you go – another easy way to get web-content for free on your Kindle. Go on enjoy the book now.</p>
+
+<p><strong>Blog-Notes</strong></p>
+
+<ul>
+<li><a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a></li>
+<li><a href="http://guides.rubyonrails.org">Rails Guides – excellent info on the RubyOnRails framework</a></li>
+<li><a href="http://www.cutepdf.com/">CutePDF</a></li>
+<li><a href="https://www.getdropbox.com/">DropBox</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[#songsincode (twitter geek fun)]]></title>
+    <link href="http://arnab.github.com/posts/2009/08/songsincode-twitter-geek-fun/"/>
+    <updated>2009-08-21T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/08/songsincode-twitter-geek-fun</id>
+    <content type="html"><![CDATA[<blockquote><p>This blog is about twitter hastags. To learn more about twitter hashtags, go <a href="http://twitter.pbworks.com/Hashtags">here</a>.</p></blockquote>
+
+<p>So #songsincode has been <a href="http://twitter.com/#search?q=%23songsincode">ruling the twitter trends</a> for a day now). Didn’t follow it? No worries – <a href="http://www.sitepoint.com/blogs/2009/08/21/geeks-just-wanna-have-fun-songsincode/">here’s a recent blog</a> with some good (early) ones.</p>
+
+<p>Basically, it was the most fun I have had reading hashtags. Today, after lunch I took a plunge too <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+
+<p>Original <a href="http://twitter.com/arnab_deka/status/3460700079">tweet here</a>:</p>
+
+<pre><code>(you.breath + you.move).each { i.missing(you) }
+</code></pre>
+
+<p>Original <a href="http://twitter.com/arnab_deka/status/3460883623">tweet here</a>:</p>
+
+<pre><code>while ( time(you.reverse) &lt; = 1.minute )
+  i = you.steps_behind(2)
+end
+</code></pre>
+
+<p>Oh don’t tell me I was so bad you could not even guess the songs (Every Breath You Take and <a href="http://www.youtube.com/watch?v=qv829hUuYAM">Two Steps Behind</a>.</p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Guarded logging in Ruby?]]></title>
+    <link href="http://arnab.github.com/posts/2009/08/guarded-logging-in-ruby/"/>
+    <updated>2009-08-07T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/08/guarded-logging-in-ruby</id>
+    <content type="html"><![CDATA[<p>Assuming you know about “guarded logging”, a Java logging best practise. If not, get an overview in <a href="http://publib.boulder.ibm.com/infocenter/ledoc/v6r11/index.jsp?topic=/com.ibm.rcp.tools.doc.appdev/serviceability_java.util.loggingbestpractices.html">this IBM article</a> or in <a href="http://www.burlesontech.com/wiki/display/btg/Java+Logging+Standards+and+Guidelines">this blog</a>.</p>
+
+<p>Basically it is the practice of checking if a particular log message will indeed be outputted to the log (based on the severity level) before calling the log statement. This is a performance improvement.</p>
+
+<pre><code>// Java example
+if( logger.isLoggable(Level.INFO) ) {
+  logger.info( "this is a " + "info" + "message" );
+}
+</code></pre>
+
+<p>So I heard from one of my colleagues that Ruby’s logging performance can also be improved the same way, by putting the message in a block (instead of just passing it as an string arg to the method):</p>
+
+<pre><code>@logger.debug { "this is a " + "debug" + "message" }
+</code></pre>
+
+<p>See various ways to log a message at the <a href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/">ruby-docs</a> (search for “How to log a message” in that page).
+I looked into the source-code and, just like in Java, the first thing that is done is to check the severity and return (true) if the severity is higher than the message’s. So like in Java, it should not have any effect (except creating the strings etc.).</p>
+
+<p>Just to test it out, I wrote a benchmark test:</p>
+
+<pre><code>require &amp;#039;benchmark&amp;#039;
+require &amp;#039;logger&amp;#039;
+
+class LoggerBenchmark
+  def initialize
+    @logger = Logger.new("/dev/null")
+  end
+
+  def benchmark
+    n = 10000
+    # I use bmbm method and not bm here
+    # so the effects of initializing etc. are abstracted away
+    Benchmark.bmbm do |x|
+      x.report("with block") do
+        n.times do |i|
+          # trying to do *some* arithmetic here
+          # so there is *some* work for string-creation
+          @logger.warn { "logging with block - #{rand * 1000 % i}" }
+        end
+      end
+
+      x.report("with string") do
+        n.times do |i|
+          @logger.warn "logging with string - #{rand * 1000 % i}"
+        end
+      end
+
+      x.report("with severity check") do
+        n.times do |i|
+          if @logger.warn?
+            @logger.warn("logging with severity check - #{rand * 1000 % i}")
+          end
+        end
+      end
+
+    end
+  end
+end
+
+LoggerBenchmark.new.benchmark
+</code></pre>
+
+<p>Here’s what I noticed:</p>
+
+<ul>
+<li><p>with n (the number of logging calls) set to &lt; = 10,000, there was really no difference between the three ways:</p>
+
+<pre><code>$ time ruby logger_benchmark.rb
+Rehearsal &amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;
+with block            1.340000   0.160000   1.500000 (  1.500111)
+with string           0.740000   0.110000   0.850000 (  0.845971)
+with severity check   0.650000   0.080000   0.730000 (  0.736908)
+&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212; total: 3.080000sec
+
+                                  user     system      total        real
+with block            0.670000   0.100000   0.770000 (  0.765206)
+with string           0.640000   0.080000   0.720000 (  0.715421)
+with severity check   0.660000   0.080000   0.740000 (  0.733024)
+ruby logger_benchmark.rb  4.72s user 0.62s system 99% cpu 5.351 total
+&lt;/li&gt;
+</code></pre></li>
+<li><p>with n set to 100,000: It looked like the simplest way to log (with a string-arg) still performs the best:</p>
+
+<pre><code>$ time ruby logger_benchmark.rb
+Rehearsal ---------------------------------------------------------------
+with block            7.630000   1.030000   8.660000 (  8.669890)
+with string           6.410000   0.840000   7.250000 (  7.270509)
+with severity check   6.570000   0.890000   7.460000 (  7.472230)
+----------------------------------------------------- total: 23.370000sec
+
+                                  user     system      total        real
+with block            6.760000   0.930000   7.690000 (  7.697947)
+with string           6.320000   0.870000   7.190000 (  7.190802)
+with severity check   6.460000   0.930000   7.390000 (  7.394368)
+ruby logger_benchmark.rb  40.20s user 5.50s system 99% cpu 45.755 total
+</code></pre></li>
+</ul>
+
+
+<p>Final takeaway: it really does not make that big a difference and keeping it simple (with a string-arg) should work. If you are worried about performance, this probably is not a trick that will give you a big bang for the buck.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Photos: Hamilton Viewpoint Park and Alki Beach, West Seattle]]></title>
+    <link href="http://arnab.github.com/posts/2009/08/photos-hamilton-park-and-alki-beach/"/>
+    <updated>2009-08-04T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/08/photos-hamilton-park-and-alki-beach</id>
+    <content type="html"><![CDATA[<p>On a photo uploading spree today.</p>
+
+<p>The first album consists photos from Hamilton Park and Alki Beach, a beautiful area in West Seattle. Because of it’s location, you get great views of Seattle and the Harbor from here, specially great in the evening.</p>
+
+<p>Hamilton Viewpoint Park: See details <a href="http://www.gonorthwest.com/Washington/Seattle/viewpoints/hamilton.htm">here</a> and the <a href="http://www.seattle.gov/parks/park_detail.asp?id=454">Seattle gov parks page</a>.</p>
+
+<p><strong>The full album</strong> (only 26 pics – easy to click through and to add comments too) <strong>is on my smugmug site: <a href="http://arnab-o-scope.smugmug.com/gallery/9163956_kwkf7">http://arnab-o-scope.smugmug.com/gallery/9163956_kwkf7</a></strong>.</p>
+
+<p>Here are a few excerpts:*   [![macbook][4]][4]
+*   [![Seattle downtown basking in the evening glory][5]][5]
+*   [![Downtown Seattle Closeup][6]][6]
+*   [![Pinkish sunset over Mt Rainier][7]][7]
+*   [![a couple getting married][8]][8]
+*   [![A state ferry with the Space Needle and Cascade mountains in the backdrop][9]][9]
+*   [![another shot with the mountains and the needle][10]][10]
+*   [![On the way to Death Valley][11]][11]
+*   [![On the way to Death Valley][12]][12]
+*   [![Badwater Basin][13]][13]
+*   [![Bad Water Basin][14]][14]
+*   [![Red Rock Canyon][15]][15]
+*   [![Vegas Strip][16]][16]
+*   [![Fabulous Las Vegas][17]][17]
+*   [![Fabulous Las Vegas][18]][18]
+*   [![Around US][19]][19]
+*   [![Red Rock Canyon][20]][20]
+*   [![Red Rock Canyon][21]][21]
+*   [![Red Rock Canyon][22]][22]
+*   [![ARCL Summer 2008 3rd Place Trophy (Eagles)][23]][23]
+*   [![Arnab Deka][24]][24]
+*   [![Arnab][25]][25]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby dup vs clone]]></title>
+    <link href="http://arnab.github.com/posts/2009/07/ruby-dup-vs-clone/"/>
+    <updated>2009-07-28T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/07/ruby-dup-vs-clone</id>
+    <content type="html"><![CDATA[<p>I have had this question about the difference between Ruby’s <code>clone</code> and <code>dup</code> method multiple times now. And I have always had this fuzzy feeling that “they are almost the same thing”. Today my colleague asked it again and I decided to dig it out. Here’s what <a href="http://ruby-doc.org/core/classes/Object.html">Ruby API docs</a> say about them:</p>
+
+<blockquote><p><strong>Object#clone</strong>
+Produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. Copies the frozen and tainted state of obj.</p>
+
+<p><strong>Object#dup</strong>
+Produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p>
+
+<p>This method may have class-specific behavior. If so, that behavior will be documented under the #initialize_copy method of the class.</p></blockquote>
+
+<p>So in essence, both produce shallow-copies of the object. clone copies the frozen <em>and</em> tainted state while dup copies only the tainted state. Even after reading that documentation twice, it’s still murky in my head (probably coz I have not had <em>a chance</em> to write code to notice the frozen or tainted state specifically.)</p>
+
+<p>Here’s a gem from ruby-talk that Google brought up: <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/6328">http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/6328</a>. So Matz says:</p>
+
+<blockquote><p><code>clone’ copies everything; internal state, singleton methods, etc.
+</code>dup’ copies object contents only (plus taintness status).</p></blockquote>
+
+<p>And so I wrote a bit of code to see it myself (and thus remember it). Here’s a very simple Person class:</p>
+
+<pre><code>class Person
+  attr_accessor :name
+end
+</code></pre>
+
+<p>Now we instantiate a Person object (p) and add then an singleton method on the new object (p) to say hi:</p>
+
+<pre><code>p = Person.new
+p.name = "The Man"
+
+# now add a singleton method on p:
+def p.say_hi
+  "&amp;#039;sup"
+end
+</code></pre>
+
+<p>See that it’s all working:</p>
+
+<pre><code>irb(main):014:0&gt; puts p.inspect
+#&lt;person :0xb7e83340 @name="The Man"&gt;
+=&gt; nil
+irb(main):015:0&gt; puts p.say_hi
+&amp;#039;sup
+=&gt; nil
+</code></pre>
+
+<p>Now create a clone and a dup of it:</p>
+
+<pre><code>the_clone = p.clone
+the_dup = p.dup
+</code></pre>
+
+<p>Both the clone and the dup have the same instance variables (which are shallow-copies BTW), but only the clone has the singleton method (say_hi) in it:</p>
+
+<pre><code>irb(main):018:0&gt; the_clone.name
+=&gt; "The Man"
+irb(main):019:0&gt; the_dup.name
+=&gt; "The Man"
+irb(main):020:0&gt; the_clone.say_hi
+=&gt; "&amp;#039;sup"
+irb(main):021:0&gt; the_dup.say_hi
+NoMethodError: undefined method `say_hi&amp;#039; for
+(Person :0xb7e83340 @name="The Man")
+        from (irb):21
+        from :0
+irb(main):022:0&gt;
+</code></pre>
+
+<p>So that makes me feel that clone has to do more work than dup does. Hence dup might be more beneficial for performance compared to clone (unless you really need to use clone). Comments are welcome!</person></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GNU Screen]]></title>
+    <link href="http://arnab.github.com/posts/2009/07/gnu-screen/"/>
+    <updated>2009-07-20T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/07/gnu-screen</id>
+    <content type="html"><![CDATA[<p>If you have nothing to do with Linux you probably can stop reading now. Unless you want to get introduced to a very nice tool in the Linux world. I can say without doubt that this saves me at least an hour every month. In addition it gets you away from doing some mundane “set-up” like things every time to start working. It has a load of features but today I’ll just scratch the surface. But it’ll be enough to start you off and I promise you’ll be glad you found screen.</p>
+
+<p>One of the programs that I love and can’t go through the day without is <a href="http://www.gnu.org/software/screen/">GNU Screen</a>. It’s like a Window manager, but only for your terminals. You know, like you are working with so many terminals/consoles/terminal-windows all the time (one to the DB, one with vim open, one to run the tests, one to run the program etc., one to watch the logs, a few to prod boxes etc.). And then you disconnect and then reconnect (from home, somewhere else) and you have to set-up all that again?</p>
+
+<p>Yeah screen can help you with all that. My work pattern involves connecting to a screen session (and I get all the windows/context loaded). Whether I connect from work, home from somewhere else, all I have to say is:</p>
+
+<pre><code>$ screen -ls (to see what sessions I have running)
+$ screen -R some-session-name
+</code></pre>
+
+<p>And it’s wicked-easy to switch between different windows, search through your history etc. You can also configure it to do a few “start-up” things every time. For example, at home, I have screen</p>
+
+<ol>
+<li>configured to Open 4 windows when it starts up and</li>
+<li>have window-0 go to my code dir (to teh root of my <a href="http://rubyonrails.org/">RubyOnRails</a> part of the site)</li>
+<li>start up <a href="http://nubyonrails.com/articles/autotest-rails">auto-test</a> on window-1</li>
+<li>show the logs on window-2</li>
+<li>ssh into the <a href="http://www.bluehost.com/">blue host</a> (which hosts my site)</li>
+</ol>
+
+
+<p>Since the windows are persisted, I don’t have to do all these things every time I connect (for a lazy programmer (and all programmers are lazy aren’t they?) that’s a lot of help). You can even share the screens with someone else (I have not tried that yet though).</p>
+
+<p>Anyway, I hope you are sold by now. Even if you are not, spend some time (shouldn’t be more than a couple of hours) installing/configuring/running screen and you will soon reap the rewards. To get you started:</p>
+
+<ul>
+<li>The GNU Screen home-page: <a href="http://www.gnu.org/software/screen/">http://www.gnu.org/software/screen</a></li>
+<li>A good guide to installing/setting-up/using: <a href="http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen">http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen</a></li>
+<li>Once you start liking it you’ll need a cheat-sheet: <a href="http://aperiodic.net/screen/quick_reference?do=show">http://aperiodic.net/screen/quick_reference?do=show</a></li>
+</ul>
+
+
+<p>A word about configuring: heard that Ubuntu will soon shipping with decent .screenrc (sane default configuration) so you don’t have to. Meanwhile you can configure it yourself (as in the Red Hat guide above) or look at these cool options: <a href="http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/">http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/</a>. Here is my .screenrc:</p>
+
+<pre><code>vbell off
+vbell_msg "Ring"
+
+# detach on hangup
+autodetach on
+
+# don&amp;#039;t display copyright page
+startup_message off
+
+# scroll back
+defscrollback 1000
+
+# setup the caption
+hardstatus alwayslastline "%{-b gk}%-w%{+b kg}%50&gt;%n %t%{-b gk}%+w %=%C%&lt; "
+
+# right/left bindings
+bindkey "^[[c" next
+bindkey "^[[d" prev
+bindkey "^[[b" focus
+
+# Set the altscreen so that when you quit vi, it will go back to
+# what it was before
+altscreen on
+</code></pre>
+
+<p>And finally, my delicious links for screen. </p>
+Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+]]></content>
+  </entry>
   
 </feed>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: on life - programming | Arnab's Universe]]></title>
+  <link href="http://arnab.github.com/posts/categories/on-life-programming/atom.xml" rel="self"/>
+  <link href="http://arnab.github.com/"/>
+  <updated>2013-01-21T15:16:38+05:30</updated>
+  <id>http://arnab.github.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[zembly super!!!]]></title>
+    <link href="http://arnab.github.com/posts/2008/07/zembly-super/"/>
+    <updated>2008-07-17T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2008/07/zembly-super</id>
+    <content type="html"><![CDATA[<p>Ok Ok Ok… I’ve not been posting regularly. Mostly a fault of companies like BMW, Nintendo and Amazon…</p>
+
+<p>Yeah, so since my last blog, I got a <a href="http://www.bmwusa.com/Standard/Content/Vehicles/2008/3/328iSedan/Default.aspx">BMW 3-series</a>, an <a href="http://www.amazon.com/o/ASIN/B000FI73MA">Amazon Kindle</a> (as a gift, that too!) and a <a href="http://www.amazon.com/o/ASIN/B0009VXBAQ">Wii</a>. So life’s been busy… driving, reading new stuff and playing fun games! Oh and the introduction of a new person… who keeps me, let’s say, engaged? <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<p>So all that and stuff like what-I’m-going-to-write-about now is basically what is keeping me from writing more blogs… Believe me, I hardly get to stop a think a moment nowadays… Time’s just flying… what with nice increase in office work too. Thank God I like it – I would have stopped coming to office otherwise. No, really!</p>
+
+<p>So I have turned to micro-blogging… Don’t get me worng, I love to write here… but where’s the time? So I turned to twitter recently. If you haven’t seen that yet – try it out – it’s the latest fad. Like sms-ing and blogging… It’s called Twitting! I mean it – go to <a href="http://twitter.com/">twitter</a> right now and see the demo video. It’s cool… and as most people believe, it’s the future… of smsing/blogging/mailing all-in-one.</p>
+
+<p>So if you still wanna see my updates – whatever handful you are anyway – get on to twitter and find me (arnab_deka) and follow me. I’ll still continue to write blogs, but they will be rare – like this.</p>
+
+<p>So today I came across this new shiny thing called zembly.</p>
+
+<p>I think I blogged about : <a href="http://heroku.com/">http://heroku.com/</a> The first online IDE I saw… but that won’t interest most of you as it was only for RubyOnRails.</p>
+
+<p>Look at the new zembly: <a href="http://zembly.com/">http://zembly.com/</a> Visual-<wbr>coding in Javascript in a nice IDE (read Visual Studio, but much nicer, AJAXy and with lots less errors. AND FREE!).</p>
+and the IDE is online! Get APIs for free (like, from, Yahoo, Google, Amazon, Flickr etc.) and publish your WebService/idget/app for free! Quick and easy…</p>
+
+<p>Here’s a Hello-world type WebService I created (I should say it created for me – it was so damn easy):
+<a href="http://zembly.com/things/a7085d0638fb4ec799379ab499eefe71;exec">http://zembly.com/things/<wbr>a7085d0638fb4ec799379ab499eefe<wbr>71;exec</a>?</p>
+
+<p>and put your name in and see:
+<a href="http://zembly.com/things/a7085d0638fb4ec799379ab499eefe71;exec?name=%5Byour%20name%20here%5D">http://zembly.com/things/<wbr>a7085d0638fb4ec799379ab499eefe<wbr>71;exec?name=[your%20name%<wbr>20here]</a></p>
+
+<p>Never thought it would be so easy to craete a web-service! <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<p>BTW, they are open for beta users now – check it out, it’s nice…</p>
+]]></content>
+  </entry>
+  
+</feed>

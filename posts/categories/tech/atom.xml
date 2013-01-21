@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tech | Arnab's Universe]]></title>
+  <link href="http://arnab.github.com/posts/categories/tech/atom.xml" rel="self"/>
+  <link href="http://arnab.github.com/"/>
+  <updated>2013-01-21T15:16:38+05:30</updated>
+  <id>http://arnab.github.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Interesting Job Advertisement]]></title>
+    <link href="http://arnab.github.com/posts/2009/09/interesting-job-advertisement/"/>
+    <updated>2009-09-22T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/09/interesting-job-advertisement</id>
+    <content type="html"><![CDATA[<p>A recent job opening advert (from <a href="http://vark.com/jobs#feeng">Aardvark, for a Front-End Web Developers</a>) goes:</p>
+
+<blockquote><p>Required Skills:
+* Fluency in HTML and CSS
+* Experience taking mockups and turning them into standards-compliant HTML/CSS
+* Expertise in achieving cross-browser compatibility in IE, Firefox, and Safari
+* Experience in implementing grid-based layouts in HTML/CSS
+* Experience in an agile development environment</p>
+
+<p>Pluses:
+* Interest in user experience design and graphic design
+* Experience in Javascript and Ruby on Rails
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools
+* Experimental, user focused, and iterative
+* Previous startup experience</p></blockquote>
+
+<p>I felt the Pluses section was very interesting, specially (you kinda see the others on Rails related job boards anyway):
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools</p>
+
+<p>Shows how today’s start-ups value people who are really interested in what they do (and not just in for the money). An encouraging view of the world indeed – now I just have to get on it and get those much needed Plusses into my skills bag <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+
+<p>Note to my employers, friends, well wishers and anyone else interested: This does not mean I am looking for a job! I love the job I have right now and am just happy to see the importance of “passion” in the world’s view of an ideal employee increasing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Guides on my Kindle DX!!! (or any webpage for that matter)
+]]></title>
+    <link href="http://arnab.github.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter/"/>
+    <updated>2009-09-18T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter</id>
+    <content type="html"><![CDATA[<p>I got a <a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a><img src="http://www.assoc-amazon.com/e/ir?t=arnsblo-20&amp;l=as2&amp;o=1&amp;a=B0015TCML0" alt="" /> for a birthday gift! Thanks Ujwala!</p>
+
+<p>And so far I am loving it. It’s better to read on compared to Kindle 1 (which, BTW, Ujwala had gifted to me last year) – and the native PDF support (and the search-anywhere) is awesome! The experimental browser that comes with the DX is much much improved compared to Kindle 1st Gen.</p>
+
+<p>So I was reading more about <a href="http://guides.rubyonrails.org/routing.html">Rails Routing in the rails-guides</a>. And while I was in the bus today morning I wanted to read that on the Kindle (coz it is a pleasure to read on it). So I fired up the guides page on the experimental browser – it works, but reading a PDF or a Kindle-formatted book is so much better.</p>
+
+<p>So I got this simple idea. Print the web page as a PDF and e-mail it to your Kindle. Here’s what I did:</p>
+
+<ol>
+<li>Go to the site</li>
+<li>Print – (PDF format “saved to file” instead of sending it to a printer). I was on Linux – Mac also has the “Print to PDF/PS support by default, for Windows you’ll need to get <a href="http://www.cutepdf.com/">CutePDF</a> installed)</li>
+<li>e-mail it to your Kindle address (I also uploaded it to my dropbox – so I can get it later on) and you are done!</li>
+</ol>
+
+
+<p>(BTW, dropbox is an amazing thing – if you use multiple computers/OS, you have to try this thing. If you are going to try it out (for free), help me out – <a href="https://www.getdropbox.com/referrals/NTEzMDYwMzk">use my Dropbox referral link</a>)</p>
+
+<p>So there you go – another easy way to get web-content for free on your Kindle. Go on enjoy the book now.</p>
+
+<p><strong>Blog-Notes</strong></p>
+
+<ul>
+<li><a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a></li>
+<li><a href="http://guides.rubyonrails.org">Rails Guides – excellent info on the RubyOnRails framework</a></li>
+<li><a href="http://www.cutepdf.com/">CutePDF</a></li>
+<li><a href="https://www.getdropbox.com/">DropBox</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GNU Screen]]></title>
+    <link href="http://arnab.github.com/posts/2009/07/gnu-screen/"/>
+    <updated>2009-07-20T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/07/gnu-screen</id>
+    <content type="html"><![CDATA[<p>If you have nothing to do with Linux you probably can stop reading now. Unless you want to get introduced to a very nice tool in the Linux world. I can say without doubt that this saves me at least an hour every month. In addition it gets you away from doing some mundane “set-up” like things every time to start working. It has a load of features but today I’ll just scratch the surface. But it’ll be enough to start you off and I promise you’ll be glad you found screen.</p>
+
+<p>One of the programs that I love and can’t go through the day without is <a href="http://www.gnu.org/software/screen/">GNU Screen</a>. It’s like a Window manager, but only for your terminals. You know, like you are working with so many terminals/consoles/terminal-windows all the time (one to the DB, one with vim open, one to run the tests, one to run the program etc., one to watch the logs, a few to prod boxes etc.). And then you disconnect and then reconnect (from home, somewhere else) and you have to set-up all that again?</p>
+
+<p>Yeah screen can help you with all that. My work pattern involves connecting to a screen session (and I get all the windows/context loaded). Whether I connect from work, home from somewhere else, all I have to say is:</p>
+
+<pre><code>$ screen -ls (to see what sessions I have running)
+$ screen -R some-session-name
+</code></pre>
+
+<p>And it’s wicked-easy to switch between different windows, search through your history etc. You can also configure it to do a few “start-up” things every time. For example, at home, I have screen</p>
+
+<ol>
+<li>configured to Open 4 windows when it starts up and</li>
+<li>have window-0 go to my code dir (to teh root of my <a href="http://rubyonrails.org/">RubyOnRails</a> part of the site)</li>
+<li>start up <a href="http://nubyonrails.com/articles/autotest-rails">auto-test</a> on window-1</li>
+<li>show the logs on window-2</li>
+<li>ssh into the <a href="http://www.bluehost.com/">blue host</a> (which hosts my site)</li>
+</ol>
+
+
+<p>Since the windows are persisted, I don’t have to do all these things every time I connect (for a lazy programmer (and all programmers are lazy aren’t they?) that’s a lot of help). You can even share the screens with someone else (I have not tried that yet though).</p>
+
+<p>Anyway, I hope you are sold by now. Even if you are not, spend some time (shouldn’t be more than a couple of hours) installing/configuring/running screen and you will soon reap the rewards. To get you started:</p>
+
+<ul>
+<li>The GNU Screen home-page: <a href="http://www.gnu.org/software/screen/">http://www.gnu.org/software/screen</a></li>
+<li>A good guide to installing/setting-up/using: <a href="http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen">http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen</a></li>
+<li>Once you start liking it you’ll need a cheat-sheet: <a href="http://aperiodic.net/screen/quick_reference?do=show">http://aperiodic.net/screen/quick_reference?do=show</a></li>
+</ul>
+
+
+<p>A word about configuring: heard that Ubuntu will soon shipping with decent .screenrc (sane default configuration) so you don’t have to. Meanwhile you can configure it yourself (as in the Red Hat guide above) or look at these cool options: <a href="http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/">http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/</a>. Here is my .screenrc:</p>
+
+<pre><code>vbell off
+vbell_msg "Ring"
+
+# detach on hangup
+autodetach on
+
+# don&amp;#039;t display copyright page
+startup_message off
+
+# scroll back
+defscrollback 1000
+
+# setup the caption
+hardstatus alwayslastline "%{-b gk}%-w%{+b kg}%50&gt;%n %t%{-b gk}%+w %=%C%&lt; "
+
+# right/left bindings
+bindkey "^[[c" next
+bindkey "^[[d" prev
+bindkey "^[[b" focus
+
+# Set the altscreen so that when you quit vi, it will go back to
+# what it was before
+altscreen on
+</code></pre>
+
+<p>And finally, my delicious links for screen. </p>
+Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Where is the quality in e-commerce?]]></title>
+    <link href="http://arnab.github.com/posts/2009/03/where-is-the-quality-in-e-commerce/"/>
+    <updated>2009-03-29T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/03/where-is-the-quality-in-e-commerce</id>
+    <content type="html"><![CDATA[<p>I have been buying most of my stuff (on the net) from Amazon ever since I moved to the US, in 2006. That’s probably why this thought/blog is coming now, after 3 years.</p>
+
+<p>It’s about the quality, mostly about the customer experience in e-commerce stores. First, I have to say kudos to the handful of places I have had a good experience in – <a href="http://www.amazon.com">Amazon</a> (and <a href="http://www.endless.com">endless</a>, <a href="http://www.amazonfresh.com">AmazonFresh</a>, <a href="http://www.windowshop.com">windowshop</a> etc.), <a href="http://www.ebay.com">eBay</a>, <a href="http://www.zappos.com">zappos</a>, <a href="http://www.bn.com">BN</a> and <a href="http://www.netflix.com">Netflix</a>. These places make it easy for the customer – easy to choose, to place an order and easy to track or follow in case there is a need. It’s (most of the time) easy to use them (categorization, search, find more related info, edit orders, cancel, return – the whole deal).</p>
+
+<p>However, over the last one week, I have had a “chance” to use a few other sites. Three of these were for techie/geeky t-shirts (which you won’t find, easily, in the aforementioned stores) – <a href="http://www.cafepress.com">CafePress</a>, The <a href="https://usshop.ubuntu.com">Ubuntu US Merchandise Shop</a> and <a href="http://www.zazzle.com">Zazzle</a> (for Mozilla/Firefox merchandise). Maybe, I am spoilt by the bigger, better sites – but I did not find it easy to search for things, find more info on them on these sites. They probably did fine, but not great. However, the experience after placing the order is not nice at all.</p>
+
+<p>The email I received from Ubuntu informing me that my order is complete does not have a single hyper-link. It does not even have a order number. It has the long UPS tracking number in it, but is it so hard to embed a link? And where do I go to see the details of my order? No link, no order number. They don’t have a picture of the T-shirt in the e-mail, so if I want to look it up to show to someone, I have to go to their site (the US one by the way, is harder to find). But if I search for the item by the name they sent in the e-mail nothing turns up. Horrified.</p>
+
+<p>I did not sign up for yet another account at zazzle and checked out as a guest. And now, when I click on the “View Order Details” on their site, it asks me to sign in. They could have told me this before, and I probably would have signed up for an account right? So at this site too I can’t search for or easily find the item I ordered.</p>
+
+<p>The e-mail from CafePress has a UPS link, but no links to their site or a “Order Details” page. Oh man, even here I can’t search for the item I ordered by the name they gave in the email.</p>
+
+<p>Anyway, I’ll say that these 3 sites gave me a sound (not great) experience before checkout (although the post-checkout part leaves a lot to be desired). The extreme example of a poorly-designed site was <a href="http://www.theamericanwedding.com">The American Wedding</a>. Ujwala was looking a site to order some more wedding cards (for friends over here in the US). There were a few sites which were just plain worthless. From their main page you could click on a card type (which will get you to the detail page for that card), but there was no way to start the checkout. No links whatsoever (maybe they do everything over the phone). Maybe they are just ads for a physical business, not e-commerce really.</p>
+
+<p>Anyway, <a href="http://www.theamericanwedding.com">www.theamericanwedding.com</a> looked like the best bet. We could select an invitation type from a good selection. Then came entering the text. You have to give the bride and the groom names in 3 different places! And the “sub-verse” that they suggested, violated their own rule of max 40 characters on a line for “sub-verses”. But the best – A form element called “Enter the first name of the bride and groom” – which has 3 text-boxes to enter (they are even numbered 1,2 and 3). Ok, they are asking for 2 first names, and clearly are expecting 3 different inputs. Hmmm. Guess what? Turns out Box #2 was for the word “and”! And then they ask “The name of the bride is in Line #” – {select 1 to like 50 from a dropdown}. And the same for the bride. Man!</p>
+
+<p>After filling out all the details, there is no preview of which text goes where in the card. There are no hints as to which section is optional (left top text, right top text) – so if I leave out a section I don’t know if that will result in a blotch of blank in the card. Oh and the shipping was about $20 for standard ground shipping <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> (and I don’t know the post-checkout experience yet).</p>
+
+<p>Now I think I know why Amazon/eBay etc. are where they are in the e-commerce world. Maybe the “invitation cards” industry specifically lacks good sites (which makes me wonder if it is easier to make a difference there), but it seems that most of the “e-commerce” sites are still in the 90s. It seems the internet as a whole has advanced light years ahead of it’s e-commerce children. “web2.0″ is a distant reality for now.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How Ubiquity saved me today]]></title>
+    <link href="http://arnab.github.com/posts/2009/03/how-ubiquity-saved-me-today/"/>
+    <updated>2009-03-07T00:00:00+05:30</updated>
+    <id>http://arnab.github.com/posts/2009/03/how-ubiquity-saved-me-today</id>
+    <content type="html"><![CDATA[<p>I know how I shouldn’t be pointy-clicky on all links I get. Specially the tiny url ones.</p>
+
+<p>Well yesterday I got a link (internal – so can’t share) in a mailing group in office. The URL was a shortened one (something like tinyurl, but used inside Amazon) and it did come with adequate warning about not opening it. But like a few other dumbos I did click it.</p>
+
+<p>I have to share the link in this post – but be warned that I have warned you. It’s no virus r malicious software/code but clever Javascript play. Anyway if you happen to click know that you have no right to sue me whatsoever. And if you really do click – let me know, afterwards, how it goes.</p>
+
+<p>Without further ado, it’s – <a href="http://www.rickrolling.com">http://www.rickrolling.com</a></p>
+
+<p>I am assuming you know what RickRoll is – if not, you should – the <a href="http://en.wikipedia.org/wiki/Rickroll">wikipedia article on RickRoll</a> explains it well (it has given me a lot of laughs till date and has robbed some producive hours too. I hope you enjoy it too <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> ).</p>
+
+<p>So, anyway, like a real dumbo, even after reading all the warnings I clicked on it. And bam… my browser is not mine anymore. It’s like one of those really annoying moments when you loose control of something you use all the time (maybe not a great analogy, think a driver loosing control of the steering wheel of his bus. Think a bus full of passengers. In this case, it causes no damage – so like, the bus not hitting any thing/body, but dancing around the street).</p>
+
+<p>I had quite a few interesting tabs open on Firefox. And when it started dancing around, I really lost it. For a few seconds that is. Then the ubiquity idea came to me.</p>
+
+<p>ALT+SHIFT. type “close-tab” (actually just type “clo” and hit tab) and then type “RICK ROLL”.
+W00t! My browser is back. And my work is saved (the only other way would have been to kill firefox – after which if I restart and ask it to open All Tabs again, I am back to square-one. If I say “Start with no tabs” I loose all the other interesting ones. Of course you can kill FF, open up the FF tabs xml file (it’s nested inside your FF install dir) and delete this tab – but that’s a lot of work).</p>
+
+<p>I have loved Ubiquity a lot and have evangelized it to a lot of people already. It gives you a really powerful browser (like just type “search Something”, or “email Hi to arnab” and you are done. No opening a tabs or another service even). It’s very liberating. My fav commands are search, wiki, weather, email, map, define and twitter.</p>
+
+<p>But yesterday, for the first time I had the opportunity to really feel myself “Thank God I installed Ubiquity”.</p>
+
+<p>If you have not already, give it a spin – here’s the page for the <a href="http://labs.mozilla.com/projects/ubiquity/">Ubiquity project</a></p>
+
+<p>If you want more, watch this screencast (you can also find it on the Ubiquity page) -</p>
+
+<p><a href="http://vimeo.com/1561578">Ubiquity for Firefox</a> from <a href="http://vimeo.com/user532161">Aza Raskin</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+
+<p>If you are using it already, don’t you love it? If not using it yet – try it out and let me know how it goes. (Ubiquity is also on twitter – <a href="http://twitter.com/mozillaubiquity">@mozillaubiquity</a>)</p>
+]]></content>
+  </entry>
+  
+</feed>
