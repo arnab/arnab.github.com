@@ -8,7 +8,7 @@ footer: true
 ---
 ### Arnab Deka is a <del>20-something</del> 30-something, guy-next-door living in <del>Seattle, WA</del> Bangalore, India.
 
-{% img right images/arnab.jpg %}
+{% img right ../images/arnab.jpg %}
 
 Right, I turned 30 recently and we moved to India too!
 
