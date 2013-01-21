@@ -9,7 +9,8 @@
   <meta name="author" content="Arnab Deka">
 
   
-  <meta name="description" content="Assuming you know about “guarded logging”, a Java logging best practise. If not, get an overview in this IBM article or in this blog. Basically it is &hellip;">
+  <meta name="description" content="Assuming you know about “guarded logging”, a Java logging best
+practise. If not, get an overview in this IBM article or in this blog. Basically it is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,32 +103,47 @@
   </header>
 
 
-<div class="entry-content"><p>Assuming you know about “guarded logging”, a Java logging best practise. If not, get an overview in <a href="http://publib.boulder.ibm.com/infocenter/ledoc/v6r11/index.jsp?topic=/com.ibm.rcp.tools.doc.appdev/serviceability_java.util.loggingbestpractices.html">this IBM article</a> or in <a href="http://www.burlesontech.com/wiki/display/btg/Java+Logging+Standards+and+Guidelines">this blog</a>.</p>
+<div class="entry-content"><p>Assuming you know about “guarded logging”, a Java logging best
+practise. If not, get an overview in <a href="http://publib.boulder.ibm.com/infocenter/ledoc/v6r11/index.jsp?topic=/com.ibm.rcp.tools.doc.appdev/serviceability_java.util.loggingbestpractices.html">this IBM article</a> or in <a href="http://www.burlesontech.com/wiki/display/btg/Java+Logging+Standards+and+Guidelines">this blog</a>.</p>
 
-<p>Basically it is the practice of checking if a particular log message will indeed be outputted to the log (based on the severity level) before calling the log statement. This is a performance improvement.</p>
+<p>Basically it is the practice of checking if a particular log message
+will indeed be outputted to the log (based on the severity level)
+before calling the log statement. This is a performance improvement.
+Here&#8217;s a Java example:</p>
 
-<pre><code>// Java example
-if( logger.isLoggable(Level.INFO) ) {
-  logger.info( "this is a " + "info" + "message" );
+<div><script src='https://gist.github.com/4585349.js?file=example.java'></script>
+<noscript><pre><code>if( logger.isLoggable(Level.INFO) ) {
+    // or logger.info?
+    logger.info( &quot;this is a &quot; + &quot;info&quot; + &quot;message&quot; );
 }
-</code></pre>
+</code></pre></noscript></div>
 
-<p>So I heard from one of my colleagues that Ruby’s logging performance can also be improved the same way, by putting the message in a block (instead of just passing it as an string arg to the method):</p>
 
-<pre><code>@logger.debug { "this is a " + "debug" + "message" }
-</code></pre>
+<p>So I heard from one of my colleagues that Ruby&#8217;s logging performance
+can also be improved the same way, by putting the message in a block
+(instead of just passing it as an string arg to the method):</p>
 
-<p>See various ways to log a message at the <a href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/">ruby-docs</a> (search for “How to log a message” in that page).
-I looked into the source-code and, just like in Java, the first thing that is done is to check the severity and return (true) if the severity is higher than the message’s. So like in Java, it should not have any effect (except creating the strings etc.).</p>
+<div><script src='https://gist.github.com/4585349.js?file=example.rb'></script>
+<noscript><pre><code>logger.debug { &quot;this is a &quot; + &quot;debug&quot; + &quot;message&quot; }
+</code></pre></noscript></div>
+
+
+<p>See various ways to log a message at the <a href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/">ruby-docs</a> (search for
+&#8220;How to log a message&#8221; in that page). I looked into the source-code
+and, just like in Java, the first thing that is done is to check the
+severity and return (true) if the severity is higher than the
+message&#8217;s. So like in Java, it should not have any effect (except
+creating the strings etc.).</p>
 
 <p>Just to test it out, I wrote a benchmark test:</p>
 
-<pre><code>require &amp;#039;benchmark&amp;#039;
-require &amp;#039;logger&amp;#039;
+<div><script src='https://gist.github.com/4585349.js?file=benchmarking_example.rb'></script>
+<noscript><pre><code>require 'benchmark'
+require 'logger'
 
 class LoggerBenchmark
   def initialize
-    @logger = Logger.new("/dev/null")
+    @logger = Logger.new(&quot;/dev/null&quot;)
   end
 
   def benchmark
@@ -135,24 +151,24 @@ class LoggerBenchmark
     # I use bmbm method and not bm here
     # so the effects of initializing etc. are abstracted away
     Benchmark.bmbm do |x|
-      x.report("with block") do
+      x.report(&quot;with block&quot;) do
         n.times do |i|
           # trying to do *some* arithmetic here
           # so there is *some* work for string-creation
-          @logger.warn { "logging with block - #{rand * 1000 % i}" }
+          @logger.warn { &quot;logging with block - #{rand * 1000 % i}&quot; }
         end
       end
 
-      x.report("with string") do
+      x.report(&quot;with string&quot;) do
         n.times do |i|
-          @logger.warn "logging with string - #{rand * 1000 % i}"
+          @logger.warn &quot;logging with string - #{rand * 1000 % i}&quot;
         end
       end
 
-      x.report("with severity check") do
+      x.report(&quot;with severity check&quot;) do
         n.times do |i|
           if @logger.warn?
-            @logger.warn("logging with severity check - #{rand * 1000 % i}")
+            @logger.warn(&quot;logging with severity check - #{rand * 1000 % i}&quot;)
           end
         end
       end
@@ -162,46 +178,55 @@ class LoggerBenchmark
 end
 
 LoggerBenchmark.new.benchmark
-</code></pre>
+</code></pre></noscript></div>
 
-<p>Here’s what I noticed:</p>
+
+<p>Here&#8217;s what I noticed:</p>
 
 <ul>
-<li><p>with n (the number of logging calls) set to &lt; = 10,000, there was really no difference between the three ways:</p>
-
-<pre><code>$ time ruby logger_benchmark.rb
-Rehearsal &amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;
+<li><p>with <code>n &lt;= 10,000</code> (number of logging calls), there was really no
+difference between the three ways:
+<div><script src='https://gist.github.com/4585349.js?file=results_small_n.sh'></script>
+<noscript><pre><code>$ time ruby logger_benchmark.rb
+Rehearsal —————————————————————
 with block            1.340000   0.160000   1.500000 (  1.500111)
 with string           0.740000   0.110000   0.850000 (  0.845971)
 with severity check   0.650000   0.080000   0.730000 (  0.736908)
-&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212; total: 3.080000sec
+—————————————————— total: 3.080000sec</p>
 
-                                  user     system      total        real
-with block            0.670000   0.100000   0.770000 (  0.765206)
+<pre><code>                            user     system      total        real
+</code></pre>
+
+<p>with block            0.670000   0.100000   0.770000 (  0.765206)
 with string           0.640000   0.080000   0.720000 (  0.715421)
 with severity check   0.660000   0.080000   0.740000 (  0.733024)
 ruby logger_benchmark.rb  4.72s user 0.62s system 99% cpu 5.351 total
-&lt;/li&gt;
-</code></pre></li>
-<li><p>with n set to 100,000: It looked like the simplest way to log (with a string-arg) still performs the best:</p>
-
-<pre><code>$ time ruby logger_benchmark.rb
+</code></pre></noscript></div></p></li>
+<li><p>with <code>n = 100,000</code>: It looked like the simplest way to log (with a
+string-arg) still performs the best:
+<div><script src='https://gist.github.com/4585349.js?file=results_medium_n.sh'></script>
+<noscript><pre><code>$ time ruby logger_benchmark.rb
 Rehearsal ---------------------------------------------------------------
 with block            7.630000   1.030000   8.660000 (  8.669890)
 with string           6.410000   0.840000   7.250000 (  7.270509)
 with severity check   6.570000   0.890000   7.460000 (  7.472230)
------------------------------------------------------ total: 23.370000sec
+----------------------------------------------------- total: 23.370000sec</p>
 
-                                  user     system      total        real
-with block            6.760000   0.930000   7.690000 (  7.697947)
+<pre><code>                            user     system      total        real
+</code></pre>
+
+<p>with block            6.760000   0.930000   7.690000 (  7.697947)
 with string           6.320000   0.870000   7.190000 (  7.190802)
 with severity check   6.460000   0.930000   7.390000 (  7.394368)
 ruby logger_benchmark.rb  40.20s user 5.50s system 99% cpu 45.755 total
-</code></pre></li>
+</code></pre></noscript></div></p></li>
 </ul>
 
 
-<p>Final takeaway: it really does not make that big a difference and keeping it simple (with a string-arg) should work. If you are worried about performance, this probably is not a trick that will give you a big bang for the buck.</p>
+<p>Final takeaway: it really does not make that big a difference and
+keeping it simple (with a string-arg) should work. If you are worried
+about performance, this probably is not a trick that will give you a
+big bang for the buck.</p>
 </div>
 
 

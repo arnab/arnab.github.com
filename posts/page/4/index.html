@@ -9,7 +9,7 @@
   <meta name="author" content="Arnab Deka">
 
   
-  <meta name="description" content="This blog is about twitter hastags. To learn more about twitter hashtags, go here. So #songsincode has been ruling the twitter trends for a day now &hellip;">
+  <meta name="description" content="This blog is about twitter hastags. To learn more about twitter hashtags, go here. So #songsincode has been ruling the twitter trends for a day now. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,9 +107,9 @@
 
   <div class="entry-content"><blockquote><p>This blog is about twitter hastags. To learn more about twitter hashtags, go <a href="http://twitter.pbworks.com/Hashtags">here</a>.</p></blockquote>
 
-<p>So #songsincode has been <a href="http://twitter.com/#search?q=%23songsincode">ruling the twitter trends</a> for a day now). Didn’t follow it? No worries – <a href="http://www.sitepoint.com/blogs/2009/08/21/geeks-just-wanna-have-fun-songsincode/">here’s a recent blog</a> with some good (early) ones.</p>
+<p>So #songsincode has been <a href="http://twitter.com/#search?q=%23songsincode">ruling the twitter trends</a> for a day now. Didn&#8217;t follow it? No worries - <a href="http://www.sitepoint.com/blogs/2009/08/21/geeks-just-wanna-have-fun-songsincode/">here&#8217;s a recent blog</a> with some good (early) ones.</p>
 
-<p>Basically, it was the most fun I have had reading hashtags. Today, after lunch I took a plunge too <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+<p>Basically, it was the most fun I have had reading hashtags. Today, after lunch I took a plunge too :)</p>
 
 <p>Original <a href="http://twitter.com/arnab_deka/status/3460700079">tweet here</a>:</p>
 
@@ -123,7 +123,7 @@
 end
 </code></pre>
 
-<p>Oh don’t tell me I was so bad you could not even guess the songs (Every Breath You Take and <a href="http://www.youtube.com/watch?v=qv829hUuYAM">Two Steps Behind</a>.</p></p>
+<p>Oh don&#8217;t tell me I was so bad you could not even guess the songs (<a href="http://www.amazon.com/Every-Breath-You-Take/dp/B000W299VM/ref=sr_1_2?ie=UTF8&amp;s=dmusic&amp;qid=1250899720&amp;sr=8-2">Every Breath You Take</a> and <a href="http://www.youtube.com/watch?v=qv829hUuYAM">Two Steps Behind</a>).</p>
 </div>
   
   
@@ -159,32 +159,47 @@ end
   </header>
 
 
-  <div class="entry-content"><p>Assuming you know about “guarded logging”, a Java logging best practise. If not, get an overview in <a href="http://publib.boulder.ibm.com/infocenter/ledoc/v6r11/index.jsp?topic=/com.ibm.rcp.tools.doc.appdev/serviceability_java.util.loggingbestpractices.html">this IBM article</a> or in <a href="http://www.burlesontech.com/wiki/display/btg/Java+Logging+Standards+and+Guidelines">this blog</a>.</p>
+  <div class="entry-content"><p>Assuming you know about “guarded logging”, a Java logging best
+practise. If not, get an overview in <a href="http://publib.boulder.ibm.com/infocenter/ledoc/v6r11/index.jsp?topic=/com.ibm.rcp.tools.doc.appdev/serviceability_java.util.loggingbestpractices.html">this IBM article</a> or in <a href="http://www.burlesontech.com/wiki/display/btg/Java+Logging+Standards+and+Guidelines">this blog</a>.</p>
 
-<p>Basically it is the practice of checking if a particular log message will indeed be outputted to the log (based on the severity level) before calling the log statement. This is a performance improvement.</p>
+<p>Basically it is the practice of checking if a particular log message
+will indeed be outputted to the log (based on the severity level)
+before calling the log statement. This is a performance improvement.
+Here&#8217;s a Java example:</p>
 
-<pre><code>// Java example
-if( logger.isLoggable(Level.INFO) ) {
-  logger.info( "this is a " + "info" + "message" );
+<div><script src='https://gist.github.com/4585349.js?file=example.java'></script>
+<noscript><pre><code>if( logger.isLoggable(Level.INFO) ) {
+    // or logger.info?
+    logger.info( &quot;this is a &quot; + &quot;info&quot; + &quot;message&quot; );
 }
-</code></pre>
+</code></pre></noscript></div>
 
-<p>So I heard from one of my colleagues that Ruby’s logging performance can also be improved the same way, by putting the message in a block (instead of just passing it as an string arg to the method):</p>
 
-<pre><code>@logger.debug { "this is a " + "debug" + "message" }
-</code></pre>
+<p>So I heard from one of my colleagues that Ruby&#8217;s logging performance
+can also be improved the same way, by putting the message in a block
+(instead of just passing it as an string arg to the method):</p>
 
-<p>See various ways to log a message at the <a href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/">ruby-docs</a> (search for “How to log a message” in that page).
-I looked into the source-code and, just like in Java, the first thing that is done is to check the severity and return (true) if the severity is higher than the message’s. So like in Java, it should not have any effect (except creating the strings etc.).</p>
+<div><script src='https://gist.github.com/4585349.js?file=example.rb'></script>
+<noscript><pre><code>logger.debug { &quot;this is a &quot; + &quot;debug&quot; + &quot;message&quot; }
+</code></pre></noscript></div>
+
+
+<p>See various ways to log a message at the <a href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/">ruby-docs</a> (search for
+&#8220;How to log a message&#8221; in that page). I looked into the source-code
+and, just like in Java, the first thing that is done is to check the
+severity and return (true) if the severity is higher than the
+message&#8217;s. So like in Java, it should not have any effect (except
+creating the strings etc.).</p>
 
 <p>Just to test it out, I wrote a benchmark test:</p>
 
-<pre><code>require &amp;#039;benchmark&amp;#039;
-require &amp;#039;logger&amp;#039;
+<div><script src='https://gist.github.com/4585349.js?file=benchmarking_example.rb'></script>
+<noscript><pre><code>require 'benchmark'
+require 'logger'
 
 class LoggerBenchmark
   def initialize
-    @logger = Logger.new("/dev/null")
+    @logger = Logger.new(&quot;/dev/null&quot;)
   end
 
   def benchmark
@@ -192,24 +207,24 @@ class LoggerBenchmark
     # I use bmbm method and not bm here
     # so the effects of initializing etc. are abstracted away
     Benchmark.bmbm do |x|
-      x.report("with block") do
+      x.report(&quot;with block&quot;) do
         n.times do |i|
           # trying to do *some* arithmetic here
           # so there is *some* work for string-creation
-          @logger.warn { "logging with block - #{rand * 1000 % i}" }
+          @logger.warn { &quot;logging with block - #{rand * 1000 % i}&quot; }
         end
       end
 
-      x.report("with string") do
+      x.report(&quot;with string&quot;) do
         n.times do |i|
-          @logger.warn "logging with string - #{rand * 1000 % i}"
+          @logger.warn &quot;logging with string - #{rand * 1000 % i}&quot;
         end
       end
 
-      x.report("with severity check") do
+      x.report(&quot;with severity check&quot;) do
         n.times do |i|
           if @logger.warn?
-            @logger.warn("logging with severity check - #{rand * 1000 % i}")
+            @logger.warn(&quot;logging with severity check - #{rand * 1000 % i}&quot;)
           end
         end
       end
@@ -219,46 +234,55 @@ class LoggerBenchmark
 end
 
 LoggerBenchmark.new.benchmark
-</code></pre>
+</code></pre></noscript></div>
 
-<p>Here’s what I noticed:</p>
+
+<p>Here&#8217;s what I noticed:</p>
 
 <ul>
-<li><p>with n (the number of logging calls) set to &lt; = 10,000, there was really no difference between the three ways:</p>
-
-<pre><code>$ time ruby logger_benchmark.rb
-Rehearsal &amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;
+<li><p>with <code>n &lt;= 10,000</code> (number of logging calls), there was really no
+difference between the three ways:
+<div><script src='https://gist.github.com/4585349.js?file=results_small_n.sh'></script>
+<noscript><pre><code>$ time ruby logger_benchmark.rb
+Rehearsal —————————————————————
 with block            1.340000   0.160000   1.500000 (  1.500111)
 with string           0.740000   0.110000   0.850000 (  0.845971)
 with severity check   0.650000   0.080000   0.730000 (  0.736908)
-&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212;&amp;#8212; total: 3.080000sec
+—————————————————— total: 3.080000sec</p>
 
-                                  user     system      total        real
-with block            0.670000   0.100000   0.770000 (  0.765206)
+<pre><code>                            user     system      total        real
+</code></pre>
+
+<p>with block            0.670000   0.100000   0.770000 (  0.765206)
 with string           0.640000   0.080000   0.720000 (  0.715421)
 with severity check   0.660000   0.080000   0.740000 (  0.733024)
 ruby logger_benchmark.rb  4.72s user 0.62s system 99% cpu 5.351 total
-&lt;/li&gt;
-</code></pre></li>
-<li><p>with n set to 100,000: It looked like the simplest way to log (with a string-arg) still performs the best:</p>
-
-<pre><code>$ time ruby logger_benchmark.rb
+</code></pre></noscript></div></p></li>
+<li><p>with <code>n = 100,000</code>: It looked like the simplest way to log (with a
+string-arg) still performs the best:
+<div><script src='https://gist.github.com/4585349.js?file=results_medium_n.sh'></script>
+<noscript><pre><code>$ time ruby logger_benchmark.rb
 Rehearsal ---------------------------------------------------------------
 with block            7.630000   1.030000   8.660000 (  8.669890)
 with string           6.410000   0.840000   7.250000 (  7.270509)
 with severity check   6.570000   0.890000   7.460000 (  7.472230)
------------------------------------------------------ total: 23.370000sec
+----------------------------------------------------- total: 23.370000sec</p>
 
-                                  user     system      total        real
-with block            6.760000   0.930000   7.690000 (  7.697947)
+<pre><code>                            user     system      total        real
+</code></pre>
+
+<p>with block            6.760000   0.930000   7.690000 (  7.697947)
 with string           6.320000   0.870000   7.190000 (  7.190802)
 with severity check   6.460000   0.930000   7.390000 (  7.394368)
 ruby logger_benchmark.rb  40.20s user 5.50s system 99% cpu 45.755 total
-</code></pre></li>
+</code></pre></noscript></div></p></li>
 </ul>
 
 
-<p>Final takeaway: it really does not make that big a difference and keeping it simple (with a string-arg) should work. If you are worried about performance, this probably is not a trick that will give you a big bang for the buck.</p>
+<p>Final takeaway: it really does not make that big a difference and
+keeping it simple (with a string-arg) should work. If you are worried
+about performance, this probably is not a trick that will give you a
+big bang for the buck.</p>
 </div>
   
   
@@ -359,74 +383,114 @@ ruby logger_benchmark.rb  40.20s user 5.50s system 99% cpu 45.755 total
   </header>
 
 
-  <div class="entry-content"><p>I have had this question about the difference between Ruby’s <code>clone</code> and <code>dup</code> method multiple times now. And I have always had this fuzzy feeling that “they are almost the same thing”. Today my colleague asked it again and I decided to dig it out. Here’s what <a href="http://ruby-doc.org/core/classes/Object.html">Ruby API docs</a> say about them:</p>
+  <div class="entry-content"><blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
+certainly much before it became popular. Those were the days when
+programmers had find out answers themselves ;)
+This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
 
-<blockquote><p><strong>Object#clone</strong>
-Produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. Copies the frozen and tainted state of obj.</p>
+<p>I have had this question about the difference between Ruby&#8217;s <code>clone</code>
+and <code>dup</code> method multiple times now. And I have always had this fuzzy
+feeling that &#8220;they are almost the same thing&#8221;. Today my colleague
+asked it again and I decided to dig it out. Here&#8217;s what
+<a href="http://www.joelonsoftware.com/items/2008/09/15.html">Ruby API docs</a> say about them:</p>
 
-<p><strong>Object#dup</strong>
-Produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p>
+<h3><code>Object#clone</code></h3>
 
-<p>This method may have class-specific behavior. If so, that behavior will be documented under the #initialize_copy method of the class.</p></blockquote>
+<blockquote><p>Produces a shallow copy of obj - the instance variables of obj are
+copied, but not the objects they reference. Copies the frozen and
+tainted state of obj.</p></blockquote>
 
-<p>So in essence, both produce shallow-copies of the object. clone copies the frozen <em>and</em> tainted state while dup copies only the tainted state. Even after reading that documentation twice, it’s still murky in my head (probably coz I have not had <em>a chance</em> to write code to notice the frozen or tainted state specifically.)</p>
+<h3><code>Object#dup</code></h3>
 
-<p>Here’s a gem from ruby-talk that Google brought up: <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/6328">http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/6328</a>. So Matz says:</p>
+<blockquote><p>Produces a shallow copy of obj—the instance variables of obj are
+copied, but not the objects they reference. dup copies the tainted
+state of obj. See also the discussion under Object#clone. In general,
+clone and dup may have different semantics in descendant classes.
+While clone is used to duplicate an object, including its internal
+state, dup typically uses the class of the descendant object to create
+the new instance.</p>
 
-<blockquote><p><code>clone’ copies everything; internal state, singleton methods, etc.
-</code>dup’ copies object contents only (plus taintness status).</p></blockquote>
+<p>This method may have class-specific behavior. If so, that behavior
+will be documented under the #initialize_copy method of the class.</p></blockquote>
 
-<p>And so I wrote a bit of code to see it myself (and thus remember it). Here’s a very simple Person class:</p>
+<p>So in essence, both produce shallow-copies of the object. <code>clone</code>
+copies the frozen <strong>and</strong> tainted state while <code>dup</code> copies only the
+tainted state. Even after reading that documentation twice, it&#8217;s still
+murky in my head (probably coz I have not had <em>a chance</em> to write code
+to notice the frozen or tainted state specifically.)</p>
 
-<pre><code>class Person
+<p>Here&#8217;s a gem from ruby-talk that Google brought up. So
+<a href="3">Matz says</a>:</p>
+
+<blockquote><p><code>clone</code> copies everything; internal state, singleton methods, etc.
+<code>dup</code> copies object contents only (plus taintness status).</p></blockquote>
+
+<p>And so I wrote a bit of code to see it myself (and thus remember it).
+Here&#8217;s a very simple <code>Person</code> class:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
+<noscript><pre><code>class Person
   attr_accessor :name
 end
-</code></pre>
+</code></pre></noscript></div>
 
-<p>Now we instantiate a Person object (p) and add then an singleton method on the new object (p) to say hi:</p>
 
-<pre><code>p = Person.new
-p.name = "The Man"
+<p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
+<noscript><pre><code>p = Person.new
+p.name = &quot;The Man&quot;
 
 # now add a singleton method on p:
 def p.say_hi
-  "&amp;#039;sup"
+  &quot;'sup&quot;
 end
-</code></pre>
+</code></pre></noscript></div>
 
-<p>See that it’s all working:</p>
 
-<pre><code>irb(main):014:0&gt; puts p.inspect
-#&lt;person :0xb7e83340 @name="The Man"&gt;
+<p>See that it&#8217;s all working:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
+<noscript><pre><code>irb(main):014:0&gt; puts p.inspect
+#&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
 =&gt; nil
 irb(main):015:0&gt; puts p.say_hi
-&amp;#039;sup
+'sup
 =&gt; nil
-</code></pre>
+</code></pre></noscript></div>
+
 
 <p>Now create a clone and a dup of it:</p>
 
-<pre><code>the_clone = p.clone
+<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
+<noscript><pre><code>the_clone = p.clone
 the_dup = p.dup
-</code></pre>
+</code></pre></noscript></div>
 
-<p>Both the clone and the dup have the same instance variables (which are shallow-copies BTW), but only the clone has the singleton method (say_hi) in it:</p>
 
-<pre><code>irb(main):018:0&gt; the_clone.name
-=&gt; "The Man"
+<p>Both the clone and the dup have the same instance variables (which are
+shallow-copies BTW), but only the clone has the singleton method
+(<code>#say_hi</code>) in it:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
+<noscript><pre><code>irb(main):018:0&gt; the_clone.name
+=&gt; &quot;The Man&quot;
 irb(main):019:0&gt; the_dup.name
-=&gt; "The Man"
+=&gt; &quot;The Man&quot;
 irb(main):020:0&gt; the_clone.say_hi
-=&gt; "&amp;#039;sup"
+=&gt; &quot;'sup&quot;
 irb(main):021:0&gt; the_dup.say_hi
-NoMethodError: undefined method `say_hi&amp;#039; for
-(Person :0xb7e83340 @name="The Man")
+NoMethodError: undefined method `say_hi' for 
+(Person :0xb7e83340 @name=&quot;The Man&quot;)
         from (irb):21
         from :0
-irb(main):022:0&gt;
-</code></pre>
+irb(main):022:0&gt; 
+</code></pre></noscript></div>
 
-<p>So that makes me feel that clone has to do more work than dup does. Hence dup might be more beneficial for performance compared to clone (unless you really need to use clone). Comments are welcome!</person></p>
+
+<p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
+does. Hence <code>#dup</code> might be more beneficial for performance compared to
+<code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
 </div>
   
   

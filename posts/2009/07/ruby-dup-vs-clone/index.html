@@ -9,7 +9,9 @@
   <meta name="author" content="Arnab Deka">
 
   
-  <meta name="description" content="I have had this question about the difference between Ruby’s clone and dup method multiple times now. And I have always had this fuzzy feeling that “ &hellip;">
+  <meta name="description" content="This was written way before StackOverflow launched, and
+certainly much before it became popular. Those were the days when
+programmers had find out &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -102,74 +104,114 @@
   </header>
 
 
-<div class="entry-content"><p>I have had this question about the difference between Ruby’s <code>clone</code> and <code>dup</code> method multiple times now. And I have always had this fuzzy feeling that “they are almost the same thing”. Today my colleague asked it again and I decided to dig it out. Here’s what <a href="http://ruby-doc.org/core/classes/Object.html">Ruby API docs</a> say about them:</p>
+<div class="entry-content"><blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
+certainly much before it became popular. Those were the days when
+programmers had find out answers themselves ;)
+This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
 
-<blockquote><p><strong>Object#clone</strong>
-Produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. Copies the frozen and tainted state of obj.</p>
+<p>I have had this question about the difference between Ruby&#8217;s <code>clone</code>
+and <code>dup</code> method multiple times now. And I have always had this fuzzy
+feeling that &#8220;they are almost the same thing&#8221;. Today my colleague
+asked it again and I decided to dig it out. Here&#8217;s what
+<a href="http://www.joelonsoftware.com/items/2008/09/15.html">Ruby API docs</a> say about them:</p>
 
-<p><strong>Object#dup</strong>
-Produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p>
+<h3><code>Object#clone</code></h3>
 
-<p>This method may have class-specific behavior. If so, that behavior will be documented under the #initialize_copy method of the class.</p></blockquote>
+<blockquote><p>Produces a shallow copy of obj - the instance variables of obj are
+copied, but not the objects they reference. Copies the frozen and
+tainted state of obj.</p></blockquote>
 
-<p>So in essence, both produce shallow-copies of the object. clone copies the frozen <em>and</em> tainted state while dup copies only the tainted state. Even after reading that documentation twice, it’s still murky in my head (probably coz I have not had <em>a chance</em> to write code to notice the frozen or tainted state specifically.)</p>
+<h3><code>Object#dup</code></h3>
 
-<p>Here’s a gem from ruby-talk that Google brought up: <a href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/6328">http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/6328</a>. So Matz says:</p>
+<blockquote><p>Produces a shallow copy of obj—the instance variables of obj are
+copied, but not the objects they reference. dup copies the tainted
+state of obj. See also the discussion under Object#clone. In general,
+clone and dup may have different semantics in descendant classes.
+While clone is used to duplicate an object, including its internal
+state, dup typically uses the class of the descendant object to create
+the new instance.</p>
 
-<blockquote><p><code>clone’ copies everything; internal state, singleton methods, etc.
-</code>dup’ copies object contents only (plus taintness status).</p></blockquote>
+<p>This method may have class-specific behavior. If so, that behavior
+will be documented under the #initialize_copy method of the class.</p></blockquote>
 
-<p>And so I wrote a bit of code to see it myself (and thus remember it). Here’s a very simple Person class:</p>
+<p>So in essence, both produce shallow-copies of the object. <code>clone</code>
+copies the frozen <strong>and</strong> tainted state while <code>dup</code> copies only the
+tainted state. Even after reading that documentation twice, it&#8217;s still
+murky in my head (probably coz I have not had <em>a chance</em> to write code
+to notice the frozen or tainted state specifically.)</p>
 
-<pre><code>class Person
+<p>Here&#8217;s a gem from ruby-talk that Google brought up. So
+<a href="3">Matz says</a>:</p>
+
+<blockquote><p><code>clone</code> copies everything; internal state, singleton methods, etc.
+<code>dup</code> copies object contents only (plus taintness status).</p></blockquote>
+
+<p>And so I wrote a bit of code to see it myself (and thus remember it).
+Here&#8217;s a very simple <code>Person</code> class:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
+<noscript><pre><code>class Person
   attr_accessor :name
 end
-</code></pre>
+</code></pre></noscript></div>
 
-<p>Now we instantiate a Person object (p) and add then an singleton method on the new object (p) to say hi:</p>
 
-<pre><code>p = Person.new
-p.name = "The Man"
+<p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
+<noscript><pre><code>p = Person.new
+p.name = &quot;The Man&quot;
 
 # now add a singleton method on p:
 def p.say_hi
-  "&amp;#039;sup"
+  &quot;'sup&quot;
 end
-</code></pre>
+</code></pre></noscript></div>
 
-<p>See that it’s all working:</p>
 
-<pre><code>irb(main):014:0&gt; puts p.inspect
-#&lt;person :0xb7e83340 @name="The Man"&gt;
+<p>See that it&#8217;s all working:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
+<noscript><pre><code>irb(main):014:0&gt; puts p.inspect
+#&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
 =&gt; nil
 irb(main):015:0&gt; puts p.say_hi
-&amp;#039;sup
+'sup
 =&gt; nil
-</code></pre>
+</code></pre></noscript></div>
+
 
 <p>Now create a clone and a dup of it:</p>
 
-<pre><code>the_clone = p.clone
+<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
+<noscript><pre><code>the_clone = p.clone
 the_dup = p.dup
-</code></pre>
+</code></pre></noscript></div>
 
-<p>Both the clone and the dup have the same instance variables (which are shallow-copies BTW), but only the clone has the singleton method (say_hi) in it:</p>
 
-<pre><code>irb(main):018:0&gt; the_clone.name
-=&gt; "The Man"
+<p>Both the clone and the dup have the same instance variables (which are
+shallow-copies BTW), but only the clone has the singleton method
+(<code>#say_hi</code>) in it:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
+<noscript><pre><code>irb(main):018:0&gt; the_clone.name
+=&gt; &quot;The Man&quot;
 irb(main):019:0&gt; the_dup.name
-=&gt; "The Man"
+=&gt; &quot;The Man&quot;
 irb(main):020:0&gt; the_clone.say_hi
-=&gt; "&amp;#039;sup"
+=&gt; &quot;'sup&quot;
 irb(main):021:0&gt; the_dup.say_hi
-NoMethodError: undefined method `say_hi&amp;#039; for
-(Person :0xb7e83340 @name="The Man")
+NoMethodError: undefined method `say_hi' for 
+(Person :0xb7e83340 @name=&quot;The Man&quot;)
         from (irb):21
         from :0
-irb(main):022:0&gt;
-</code></pre>
+irb(main):022:0&gt; 
+</code></pre></noscript></div>
 
-<p>So that makes me feel that clone has to do more work than dup does. Hence dup might be more beneficial for performance compared to clone (unless you really need to use clone). Comments are welcome!</person></p>
+
+<p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
+does. Hence <code>#dup</code> might be more beneficial for performance compared to
+<code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
 </div>
 
 

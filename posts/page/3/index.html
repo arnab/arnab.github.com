@@ -123,7 +123,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2009/11/rails-join-with-select/">Rails: Table Join With Specified Fields in Select</a></h1>
+      <h1 class="entry-title"><a href="/posts/2009/11/rails-join-with-select/">Rails - Table Join With Specified Fields in Select</a></h1>
     
     
       <p class="meta">
@@ -146,17 +146,28 @@
   </header>
 
 
-  <div class="entry-content"><p>Figured this out after a lot of monkeying-around (I mean script/console).</p>
+  <div class="entry-content"><p>Figured this out after a lot of monkeying-around (I mean <code>script/console</code>).</p>
 
 <p>Situation:</p>
 
 <ul>
-<li>I have two tables (Revisions has_many Inputs)</li>
+<li>I have two tables (Revisions <code>has_many</code> Inputs)</li>
 <li>I can load Revisions and then for each I can find Inputs, but quickly found out that for my situation, it leads to a lot of queries. So I want to load the required fields from both tables together</li>
 </ul>
 
 
-<p>:joins is the only way to do this, using :includes does NOT respect the select clause. Here is the gist I created:</p>
+<p><code>:joins</code> is the only way to do this, using <code>:includes</code> does <strong>NOT</strong> respect the select clause. Here a gist:</p>
+
+<div><script src='https://gist.github.com/223925.js'></script>
+<noscript><pre><code>    metrics_with_inputs = Revision.find(
+      :all,
+      :conditions =&gt; { :id =&gt; self.revisions.map { |r| r.id } },
+      :select =&gt; 'revisions.metric, revisions.snap_date, revisions.updated_at,
+        inputs.author, inputs.as_of_date, inputs.units',
+      :joins =&gt; 'join inputs on inputs.revision_id = revisions.id',
+      :order =&gt; 'revisions.metric, revisions.snap_date, revisions.updated_at'
+    )</code></pre></noscript></div>
+
 
 <p>Admittedly, this is hacky, too hacky for my comfort. Comment/suggest a better/cleaner solution?</p>
 
@@ -196,13 +207,9 @@
   </header>
 
 
-  <div class="entry-content"><p>Echo lake, view from my house. Taken with my iPhone and enhanced with the free Photoshop.com app…</p>
+  <div class="entry-content"><p>Echo lake, view from my house. Taken with my iPhone and enhanced with the free Photoshop.com app:</p>
 
-<p><a href="http://posterous.com"><img src="http://posterous.com" alt="" /></a></p>
-
-<p>via tweetie</p>
-
-<p><a href="http://posterous.com">Posted via web</a> from <a href="http://arnab.posterous.com/a-beautiful-foggy-autumn-morning-echo-lake-vi">arnab’s posterous</a></p>
+<p><img class="left" src="http://posterous.com/getfile/files.posterous.com/arnab/FxteHueeFwrqAflpJqfdjFhCGIiqmxehipFhElFobGurIylFdmjChaegDpBm/image.jpg.scaled500.jpg" title="Echo Lake" ></p>
 </div>
   
   
