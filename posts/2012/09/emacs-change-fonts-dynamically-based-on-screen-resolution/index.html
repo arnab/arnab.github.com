@@ -106,6 +106,24 @@
 
 <p>It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:</p>
 
+<div><script src='https://gist.github.com/3774147.js'></script>
+<noscript><pre><code>;; Gist-ed from in https://github.com/arnab/emacs-starter-kit
+
+(defun fontify-frame (frame)
+  (interactive)
+  (if window-system
+      (progn
+        (if (&gt; (x-display-pixel-width) 2000)
+            (set-frame-parameter frame 'font &quot;Inconsolata 19&quot;) ;; Cinema Display
+         (set-frame-parameter frame 'font &quot;Inconsolata 16&quot;)))))
+
+;; Fontify current frame
+(fontify-frame nil)
+
+;; Fontify any future frames
+(push 'fontify-frame after-make-frame-functions)</code></pre></noscript></div>
+
+
 <p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
 </div>
 
@@ -189,8 +207,7 @@
       </li>
     
       <li class="post">
-        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties
-</a>
+        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties</a>
       </li>
     
       <li class="post">

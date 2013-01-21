@@ -109,7 +109,24 @@
 
 <p>While there are lots of examples that show how to allow CORS requests in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them. While it’s simple to test the HTTP headers, you may have to look around a little (or a lot) on how to test a HTTP “OPTIONS” request. When you make CORS requests, the browser may make a pre-flight “OPTIONS” request to verify that the server allows CORS.</p>
 
+<!-- more -->
+
+
 <p>To make Rails set the right HTTP headers to allow CORS requests, you can do something like this:</p>
+
+<div><script src='https://gist.github.com/3749227.js?file=controller.rb'></script>
+<noscript><pre><code>before_filter: allow_cors_requests
+
+def allow_cors
+  headers[&quot;Access-Control-Allow-Origin&quot;] = &quot;*&quot;
+  headers[&quot;Access-Control-Allow-Methods&quot;] = %w{GET POST PUT DELETE}.join(&quot;,&quot;)
+  headers[&quot;Access-Control-Allow-Headers&quot;] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(&quot;,&quot;)
+  head(:ok) if request.request_method == &quot;OPTIONS&quot;
+  # or, render text: ''
+  # if that's more your style
+end
+</code></pre></noscript></div>
+
 
 <p>A few things to note here:</p>
 
@@ -123,10 +140,46 @@
 
 <p>In any case, how do you test this? It’s fairly trivial to test that the right HTTP headers were set with something like this:</p>
 
-<pre><code>response.headers[&amp;#039;Access-Control-Allow-Origin&amp;#039;].should == &amp;#039;*&amp;#039;
-</code></pre>
+<div><script src='https://gist.github.com/3749227.js?file=testing_cors_spec.rb'></script>
+<noscript><pre><code>response.headers['Access-Control-Allow-Origin'].should == '*'
+</code></pre></noscript></div>
+
 
 <p>To make a HTTP <code>options</code> request in RSpec, I had to dig through some code. And googling didn’t help here, at least the way I google. Here’s the low-down: RSpec <em>delegates</em> the request methods (like <code>get</code>/<code>post</code>/<code>put</code> etc. in the controller specs) to Rails’ <code>ActionController Tests</code>. All these methods invoke <code>ActionController::TestCase#process</code> with specific args, one of which is the method name. Now Rails master already has support for making “options” requests in tests (thanks to <a href="https://github.com/rails/rails/commit/0303c2325fab253adf5e4a0b738cb469c048f008#L0R438">this commit</a>), but that’s not available in the latest Rails release (3.2.8). I think this would make it’s way into Rails 4. Looking into this commit, we get the idea though: basically we also call the <code>process</code> method with a “OPTIONS” argument for the request-method. Putting it all together, my tests looked something like this:</p>
+
+<div><script src='https://gist.github.com/3749227.js?file=controller_spec.rb'></script>
+<noscript><pre><code>shared_examples_for &quot;any request&quot; do
+  context &quot;CORS requests&quot; do
+    it &quot;should set the Access-Control-Allow-Origin header to allow CORS from anywhere&quot; do
+      response.headers['Access-Control-Allow-Origin'].should == '*'
+    end
+
+    it &quot;should allow general HTTP methods thru CORS (GET/POST/PUT/DELETE)&quot; do
+      allowed_http_methods = response.header['Access-Control-Allow-Methods']
+      %w{GET POST PUT DELETE}.each do |method|
+        allowed_http_methods.should include(method)
+      end
+    end
+
+    # etc etc
+  end
+end
+
+describe &quot;HTTP OPTIONS requests&quot; do
+  # With Rails 4 (currently in master) we'll be able to `options :index`
+  before(:each) { process :index, nil, nil, nil, 'OPTIONS' }
+
+  it_should_behave_like &quot;any request&quot;
+
+  it &quot;should be succesful&quot; do
+    response.should be_success
+  end
+end
+
+# And similar tests for GET/POST what have you which actually test the functionality...</code></pre></noscript></div>
+
+
+
 </div>
 
 
@@ -176,9 +229,7 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/posts/2011/04/quick-howto-accessing-rails-properties/" title="Previous Post: Quick howto on accessing Rails Properties
-">&laquo; Quick howto on accessing Rails Properties
-</a>
+        <a class="basic-alignment left" href="/posts/2011/04/quick-howto-accessing-rails-properties/" title="Previous Post: Quick howto on accessing Rails Properties">&laquo; Quick howto on accessing Rails Properties</a>
       
       
         <a class="basic-alignment right" href="/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/" title="Next Post: Emacs: change fonts dynamically based on screen resolution">Emacs: change fonts dynamically based on screen resolution &raquo;</a>
@@ -209,8 +260,7 @@
       </li>
     
       <li class="post">
-        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties
-</a>
+        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties</a>
       </li>
     
       <li class="post">

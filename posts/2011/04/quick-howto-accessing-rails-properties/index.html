@@ -5,8 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Quick howto on accessing Rails Properties
- - Arnab's Universe</title>
+  <title>Quick howto on accessing Rails Properties - Arnab's Universe</title>
   <meta name="author" content="Arnab Deka">
 
   
@@ -105,13 +104,48 @@
 
 <div class="entry-content"><p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
 
+<!-- more -->
+
+
 <p><strong>Rails 3</strong>: browse the <a href="https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb">source-code at railties/lib/rails/info.rb</a></p>
 
 <p>Or see:</p>
 
+<div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rack =&gt; ::Rack.release,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(Rails.root),
+  :env =&gt; Rails.env,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env]['adapter'],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+  :middleware =&gt; Rails.configuration.middleware.map(&amp;:inspect),
+}
+</code></pre></noscript></div>
+
+
 <p><strong>Rails 2</strong>: browse the <a href="https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb">source-code at railties/builtin/rails_info/rails/info.rb</a></p>
 
 <p>Or see:</p>
+
+<div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(RAILS_ROOT),
+  :env =&gt; RAILS_ENV,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV]['adapter'],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+}
+</code></pre></noscript></div>
+
 
 <p>Till the next time…</p>
 </div>
@@ -141,7 +175,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/posts/categories/programming-tech/'>programming - tech</a>
+    <a class='category' href='/posts/categories/programming/'>programming</a>, <a class='category' href='/posts/categories/tech/'>tech</a>
   
 </span>
 
@@ -196,8 +230,7 @@
       </li>
     
       <li class="post">
-        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties
-</a>
+        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties</a>
       </li>
     
       <li class="post">
