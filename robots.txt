@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://arnab.github.com/sitemap.xml 
+Sitemap: http://arnab-deka.com/sitemap.xml 
