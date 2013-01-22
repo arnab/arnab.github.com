@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: on life - tech | Arnab's Universe]]></title>
-  <link href="http://arnab-deka.com/posts/categories/on-life-tech/atom.xml" rel="self"/>
-  <link href="http://arnab-deka.com/"/>
-  <updated>2013-01-22T14:57:38+05:30</updated>
-  <id>http://arnab-deka.com/</id>
+  <link href="http://arnab.github.com/posts/categories/on-life-tech/atom.xml" rel="self"/>
+  <link href="http://arnab.github.com/"/>
+  <updated>2013-01-22T15:47:15+05:30</updated>
+  <id>http://arnab.github.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Announcing www.arnab-deka.com!]]></title>
-    <link href="http://arnab-deka.com/posts/2009/01/so-this-is-my-new-blog/"/>
+    <link href="http://arnab.github.com/posts/2009/01/so-this-is-my-new-blog/"/>
     <updated>2009-01-30T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2009/01/so-this-is-my-new-blog</id>
+    <id>http://arnab.github.com/posts/2009/01/so-this-is-my-new-blog</id>
     <content type="html"><![CDATA[<p>People have always been telling me to get move away from blogger. In late 2008, I read a few really good articles on why – and I was convinced. Sorry – but it seems I did not bookmark(<a href="http://delicious.com/arnab.deka/">delicious</a> them). Tried to look for them now, but I get a few business oriented results only.</p>
 
 <p>Anyway, I always wanted to get my own domain. And play around with Rails, Capistrano etc. to launch it. So here it is. I did spend a lot of time creating it. But finally, I think I am going the low-hanging-fruit (agile?) way – so right now it’s the simple, easy and open source <a href="http://wordpress.org">WordPress</a> running on my host.</p>
@@ -43,9 +43,9 @@
   
   <entry>
     <title type="html"><![CDATA[iPhone 3G!!!]]></title>
-    <link href="http://arnab-deka.com/posts/2008/08/iphone-3g/"/>
+    <link href="http://arnab.github.com/posts/2008/08/iphone-3g/"/>
     <updated>2008-08-23T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2008/08/iphone-3g</id>
+    <id>http://arnab.github.com/posts/2008/08/iphone-3g</id>
     <content type="html"><![CDATA[<p>yay! yay! yay!</p>
 
 <p>My T-mobile contract got over end of July and I finally gave in to the temptation – I got the iPhone 3G today!!! <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> (yes in spite of all the bad things ppl are saying about the battery and Exchange integration). I get 14 days to return it so why not try it!</p>

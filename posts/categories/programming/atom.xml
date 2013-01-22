@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: programming | Arnab's Universe]]></title>
-  <link href="http://arnab-deka.com/posts/categories/programming/atom.xml" rel="self"/>
-  <link href="http://arnab-deka.com/"/>
-  <updated>2013-01-22T14:57:38+05:30</updated>
-  <id>http://arnab-deka.com/</id>
+  <link href="http://arnab.github.com/posts/categories/programming/atom.xml" rel="self"/>
+  <link href="http://arnab.github.com/"/>
+  <updated>2013-01-22T15:47:15+05:30</updated>
+  <id>http://arnab.github.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Emacs: change fonts dynamically based on screen resolution]]></title>
-    <link href="http://arnab-deka.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/"/>
+    <link href="http://arnab.github.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/"/>
     <updated>2012-09-23T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution</id>
+    <id>http://arnab.github.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution</id>
     <content type="html"><![CDATA[<p>I regularly switch between a <a href="http://www.apple.com/thunderbolt/">Thunderbolt display</a> at home and the <a href="http://www.apple.com/macbook-pro/features/">Mac’s native retina display</a> when I’m in a coffee shop or the like.</p>
 
 <p>It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:
@@ -46,9 +46,9 @@
   <entry>
     <title type="html"><![CDATA[Allowing and testing CORS requests in Rails
 ]]></title>
-    <link href="http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails/"/>
+    <link href="http://arnab.github.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails/"/>
     <updated>2012-09-19T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails</id>
+    <id>http://arnab.github.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails</id>
     <content type="html"><![CDATA[<p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
 
 <blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it possible for AJAX requests to directly talk to HTTP-services outside it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
@@ -126,9 +126,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Quick howto on accessing Rails Properties]]></title>
-    <link href="http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties/"/>
+    <link href="http://arnab.github.com/posts/2011/04/quick-howto-accessing-rails-properties/"/>
     <updated>2011-04-08T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties</id>
+    <id>http://arnab.github.com/posts/2011/04/quick-howto-accessing-rails-properties</id>
     <content type="html"><![CDATA[<p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
 
 <!-- more -->
@@ -178,18 +178,18 @@ end
   
   <entry>
     <title type="html"><![CDATA[Notes on Emacs + CL + Clojure + Slime...]]></title>
-    <link href="http://arnab-deka.com/posts/2010/12/notes-on-emacs-cl-clojure-slime/"/>
+    <link href="http://arnab.github.com/posts/2010/12/notes-on-emacs-cl-clojure-slime/"/>
     <updated>2010-12-30T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2010/12/notes-on-emacs-cl-clojure-slime</id>
+    <id>http://arnab.github.com/posts/2010/12/notes-on-emacs-cl-clojure-slime</id>
     <content type="html"><![CDATA[<p>After a day of struggling finally Emacs+CL+Clojure+Slime setup is working. I noted it all in the <a href="http://www.arnab-deka.com/posts/notes/emacs-setup/">notes section</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Quick MacBook setup]]></title>
-    <link href="http://arnab-deka.com/posts/2010/03/quick-macbook-setup/"/>
+    <link href="http://arnab.github.com/posts/2010/03/quick-macbook-setup/"/>
     <updated>2010-03-17T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2010/03/quick-macbook-setup</id>
+    <id>http://arnab.github.com/posts/2010/03/quick-macbook-setup</id>
     <content type="html"><![CDATA[<p>Just put in my notes about setting up a MacBook in <a href="http://www.arnab-deka.com/posts/notes/macbook-setup" title="MacBook setup">the notes section here</a>. I’ll keep updating – please add your thoughts in!</p>
 ]]></content>
   </entry>
