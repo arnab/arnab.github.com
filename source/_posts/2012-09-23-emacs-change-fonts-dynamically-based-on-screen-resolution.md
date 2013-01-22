@@ -20,6 +20,8 @@ post_format: [ ]
 I regularly switch between a [Thunderbolt display][1] at home and the [Mac’s native retina display][2] when I’m in a coffee shop or the like.
 
 It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:
+<!-- more -->
+
 {% gist 3774147 %}
 
 You can see all my emacs customizations in Github [arnab/emacs-starter-kit][3] repo, which is based on the excellent [ESK v2][4].
