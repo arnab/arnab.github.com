@@ -20,7 +20,7 @@ diapers to &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arnab.github.com/">
+  <link rel="canonical" href="http://arnab-deka.com/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,7 +63,7 @@ diapers to &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="q" value="site:arnab.github.com" />
+    <input type="hidden" name="q" value="site:arnab-deka.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -170,27 +170,12 @@ in my search.</p>
 
 <p>It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:</p>
 
-<div><script src='https://gist.github.com/3774147.js'></script>
-<noscript><pre><code>;; Gist-ed from in https://github.com/arnab/emacs-starter-kit
-
-(defun fontify-frame (frame)
-  (interactive)
-  (if window-system
-      (progn
-        (if (&gt; (x-display-pixel-width) 2000)
-            (set-frame-parameter frame 'font &quot;Inconsolata 19&quot;) ;; Cinema Display
-         (set-frame-parameter frame 'font &quot;Inconsolata 16&quot;)))))
-
-;; Fontify current frame
-(fontify-frame nil)
-
-;; Fontify any future frames
-(push 'fontify-frame after-make-frame-functions)</code></pre></noscript></div>
-
-
-<p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/">Continue reading &rarr;</a>
+    </footer>
   
 
 

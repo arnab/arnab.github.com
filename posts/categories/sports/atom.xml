@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: sports | Arnab's Universe]]></title>
-  <link href="http://arnab.github.com/posts/categories/sports/atom.xml" rel="self"/>
-  <link href="http://arnab.github.com/"/>
-  <updated>2013-01-22T15:47:15+05:30</updated>
-  <id>http://arnab.github.com/</id>
+  <link href="http://arnab-deka.com/posts/categories/sports/atom.xml" rel="self"/>
+  <link href="http://arnab-deka.com/"/>
+  <updated>2013-01-22T16:31:50+05:30</updated>
+  <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Some pics of my cricket team Eagles]]></title>
-    <link href="http://arnab.github.com/posts/2008/08/some-pics-of-my-cricket-team-eagles/"/>
+    <link href="http://arnab-deka.com/posts/2008/08/some-pics-of-my-cricket-team-eagles/"/>
     <updated>2008-08-24T00:00:00+05:30</updated>
-    <id>http://arnab.github.com/posts/2008/08/some-pics-of-my-cricket-team-eagles</id>
+    <id>http://arnab-deka.com/posts/2008/08/some-pics-of-my-cricket-team-eagles</id>
     <content type="html"><![CDATA[<p>taken with the new iPhone! After the win this saturday.</p>
 
 <p>League details here: <a href="http://arcl.org/Pages/UI/TeamStats.aspx?team_id=1235&amp;league_id=8&amp;season_id=13">http://arcl.org/Pages/UI/TeamStats.aspx?team_id=1235&amp;league_id=8&amp;season_id=13</a></p>
