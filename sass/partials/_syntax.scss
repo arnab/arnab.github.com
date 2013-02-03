@@ -49,6 +49,9 @@ html .gist .gist-file {
       @extend .pre-code;
       padding: 0;
     }
+    .file-data {
+      background-color: #002b36;
+    }
   }
   .gist-meta {
    padding: .6em 0.8em;
