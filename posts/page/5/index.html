@@ -9,7 +9,7 @@
   <meta name="author" content="Arnab Deka">
 
   
-  <meta name="description" content="I have been buying most of my stuff (on the net) from Amazon ever since I moved to the US, in 2006. That’s probably why this thought/blog is coming &hellip;">
+  <meta name="description" content="If you have nothing to do with Linux you probably can stop reading now. Unless you want to get introduced to a very nice tool in the Linux world. I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,104 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2009/07/gnu-screen/">GNU Screen</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-20T00:00:00+05:30" pubdate data-updated="true">Monday, July the 20<span>th</span>, 2009</time>
+        
+         | <a href="/posts/2009/07/gnu-screen/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you have nothing to do with Linux you probably can stop reading now. Unless you want to get introduced to a very nice tool in the Linux world. I can say without doubt that this saves me at least an hour every month. In addition it gets you away from doing some mundane “set-up” like things every time to start working. It has a load of features but today I’ll just scratch the surface. But it’ll be enough to start you off and I promise you’ll be glad you found screen.</p>
+
+<p>One of the programs that I love and can’t go through the day without is <a href="http://www.gnu.org/software/screen/">GNU Screen</a>. It’s like a Window manager, but only for your terminals. You know, like you are working with so many terminals/consoles/terminal-windows all the time (one to the DB, one with vim open, one to run the tests, one to run the program etc., one to watch the logs, a few to prod boxes etc.). And then you disconnect and then reconnect (from home, somewhere else) and you have to set-up all that again?</p>
+
+<p>Yeah screen can help you with all that. My work pattern involves connecting to a screen session (and I get all the windows/context loaded). Whether I connect from work, home from somewhere else, all I have to say is:</p>
+
+<pre><code>$ screen -ls (to see what sessions I have running)
+$ screen -R some-session-name
+</code></pre>
+
+<p>And it’s wicked-easy to switch between different windows, search through your history etc. You can also configure it to do a few “start-up” things every time. For example, at home, I have screen</p>
+
+<ol>
+<li>configured to Open 4 windows when it starts up and</li>
+<li>have window-0 go to my code dir (to teh root of my <a href="http://rubyonrails.org/">RubyOnRails</a> part of the site)</li>
+<li>start up <a href="http://nubyonrails.com/articles/autotest-rails">auto-test</a> on window-1</li>
+<li>show the logs on window-2</li>
+<li>ssh into the <a href="http://www.bluehost.com/">blue host</a> (which hosts my site)</li>
+</ol>
+
+
+<p>Since the windows are persisted, I don’t have to do all these things every time I connect (for a lazy programmer (and all programmers are lazy aren’t they?) that’s a lot of help). You can even share the screens with someone else (I have not tried that yet though).</p>
+
+<p>Anyway, I hope you are sold by now. Even if you are not, spend some time (shouldn’t be more than a couple of hours) installing/configuring/running screen and you will soon reap the rewards. To get you started:</p>
+
+<ul>
+<li>The GNU Screen home-page: <a href="http://www.gnu.org/software/screen/">http://www.gnu.org/software/screen</a></li>
+<li>A good guide to installing/setting-up/using: <a href="http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen">http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen</a></li>
+<li>Once you start liking it you’ll need a cheat-sheet: <a href="http://aperiodic.net/screen/quick_reference?do=show">http://aperiodic.net/screen/quick_reference?do=show</a></li>
+</ul>
+
+
+<p>A word about configuring: heard that Ubuntu will soon shipping with decent .screenrc (sane default configuration) so you don’t have to. Meanwhile you can configure it yourself (as in the Red Hat guide above) or look at these cool options: <a href="http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/">http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/</a>. Here is my .screenrc:</p>
+
+<pre><code>vbell off
+vbell_msg "Ring"
+
+# detach on hangup
+autodetach on
+
+# don&amp;#039;t display copyright page
+startup_message off
+
+# scroll back
+defscrollback 1000
+
+# setup the caption
+hardstatus alwayslastline "%{-b gk}%-w%{+b kg}%50&gt;%n %t%{-b gk}%+w %=%C%&lt; "
+
+# right/left bindings
+bindkey "^[[c" next
+bindkey "^[[d" prev
+bindkey "^[[b" focus
+
+# Set the altscreen so that when you quit vi, it will go back to
+# what it was before
+altscreen on
+</code></pre>
+
+<p>And finally, my delicious links for screen. </p>
+Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -357,47 +455,6 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2009/02/getting-listed-in-technorati/">Getting Listed in Technorati</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-01T00:00:00+05:30" pubdate data-updated="true">Sunday, February the 1<span>st</span>, 2009</time>
-        
-         | <a href="/posts/2009/02/getting-listed-in-technorati/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So <a href="http://website.grader.com">Website Grader</a> tells me that I should get the blog listed in Technorati – maybe someday (soon) I’ll write something meaningful! <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
-
-<p>So here goes – this is to claim my blog in Technorati -
-<a href="http://technorati.com/claim/gwt4nyx97h">Technorati Profile</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/page/6/">&larr; Older</a>
@@ -434,6 +491,10 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/02/hello-jquery-prettytextdiff/">Hello jQuery.PrettyTextDiff</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/09/state-of-e-commerce-in-india/">State of e-commerce in India</a>
       </li>
     
@@ -448,10 +509,6 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
     
       <li class="post">
         <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2010/12/notes-on-emacs-cl-clojure-slime/">Notes on Emacs + CL + Clojure + Slime&#8230;</a>
       </li>
     
   </ul>

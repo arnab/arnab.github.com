@@ -9,7 +9,8 @@
   <meta name="author" content="Arnab Deka">
 
   
-  <meta name="description" content="I use and love 1Password on my Mac every day – it has become one of those things I can’t live without, and is easily worth the $40 price. Yesterday &hellip;">
+  <meta name="description" content="After a day of struggling finally Emacs+CL+Clojure+Slime setup is working. I noted it all in the notes section.
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/posts/2010/12/notes-on-emacs-cl-clojure-slime/">Notes on Emacs + CL + Clojure + Slime&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-30T00:00:00+05:30" pubdate data-updated="true">Thursday, December the 30<span>th</span>, 2010</time>
+        
+         | <a href="/posts/2010/12/notes-on-emacs-cl-clojure-slime/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After a day of struggling finally Emacs+CL+Clojure+Slime setup is working. I noted it all in the <a href="http://www.arnab-deka.com/posts/notes/emacs-setup/">notes section</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -286,111 +325,6 @@ sudo make install
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2010/02/russian-peasant-multiplication-in-ruby/">Russian Peasant Multiplication in Ruby</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-02-01T00:00:00+05:30" pubdate data-updated="true">Monday, February the 1<span>st</span>, 2010</time>
-        
-         | <a href="/posts/2010/02/russian-peasant-multiplication-in-ruby/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Russian Peasant Multiplication: a very simple and elegant way to multiple.</p>
-
-<p>Read more: <a href="http://mathforum.org/dr.math/faq/faq.peasant.html">School-boy example of how and why it works</a> and about <a href="http://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication">Ancient Egyptian Multiplication on wikipedia</a></p>
-
-<p>So here’s my simple implementation: (or as a <a href="http://gist.github.com/290219">gist on github</a>)</p>
-
-<pre><code>module RussianPeasantMultiplication
-  def russian_peasant_multiply(b)
-    numbers_to_add = []
-    a, b = [self, b].sort #So we have the smaller number as the first
-
-    negative_operands = [a, b].select { |n| n &lt; 0 }
-    result_should_be_negative = negative_operands.size.odd? # or negative_operands.size == 1
-
-    # Now get the absoultes
-    a, b = [a, b].map { |n| n.abs }
-
-    while( a &gt; 1 )
-      a = a &gt;&gt; 1 # halv it
-      b = b &lt; &lt; 1 # double it
-      if a.odd? # or (a % 2 == 0 )
-        numbers_to_add &lt;&lt; b
-      else
-      end
-    end
-    result = numbers_to_add.inject(0) { |sum, n| sum += n }
-    result = result * -1 if result_should_be_negative
-    result
-  end
-end
-
-class Integer
-  include RussianPeasantMultiplication
-end
-
-# Tests
-require "test/unit"
-
-class TestInteger &lt; Test::Unit::TestCase
-  def test_russian_peasant_multiply
-    assert_equal(22 * 70, 22.russian_peasant_multiply(70))
-  end
-
-  def test_russian_peasant_multiply_for_negative_numbers
-    assert_equal(-22 * 70, -22.russian_peasant_multiply(70))
-  end
-
-  def test_russian_peasant_multiply_for_negative_arguments
-    assert_equal(22 * -70, 22.russian_peasant_multiply(-70))
-  end
-
-  def test_russian_peasant_multiply_for_negative_numbers_and_arguments
-    assert_equal(-22 * -70, -22.russian_peasant_multiply(-70))
-  end
-
-  def test_russian_peasant_multiply_for_zero
-    assert_equal(0 * -70, 0.russian_peasant_multiply(-70))
-  end
-
-  def test_russian_peasant_multiply_for_zero_arguments
-    assert_equal(-22 * 0, -22.russian_peasant_multiply(0))
-  end
-
-  def test_russian_peasant_multiply_for_zero_numbers_and_arguments
-    assert_equal(0 * 0, 0.russian_peasant_multiply(0))
-  end
-end
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/page/3/">&larr; Older</a>
@@ -427,6 +361,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/posts/2013/02/hello-jquery-prettytextdiff/">Hello jQuery.PrettyTextDiff</a>
+      </li>
+    
+      <li class="post">
         <a href="/posts/2012/09/state-of-e-commerce-in-india/">State of e-commerce in India</a>
       </li>
     
@@ -441,10 +379,6 @@ end
     
       <li class="post">
         <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2010/12/notes-on-emacs-cl-clojure-slime/">Notes on Emacs + CL + Clojure + Slime&#8230;</a>
       </li>
     
   </ul>
