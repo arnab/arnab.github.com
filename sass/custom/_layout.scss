@@ -1,6 +1,9 @@
 // Short screen
 @media only screen and (max-height: 650px) {
-    html .gist .gist-file {
-        width: 100%;
-    }
+  html .gist .gist-file {
+    width: 95% !important;
+  }
+  .jsfiddle {
+    width: 95% !important;
+  }
 }

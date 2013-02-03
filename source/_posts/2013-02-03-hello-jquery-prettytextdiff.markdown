@@ -23,8 +23,8 @@ and makes it trivial to wow your users.
 First, a demo (the fiddle can be found
 [here](http://jsfiddle.net/arnab/YwSVY/)):
 
-<iframe
-        style="width: 60%; height: 430px"
+<iframe class="jsfiddle"
+        style="height: 430px"
         src="http://jsfiddle.net/arnab/YwSVY/embedded/result,html,js,resources,css/"
         allowfullscreen="allowfullscreen"
         frameborder="0">
