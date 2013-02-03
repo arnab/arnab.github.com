@@ -24,7 +24,7 @@ First, a demo (the fiddle can be found
 [here](http://jsfiddle.net/arnab/YwSVY/)):
 
 <iframe
-        style="width: 100%; height: 430px"
+        style="width: 60%; height: 430px"
         src="http://jsfiddle.net/arnab/YwSVY/embedded/result,html,js,resources,css/"
         allowfullscreen="allowfullscreen"
         frameborder="0">
