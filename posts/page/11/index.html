@@ -9,7 +9,7 @@
   <meta name="author" content="Arnab Deka">
 
   
-  <meta name="description" content="Sometimes you feel lonely when you are alone – other times you feel in touch with yourself. During my growing up days (not that I make any claims &hellip;">
+  <meta name="description" content="Tweet An Interesting Talk I Attended Today - Consensus in Distributed Systems Thursday, March the 20th, 2008 | Comments Went to an incredible talk &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -45,46 +45,239 @@
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Arnab's Universe</a></h1>
-  
-    <h2>... and all the parallel ones.</h2>
-  
-</hgroup>
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Arnab's Universe</a>
+  </div>
+</aside>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Arnab's Universe</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">... and all the parallel ones.</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+  <li class="resume">
+    <a href="/resume/">resume</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/arnab_deka/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/arnab/">github</a>
+  </li>
+
+  <li class="link">
+    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
 </ul>
-  
+
+
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:arnab-deka.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/about">About</a></li>
-  <li><a href="/resume">Resume</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+      
   
   
+    <article class="post">
+      <div class="sharing-box">
   
-    <article>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/11/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/11/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2008/03/solitude/">Solitude?</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2008/03/an-interesting-talk-i-attended-today-consensus-in-distributed-systems/">An Interesting Talk I Attended Today - Consensus in Distributed Systems</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-20T00:00:00+05:30" pubdate data-updated="true">Thursday, March the 20<span>th</span>, 2008</time>
+        
+         | <a href="/posts/2008/03/an-interesting-talk-i-attended-today-consensus-in-distributed-systems/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Went to an incredible talk today and was so damn impressed with the presentation and the concepts behind. So wanted to share it with you…&lt;o:p>&lt;/o:p></p>
+
+<p>Basically the talk was on Consensus among Distributed Systems. So if you have a Master DB and two Slaves – and if the master dies, how do you choose which Slave to promote, automatically?&lt;o:p>&lt;/o:p></p>
+
+<p>Or consider you have some sort of a pool of managers who decide what to do and a bigger pool of workers who do what the managers say. Let’s say a manager dies – how do you choose which worker to promote to a manager? Because all of them might be equally eligible to get promoted (we are talking about systems here not humans).&lt;o:p>&lt;/o:p></p>
+
+<p>The simple way is – go for the majority. So every worker votes and one of them is elected. But then take in some factors such as message losses, network disturbance and partial network failure – now your vote might not have been so accurate after all ha?&lt;o:p>&lt;/o:p></p>
+
+<p>Good Robust systems built to be successful must be fault-tolerant and self-healing. It has to take care of its own – if some process fails, it has to figure out a way to fix it by itself – no human intervention – coz that takes time and money – which is not always easy or affordable. Now if it’s just one system you could somehow make it think of these situations. But make a distributed system where each worker has its own mind! The group (distributed system) has to come to _correct_ decision somehow right?&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>To build such (distributed) systems we need to be able to solve this problem of consensus. A few people have started or already have implemented this (including Google Chubby, Microsoft Autopilot, Amazon S3 etc.)&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>
+So this talk was about all this – must say it was done in a very lively manner – with a skit showing the different parts of the system, the network (where volunteers passed messages and took parts of the system – some _crashed_ too ). Was fun!&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>
+The idea stems from ancient ages and has been modeled to meet the requirements we have today. It’s called Paxos Protocol. Do read up on it – very interesting… You will definitely have nothing but appreciation for the great minds that created the mathematical model in those ancient times and the other great minds who translated it to modern day distributed systems and the other minds who have/are implementing these ideas!&lt;o:p>&lt;/o:p></p>
+
+<p>&lt;o:p> &lt;/o:p>Here are some links:&lt;o:p>&lt;/o:p></p>
+
+<ul>
+<li>&lt;o:p> &lt;/o:p>The Consensus problem: <a href="http://en.wikipedia.org/wiki/Consensus_%28computer_science%29">http://en.wikipedia.org/wiki/Consensus_%28computer_science%29</a> &lt;o:p>&lt;/o:p></li>
+<li>&lt;o:p> &lt;/o:p>The algorithm: <a href="http://en.wikipedia.org/wiki/Paxos_algorithm">http://en.wikipedia.org/wiki/Paxos_algorithm</a> &lt;o:p>&lt;/o:p></li>
+<li>&lt;o:p> Pa&lt;/o:p>rt-Time Parliament by Leslie Lamport: <a href="http://research.microsoft.com/users/lamport/pubs/lamport-paxos.pdf">http://research.microsoft.com/users/lamport/pubs/lamport-paxos.pdf</a> &lt;o:p>&lt;/o:p> (I highly recommend this one – very interesting read – and begins in an interesting manner)&lt;o:p>&lt;/o:p></li>
+<li>Leslie Lamport: <a href="http://en.wikipedia.org/wiki/Leslie_Lamport">http://en.wikipedia.org/wiki/Leslie_Lamport</a> &lt;o:p>&lt;/o:p></li>
+</ul>
+
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/11/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/11/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/posts/2008/03/clipboard-diary/">Clipboard Diary</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-12T00:00:00+05:30" pubdate data-updated="true">Wednesday, March the 12<span>th</span>, 2008</time>
+        
+         | <a href="/posts/2008/03/clipboard-diary/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Typing something in an e-mail and you need to copy some site’s link. What’s the big deal? Select, Ctrl+C.
+Whoops, just lost the all important 100-line-complicated query that you had made 2 minutes ago? Or maybe something as important that you given to the windows clipboard to keep?</p>
+
+<p>I used to find myself in this situation a lot – then I found ClipBoard Diary! <a href="http://softvoile.com/clipdiary">http://softvoile.com/clipdiary</a></p>
+
+<p>A very convenient and non-intrusive way to remember all the clipboard entries. (Just Ctrl+Shift+Up/Down to see all your clipboard entries). And it remembers the entries even after a reboot (or a crash – we are talking about Windows here remember?) – how? uses a Database.</p>
+
+<p>Enjoy!</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/11/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/11/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/posts/2008/03/solitude/">Solitude?</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -109,7 +302,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Sometimes you feel lonely when you are alone – other times you feel in touch with yourself.</p>
+  <p>Sometimes you feel lonely when you are alone – other times you feel in touch with yourself.</p>
 
 <p>During my growing up days (not that I make any claims that that phase is completely over <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> ) I used to spend a lot of times by myself – and I used to feel so good afterwards.</p>
 
@@ -128,7 +321,7 @@
 <p>Basically just enjoying the atmosphere – thinking things slowly in a relaxed manner (ok with a beer too – I love European beers by the way) – and that’s it.</p>
 
 <p>Quite an abrupt ending – but I never much to say to start with <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
-</div>
+
   
   
 
@@ -136,11 +329,27 @@
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/11/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/11/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2008/03/the-eternal-wait/">The Eternal Wait</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2008/03/the-eternal-wait/">The Eternal Wait</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -165,7 +374,7 @@
   </header>
 
 
-  <div class="entry-content"><p>Of course you know what I mean right? You have had to wait for something sometime right?</p>
+  <p>Of course you know what I mean right? You have had to wait for something sometime right?</p>
 
 <p>But I feel I am always waiting for something. Always this or that. Kabhi ek mast job, kabhi job satisfaction, kabhi cricket, kabhi koi dost ke liye, kabhi kisi type ka approval ke liye.</p>
 
@@ -173,7 +382,7 @@
 
 <p><img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" />
 That’s it – no elaboration of any of the above… people who know me well enough will know what I mean. Some will know one or two of the “waits”, hopefully some will know it all!</p>
-</div>
+
   
   
 
@@ -181,11 +390,27 @@ That’s it – no elaboration of any of the above… people who know me well en
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/11/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/11/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2008/03/high-and-low/">High and Low&#8230;</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2008/03/high-and-low/">High and Low&#8230;</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -210,7 +435,7 @@ That’s it – no elaboration of any of the above… people who know me well en
   </header>
 
 
-  <div class="entry-content"><p>Have you heard A-ha’s Hunting High and Low? You can get a preview <a href="http://www.amazon.com/Hunting-High-And-Low/dp/B0011Z93II/ref=dmusic_cd_album/105-1136235-0392434">here</a>.</p>
+  <p>Have you heard A-ha’s Hunting High and Low? You can get a preview <a href="http://www.amazon.com/Hunting-High-And-Low/dp/B0011Z93II/ref=dmusic_cd_album/105-1136235-0392434">here</a>.</p>
 
 <p>That’s exactly how I am feeling today. The day began as best in quite a while – yes you guessed it – another night out. But it was special.</p>
 
@@ -233,344 +458,28 @@ That’s it – no elaboration of any of the above… people who know me well en
 <p>And then I started feeling kinda low again – you know this lonely feeling? I know it’s normal to feel that way – to put it right I have never had a better professional life yet – I just love the job I have right now – and that comes at a price right? But yeah – sometimes I do feel lonely… so that’s what I was doing today evening…</p>
 
 <p>So that’s High and Low for me today… One of the highest I have been recently and then feeling so low in the evening. Anyway I am feeling quite at piece now that I wrote this blog – Gonna have dinner and watch a nice movie… and tomorrow morning’s gonna be cricket – so yay! Hopefully another High day? <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
-</div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2008/02/a-memorable-flight/">A Memorable Flight</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-23T00:00:00+05:30" pubdate data-updated="true">Saturday, February the 23<span>rd</span>, 2008</time>
-        
-         | <a href="/posts/2008/02/a-memorable-flight/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This has got to be the most beautiful sights I have ever seen! No second thoughts whatsoever.</p>
-
-<p>So I miss my friends in NY and not yet full used to my life in Seattle – so to get a taste of how life was, back in NY, I am traveling there this weekend. Right now I am about 30 min away from Seattle – wait, that’s flight time – so it should be around 300 miles (since an Airbus A320 travels around 560-620 mph in good weather conditions and I cannot say there is even a small blemish in the clouds today!
-So I must be flying over the Rockies right now – seems like it anyway – Maybe the gorges that I am seeing are parts of the Bryce Canion.</p>
-
-<p>I wish I was a an artist – I wish I could draw this thing – but only if wishes were horses <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" />
-Maybe even the best artist cannot draw this beauty in a physical medium – you have to experience it.</p>
-
-<p>This is my 5th cross-country flight – Coast-to-coast non-stop and I always liked the flights.</p>
-
-<p>At the east coast nothing can beat the majestic show of pomp that NYC skyline is – if you land/take off at night. Oh I don’t know if you’ll get a more engrossing skyline anywhere else in the world – you just have to see the skyscrapers of midtown and downtown rise out (as you descend) of the vast see of light that is the tri-state metropolitan area (NY, NJ and PA).
-If you fly to NY from inside the US, you’ll get to see the orange glow of NYC about half an hour before you are anywhere near it. Then you’ll see the sea of light and then in the last moments of your flight you’ll see the Grand NYC skyline emerge from there! It’s like a Hollywood movie – I have to tell you.</p>
-
-<p>On the other hand, if you land/take-off from Seattle during the day – that’s another sight. It’s not called Emerald or Green City for nothing. Seattle is an isthmus surrounded by quite a few water bodies and mountain ranges.
-It’s between the Lake Washington and Pudget Sound (which connects to the Pacific ocean about 50 miles west of Seattle) and surrounded by modern satellite cities like Redmond (Microsoft), Kirkland (Google) and Tacoma/Renton (Boeing), Bellevue (residential area).</p>
-
-<p>And the whole area is so beautiful – you have to see it once in the summer – if you are in the USA.</p>
-
-<p>But tonight’s experience is quite different from these sights – tonight is the first time I am flying out of Seattle at night. And I thought why do they brag that Seattle is the west coast;s 2nd largest city. Well I live and work in the heart of Seattle – and I always got the impression that it’s s small city (maybe 10 miles by 10 miles). Now when we took off – I saw that the story is indeed like the tri-state area – vast sea of lights!!! No doubt I am a prouder Seattlite (is that what we are called?) now!
-That’s nowhere near the best part thought…</p>
-
-<p>I always say and believe that man can never meet nature’s beauty.</p>
-
-<p>So right now – I am over the Rockies. It’s 30 min pat midnight. And a few days after a full-moon (I think 2-3 days). For the record, it’s 2 days after the lunar eclipse that I saw while playing tennis!
-There is a bit of cloud in the sky – more like a mist coat strewn here and there.</p>
-
-<p>And the mountains below me are full of snow.</p>
-
-<p>You can guess what I am about to say – Soft moonlight falling on the deep gorges and peaks on the mountains below me – strikingly highlighting the ravines and the whole terrain. And the misty clouds diffusing the moonlight in a dreamy sort of way!</p>
-
-<p>Oh man – I really have never seen anything like this – Is this what you call ghastly beautiful?</p>
-
-<p>There is not a single sign of humanity as far as I can see – only white snowy mountains and deep gorges – shining off the moonlight. Brings a mixture of feelings – lonely, scared and hauntingly beautiful. yes even though it’s so haunting – it’s so beautiful!</p>
-
-<p>If you are reading this blog – please do take a flight out of Seattle at night – on a clear night – with abundant moonlight around. Well yeah – you are right – you need luck to see things – and I guess some people have all the luck! heh heh heh…</p>
-
-<p>As for me, my colleague was talking of a hiking trip to the Bryce Canion sometime this summer – now I have to do it!</p>
-
-<p>Good night – see you tomorrow at NY!</p>
-</div>
   
   
 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/posts/2008/02/night-outs-my-take-on-it/">Night-outs : My Take on It</a></h1>
-    
-    
-      <p class="meta">
-        
+
+    <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/posts/page/12/" rel="next">Continue &rarr;</a>
+  </span>
 
 
+  <span class="prev">
+    <a href="/posts/page/10/" rel="prev">Newer &larr;</a>
+  </span>
 
-
-
-
-
-
+</nav>
+  </section>
   
 
-
-<time datetime="2008-02-20T00:00:00+05:30" pubdate data-updated="true">Wednesday, February the 20<span>th</span>, 2008</time>
-        
-         | <a href="/posts/2008/02/night-outs-my-take-on-it/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>“Practice what you preach”</p>
-
-<p>So here I am – writing a blog about night-outs at 5:30 AM after an interesting night-out.</p>
-
-<p>The night started with a late work-day. It was a very interesting day at work and I got that that feel-good thing that I did something today. You know the feeling of achieving what you aimed for at the start of the day? and doing a bit more?</p>
-
-<p>I got introduced to <a href="http://www.ruby-lang.org/">Ruby</a> and <a href="http://www.rubyonrails.org/">Rails</a> recently. I was a skeptic first – never having tasted a dynamic language and also being under the heavy influence of Java.</p>
-
-<p>But like so many other developers – and I have to say that – I am loving Ruby and Rails more and more each passing day. It’s fun! And you are at your best when work is fun!</p>
-
-<p>Anyway so the aim of the night was to read on Ruby and Rails (with dinner/music and TV all side by side!) and sleep by around 2 AM. BTW, <a href="http://en.wikipedia.org/wiki/The_Cult">The Cult</a> is coming to Seattle in March and so I am kinda deciding if I should go for it – so listening to their sound all the time to see if I like them. You can preview them <a href="http://www.amazon.com/s/ref=sr_nr_i_1?ie=UTF8&amp;rs=&amp;keywords=THE%20CULT&amp;rh=i%3Aaps%2Ck%3ATHE%20CULT%2Ci%3Adigital-music">here</a>.</p>
-
-<p>So anyway, I got engrossed in the music a bit too much – and someone reminded me about some Aerosmith stuff – and I realized that I don’t have some albums from them. How could I not have “Pump”, “Get a Grip” from the band that grew up with? So I bought them!</p>
-
-<p>And some TV – let’s forget what – that’s not important <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_wink.gif" alt=";-)" /></p>
-
-<p>And then I caught and got caught by a few good friends on gtalk… (I have to note this new friend that I made – I am surprised by the amount of strikingly similar traits that I share – I am really startled sometimes). So anyway it was 1 AM already…</p>
-
-<p>So the thought of a night out started lingering on my mind. Specially I have a lot of work today (today -> it’s already morning, duh!)</p>
-
-<p>Still I thought, ok let’s sleep by 2 (try actually) so started off again on Rails. I got so involved that now it’s 5:30 AM!!! That’s how a night can go if you find your passion! No pun intended. The question is – most of you will be divided in answering this question – “so is this a good sign that I spent a night reading something – and more importantly that became the passion of the night?” I leave that to you to decide… Maybe you’d think I have gone mad, maybe I am turning into a geek. But remember I respect all sorts of people – you don’t have to – AND I GIVE A RAT’S A$$ ABOUT THAT!</p>
-
-<p>So it’s morning now… And I am not gonna sleep tonight anyway… But I loved it. So here I am ending it with something I love doing more nowadays – a blog.</p>
-
-<p>Now that we are through with the boring part (about how I spent the night) lemme try to analyze a night out – so that you can take something from my experience.</p>
-
-<p>The following is purely based on my experience, your mileage may vary. However, note that this encapsulates a lot of night-outs – since my college days. A ballpark figure would be probably 35 nights in the last 8 years. “Ballpark”. Oh, is that nothing? Then why the hell are you reading my blog? Go write your own analysis on a night-out.</p>
-
-<p>A typical night-out goes like:</p>
-
-<ol>
-<li>The decision period: You decide it’s a night out. It can happen anywhere from a week in advance to the wee hours of the morning (before point #2, below) Lemme advice you here – you better a have a good reason – that’s where the passion comes in. Whether it’s -</li>
-</ol>
-
-
-<p>catching up with some old friends (like so many times in my last few days @ NYC – 2007 end, catching up my school friends in Delhi and college folks at Bangalore – Jan 2008),</p>
-
-<p>finding something passionate to do (project work with my class mate Nitin in college – 2003-04 and tonight with Ruby and Rails),</p>
-
-<p>just bakkar (so many times in college and in NYC)</p>
-
-<p>or maybe just driving the whole night <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> (Cape Cod trip – Apr’2007)</p>
-
-<p>Maybe you’ll have something passionately being thrust into you the whole night (no pun intended again, seriously) like in so many movies – you know what I mean. So why am I quoting movies and don’t I have an example from my life on this? Heh heh, Smarty pants, I am not gonna let you in on that!</p>
-
-<p>You’ve got an exam and you dont know what the hell to do. I’ve been in this situation a lot of times but I am too un-motivated (when it comes to exams, or is it over-confidence?) to give up sleep over this. However you’ll see this often in hostels.</p>
-
-<p>You’ve got an exam and you DO know what the hell to do, and you have already prepared thrice. But you can’t sleep – you need to revise at least 2 times more. I can not imagine why people do this – but I can understand (more like I understand an empirical formula) that they do! Maybe it’s striving for perfrection? My friends Dutta (and Debarshi and so many others from college) can explain this very well – what say Dutta? <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_wink.gif" alt=";-)" /></p>
-
-<p>The point is, you have to find something interesting to do. Or something bad enough (like a Moral Science paper in your engineering Course) Else it’s not worth it. Take my word for that. Anyway, the point is, you just gotta find “it”.</p>
-
-<ol>
-<li><p>The smooth period: Upto your normal bed-time (between 1-3 for me) you’ll enjoy like hell. Knowing that you don’t have to sleep allows you to do what “it” is you are doing in a relaxed planned manner. As always, knowing how much time you have always helps in any activity right?</p></li>
-<li><p>The dangerous period: This usually starts around 15-20 min after your normal sleep time. You feel more and more weary and wonder whether it’s worth staying up all night. This is the worst part of the night – but as you have more and more night-outs you start to enjoy this period too – knowing that if you overcome this one – you are done! It’s like a challenge.</p></li>
-</ol>
-
-
-<p>Like tonight, it was 5 AM already – so I didn’t bother to sleep – One of the golden rules of a night out is that if you decide to have one, you cannot falter. If you do – the next day is hell. You feel weary the whole day.</p>
-
-<p>However, there is a sort of cut-off time for this decision too – you will figure it out with experience. For me, the cut-off time to effect this decision (whether to give up and sleep) is around 330-4 AM.</p>
-
-<p>If I sleep before this time , although I am already in the “Danger Zone” it’s likely that the next day will still turn out okay. However if you sleep past this point it’s highly unlikely that you’ll wake up in time or will be at even half your peak. I have seen people miss exams because they fell asleep in this period – so beware – this is really the most dangerous time of the night.</p>
-
-<p>Then comes the best part:</p>
-
-<ol>
-<li>The sunrise: The human body is tuned to feel less weary and fresher as soon as they see sunlight (okay things like “global-working-hours” and call-centers are striving hard to alter this. And they are successful to an extent too, right? But remember they are fighting against nature here. So let’s see).</li>
-</ol>
-
-
-<p>Anyway this is the best part – look at the morning light outside and realize that you have done it! You feel much better now – a bit weary maybe. Take a shower and some nice breakfast – you are off man!</p>
-
-<p>I sometimes feel more at my peak when I take a night out and I am feeling like today is one of them! So a blog to finish it off!</p>
-
-<p>Post note: You know how everyone (from your Grand-Ma to your Vet) advices you eat regularly? 3 times a day, on time? And the same sort of people also advocate “fasting” – A day (or part of it, or maybe multiples of it) when you don’t eat anything. It’s supposed to help the body right? Why Islam advocates a month of fasting!</p>
-
-<p>So why not a night out? The same folks advocate “regular sleep”. So why not break the routine once in a while and see if that works for you? Isn’t that the point of a “fast”?</p>
-
-<p>For me it definitely works – nowadays I have a night out on an average every 45 days. Lets see – maybe I’ll have to tweak the frequency – but I do get the feeling that I am onto something here. Initially I used to feel weary – but with time I am getting better. Now I actually have better days just after a night out rather than a normal sleep day. (Maybe it’s like those instant shots of energy – but we do need them once in a while ha? And not sleeping is much better than taking those energy shots)</p>
-
-<p>Maybe some day these people will see the benefits and start advocating “night-outs” <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
-
-<p>So here’s to my supposedly wonderfully productive day at work! And potentially some of yours too!!!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/posts/page/12/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/posts/page/10/">Newer &rarr;</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>I am a Software Developer and a regular guy-next-door, passionate
-  about technology. Currently a Senior Engineer at LivingSocial and
-  previously at Amazon and AWS. <a href="/about">more&#8230;</a>
-  </p>
-</section>
-<section>
-  <h1>
-    <a href="https://coderwall.com/coderdude"><img alt="Endorse me on Coderwall"
-                                                   src="http://api.coderwall.com/coderdude/endorsecount.png"/></a>
-  </h1>
-</section>
-<section>
-  <h1>
-    <a href="http://in.linkedin.com/in/arnab1981"><img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.png"
-          alt="View Arnab Deka's profile on LinkedIn"></a>
-  </h1>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/posts/2013/02/hello-jquery-prettytextdiff/">Hello jQuery.PrettyTextDiff</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/09/state-of-e-commerce-in-india/">State of e-commerce in India</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/">Emacs: change fonts dynamically based on screen resolution</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/09/allowing-and-testing-cors-requests-in-rails/">Allowing and testing CORS requests in Rails
-</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2011/04/quick-howto-accessing-rails-properties/">Quick howto on accessing Rails Properties</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/arnab">@arnab</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'arnab',
-            count: 3,
-            skip_forks: false,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("arnab_deka", 3, true);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/arnab_deka" class="twitter-follow-button" data-show-count="true">Follow @arnab_deka</a>
-  
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/arnab.deka?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/arnab.deka">My Delicious Bookmarks &raquo;</a></p>
-</section>
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/101426291592553950447?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Arnab Deka -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
   
 
 <script type="text/javascript">
@@ -618,7 +527,6 @@ There is a bit of cloud in the sky – more like a mist coat strewn here and the
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
-
 
 
 
