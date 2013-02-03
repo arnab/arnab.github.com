@@ -4,7 +4,7 @@
   <title><![CDATA[Category: text | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/text/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-02-03T15:14:34+05:30</updated>
+  <updated>2013-02-03T15:21:10+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -37,8 +37,8 @@ and makes it trivial to wow your users.</p>
 <p>First, a demo (the fiddle can be found
 <a href="http://jsfiddle.net/arnab/YwSVY/">here</a>):</p>
 
-<iframe
-        style="width: 60%; height: 430px"
+<iframe class="jsfiddle"
+        style="height: 430px"
         src="http://jsfiddle.net/arnab/YwSVY/embedded/result,html,js,resources,css/"
         allowfullscreen="allowfullscreen"
         frameborder="0">
