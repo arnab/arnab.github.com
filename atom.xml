@@ -4,7 +4,7 @@
   <title><![CDATA[Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-02-03T15:33:50+05:30</updated>
+  <updated>2013-02-03T15:42:19+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -350,57 +350,6 @@ end
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The problem with Pingdom]]></title>
-    <link href="http://arnab-deka.com/posts/2012/07/the-problem-with-pingdom/"/>
-    <updated>2012-07-22T19:13:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2012/07/the-problem-with-pingdom</id>
-    <content type="html"><![CDATA[
-
-<figure class='code'><figcaption><span>Time to be Awesome - awesome.rb </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Awesome!&quot;</span> <span class="k">unless</span> <span class="n">lame</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://www.pingdom.com%20Pingdom">The problem with pingdom.</a></p>
-
-<p>My money&#8217;s in that office, right? If she start giving me some bullshit about it ain&#8217;t there, and we got to go someplace else and get it, I&#8217;m gonna shoot you in the head then and there. Then I&#8217;m gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I&#8217;m talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?</p>
-
-<blockquote><p>Blockquote is what goes
-inside this block here
-would you believe that
-bullshit?</p></blockquote>
-
-<p>Well, the way they make shows is, they make one show. That show&#8217;s called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they&#8217;re going to make more shows. Some pilots get picked and become television programs. Some don&#8217;t, become nothing. She starred in one of the ones that became nothing.</p>
-
-<p>The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother&#8217;s keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.</p>
-
-<p>Your bones don&#8217;t break, mine do. That&#8217;s clear. Your cells react to bacteria and viruses differently than mine. You don&#8217;t get sick, I do. That&#8217;s also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We&#8217;re on the same curve, just on opposite ends.</p>
-
-<p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that&#8217;s what you see at a toy store. And you must think you&#8217;re in a toy store, because you&#8217;re here shopping for an infant named Jeb.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Intro]]></title>
-    <link href="http://arnab-deka.com/posts/2012/07/intro/"/>
-    <updated>2012-07-22T08:23:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2012/07/intro</id>
-    <content type="html"><![CDATA[<p>Testing!</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin, massa eu vestibulum laoreet, nibh ante vulputate lorem, ac lobortis ante tellus eu mi. Duis sem nisi, luctus at feugiat eget, fringilla ut tellus. Nam a molestie justo. Sed pulvinar est vitae tellus semper tincidunt. Fusce euismod luctus lacus nec placerat. Mauris rutrum scelerisque nulla ut tempor. Nunc porttitor posuere mi, aliquet vehicula lorem feugiat in. Ut ut fermentum risus. Aliquam tincidunt ultricies ante sit amet bibendum. Cras nec sapien odio. Duis posuere congue sem, at congue massa faucibus at.</p>
-
-<p>Integer ut sapien eget nisl auctor faucibus ut fermentum arcu. Nunc rutrum urna non risus congue et tristique felis eleifend. Maecenas blandit est eu mauris aliquam aliquet. Quisque porttitor enim eget risus blandit in mollis orci eleifend. Nam malesuada nulla sed lacus elementum placerat accumsan arcu rhoncus. Phasellus feugiat cursus turpis nec facilisis. Duis eget metus arcu, eget commodo velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer cursus vulputate enim, vel gravida velit faucibus et. Ut a urna vitae tellus cursus rhoncus. Maecenas at odio eget quam cursus elementum. Aliquam vitae eros quis tellus laoreet accumsan sed id lorem. Suspendisse et rutrum leo. Integer scelerisque vestibulum adipiscing. In posuere, libero ac accumsan suscipit, nulla ligula gravida erat, ut tempor odio erat nec sem. Quisque justo ipsum, adipiscing volutpat varius vitae, blandit eget nisi.</p>
-
-<p>Nullam adipiscing neque ac lacus commodo vitae imperdiet dui sollicitudin. Ut ac nunc augue. Nam at sem ut quam commodo aliquet vitae vitae dui. Vivamus scelerisque felis eget dolor cursus feugiat. Phasellus at dui sed lectus scelerisque pretium. Etiam nec massa ut justo vestibulum fringilla ac vitae urna. Morbi tortor erat, tempus sed consectetur at, elementum nec eros. Vivamus mattis arcu a sapien semper non lacinia eros pretium.</p>
-
-<p>Proin ut hendrerit arcu. Maecenas ullamcorper tristique magna vel mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam tincidunt euismod viverra. In sit amet neque turpis. Suspendisse ac sapien mi, id blandit purus. Ut tortor turpis, rutrum ac tempor at, accumsan sit amet erat. Etiam ultricies eleifend dolor, eget tempus justo tristique vitae. In hac habitasse platea dictumst. Aliquam eu enim neque.</p>
-
-<p>Morbi massa lorem, viverra non dictum at, malesuada vel nibh. Nam fermentum lobortis varius. Sed a nulla lacus, quis posuere risus. Nunc id urna libero, quis rutrum mi. In gravida felis urna. Praesent nec dolor ac urna tempor fermentum. Curabitur rutrum arcu et lorem volutpat viverra.</p>
 ]]></content>
   </entry>
   
@@ -918,6 +867,160 @@ ruby logger_benchmark.rb  40.20s user 5.50s system 99% cpu 45.755 total
 keeping it simple (with a string-arg) should work. If you are worried
 about performance, this probably is not a trick that will give you a
 big bang for the buck.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Photos: Hamilton Viewpoint Park and Alki Beach, West Seattle]]></title>
+    <link href="http://arnab-deka.com/posts/2009/08/photos-hamilton-park-and-alki-beach/"/>
+    <updated>2009-08-04T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/08/photos-hamilton-park-and-alki-beach</id>
+    <content type="html"><![CDATA[<p>On a photo uploading spree today.</p>
+
+<p>The first album consists photos from Hamilton Park and Alki Beach, a beautiful area in West Seattle. Because of it’s location, you get great views of Seattle and the Harbor from here, specially great in the evening.</p>
+
+<p>Hamilton Viewpoint Park: See details <a href="http://www.gonorthwest.com/Washington/Seattle/viewpoints/hamilton.htm">here</a> and the <a href="http://www.seattle.gov/parks/park_detail.asp?id=454">Seattle gov parks page</a>.</p>
+
+<p><strong>The full album</strong> (only 26 pics – easy to click through and to add comments too) <strong>is on my smugmug site: <a href="http://arnab-o-scope.smugmug.com/gallery/9163956_kwkf7">http://arnab-o-scope.smugmug.com/gallery/9163956_kwkf7</a></strong>.</p>
+
+<p>Here are a few excerpts:*   [![macbook][4]][4]
+*   [![Seattle downtown basking in the evening glory][5]][5]
+*   [![Downtown Seattle Closeup][6]][6]
+*   [![Pinkish sunset over Mt Rainier][7]][7]
+*   [![a couple getting married][8]][8]
+*   [![A state ferry with the Space Needle and Cascade mountains in the backdrop][9]][9]
+*   [![another shot with the mountains and the needle][10]][10]
+*   [![On the way to Death Valley][11]][11]
+*   [![On the way to Death Valley][12]][12]
+*   [![Badwater Basin][13]][13]
+*   [![Bad Water Basin][14]][14]
+*   [![Red Rock Canyon][15]][15]
+*   [![Vegas Strip][16]][16]
+*   [![Fabulous Las Vegas][17]][17]
+*   [![Fabulous Las Vegas][18]][18]
+*   [![Around US][19]][19]
+*   [![Red Rock Canyon][20]][20]
+*   [![Red Rock Canyon][21]][21]
+*   [![Red Rock Canyon][22]][22]
+*   [![ARCL Summer 2008 3rd Place Trophy (Eagles)][23]][23]
+*   [![Arnab Deka][24]][24]
+*   [![Arnab][25]][25]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby dup vs clone]]></title>
+    <link href="http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone/"/>
+    <updated>2009-07-28T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone</id>
+    <content type="html"><![CDATA[<blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
+certainly much before it became popular. Those were the days when
+programmers had find out answers themselves ;)
+This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
+
+<p>I have had this question about the difference between Ruby&#8217;s <code>clone</code>
+and <code>dup</code> method multiple times now. And I have always had this fuzzy
+feeling that &#8220;they are almost the same thing&#8221;. Today my colleague
+asked it again and I decided to dig it out. Here&#8217;s what
+<a href="http://www.joelonsoftware.com/items/2008/09/15.html">Ruby API docs</a> say about them:</p>
+
+<h3><code>Object#clone</code></h3>
+
+<blockquote><p>Produces a shallow copy of obj - the instance variables of obj are
+copied, but not the objects they reference. Copies the frozen and
+tainted state of obj.</p></blockquote>
+
+<h3><code>Object#dup</code></h3>
+
+<blockquote><p>Produces a shallow copy of obj—the instance variables of obj are
+copied, but not the objects they reference. dup copies the tainted
+state of obj. See also the discussion under Object#clone. In general,
+clone and dup may have different semantics in descendant classes.
+While clone is used to duplicate an object, including its internal
+state, dup typically uses the class of the descendant object to create
+the new instance.</p>
+
+<p>This method may have class-specific behavior. If so, that behavior
+will be documented under the #initialize_copy method of the class.</p></blockquote>
+
+<p>So in essence, both produce shallow-copies of the object. <code>clone</code>
+copies the frozen <strong>and</strong> tainted state while <code>dup</code> copies only the
+tainted state. Even after reading that documentation twice, it&#8217;s still
+murky in my head (probably coz I have not had <em>a chance</em> to write code
+to notice the frozen or tainted state specifically.)</p>
+
+<p>Here&#8217;s a gem from ruby-talk that Google brought up. So
+<a href="3">Matz says</a>:</p>
+
+<blockquote><p><code>clone</code> copies everything; internal state, singleton methods, etc.
+<code>dup</code> copies object contents only (plus taintness status).</p></blockquote>
+
+<p>And so I wrote a bit of code to see it myself (and thus remember it).
+Here&#8217;s a very simple <code>Person</code> class:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
+<noscript><pre><code>class Person
+  attr_accessor :name
+end
+</code></pre></noscript></div>
+
+
+<p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
+<noscript><pre><code>p = Person.new
+p.name = &quot;The Man&quot;
+
+# now add a singleton method on p:
+def p.say_hi
+  &quot;'sup&quot;
+end
+</code></pre></noscript></div>
+
+
+<p>See that it&#8217;s all working:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
+<noscript><pre><code>irb(main):014:0&gt; puts p.inspect
+#&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
+=&gt; nil
+irb(main):015:0&gt; puts p.say_hi
+'sup
+=&gt; nil
+</code></pre></noscript></div>
+
+
+<p>Now create a clone and a dup of it:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
+<noscript><pre><code>the_clone = p.clone
+the_dup = p.dup
+</code></pre></noscript></div>
+
+
+<p>Both the clone and the dup have the same instance variables (which are
+shallow-copies BTW), but only the clone has the singleton method
+(<code>#say_hi</code>) in it:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
+<noscript><pre><code>irb(main):018:0&gt; the_clone.name
+=&gt; &quot;The Man&quot;
+irb(main):019:0&gt; the_dup.name
+=&gt; &quot;The Man&quot;
+irb(main):020:0&gt; the_clone.say_hi
+=&gt; &quot;'sup&quot;
+irb(main):021:0&gt; the_dup.say_hi
+NoMethodError: undefined method `say_hi' for 
+(Person :0xb7e83340 @name=&quot;The Man&quot;)
+        from (irb):21
+        from :0
+irb(main):022:0&gt; 
+</code></pre></noscript></div>
+
+
+<p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
+does. Hence <code>#dup</code> might be more beneficial for performance compared to
+<code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
 ]]></content>
   </entry>
   
