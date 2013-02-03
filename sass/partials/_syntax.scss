@@ -29,6 +29,7 @@ figure.code, .gist-file, pre {
 html .gist .gist-file {
   margin-bottom: 1.8em;
   position: relative;
+  width: 70%;
   border: none;
   padding-top: image-height("code_bg.png") !important;
   .gist-syntax {
@@ -250,4 +251,3 @@ figure.code {
   text-shadow: #cbcccc 0 1px 0;
   padding-left: 3em;
 }
-
