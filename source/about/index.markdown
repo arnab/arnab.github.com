@@ -11,10 +11,10 @@ footer: false
 Right, I turned 30 recently and we moved to India too!
 
 I am currently a Senior Software Engineer at
-[LivingSocial](http://corporate.livingsocial.com/) as a
-Senior Software Developer. I love playing cricket and tennis. When I
-can't play, I watch almost any goddamn sports that on TV/the net. When
-some major sporting event is not going on, we love to travel around.
+[LivingSocial](http://corporate.livingsocial.com/). I love playing
+cricket and tennis. When I can't play, I watch almost any goddamn
+sports that on TV/the net. When some major sporting event is not going
+on, we love to travel around.
 
 I graduated from REC, Calicut (now
 [National Institute of Technology, Calicut](http://nitc.ac.in) in 2004
