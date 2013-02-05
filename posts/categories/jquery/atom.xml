@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jquery | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/jquery/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-02-05T15:04:14+05:30</updated>
+  <updated>2013-02-05T15:09:26+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -56,36 +56,38 @@ that uses this is not particularly pleasing to look at.</p>
 
 <p>Here's an example of the code you would have to write to produce a
 good looking diff:
-<div><script src='https://gist.github.com/4700669.js?file=pretty-diff.js'></script>
-<noscript><pre><code>diff_match_patch.prototype.diff_prettyHtml = function(diffs) {
-    var html = [];
-    var pattern_amp = /&amp;/g;
-    var pattern_lt = /&lt;/g;
-    var pattern_gt = /&gt;/g;
-    var pattern_para = /\n/g;
-    for (var x = 0; x &lt; diffs.length; x++) {
-      var op = diffs[x][0];    // Operation (insert, delete, equal)
-      var data = diffs[x][1];  // Text of change.
-      //var text = data.replace(pattern_amp, '&amp;amp;').replace(pattern_lt, '&amp;lt;')
-      //    .replace(pattern_gt, '&amp;gt;').replace(pattern_para, '&amp;para;&lt;br&gt;');
-      var text = data.replace(pattern_amp, '&amp;amp;').replace(pattern_lt, '&amp;lt;')
-          .replace(pattern_gt, '&amp;gt;').replace(pattern_para, '&lt;br&gt;');
-      switch (op) {
-        case DIFF_INSERT:
-          html[x] = '&lt;ins style=&quot;background:#e6ffe6;&quot;&gt;' + text + '&lt;/ins&gt;';
-          break;
-        case DIFF_DELETE:
-          html[x] = '&lt;del style=&quot;background:#ffe6e6;&quot;&gt;' + text + '&lt;/del&gt;';
-          break;
-        case DIFF_EQUAL:
-          html[x] = '&lt;span&gt;' + text + '&lt;/span&gt;';
-          break;
-      }
-    }
-    return html.join('');
-  };
-  </code></pre></noscript></div>
-</p>
+```js
+diff_match_patch.prototype.diff_prettyHtml = function(diffs) {</p>
+
+<pre><code>var html = [];
+var pattern_amp = /&amp;/g;
+var pattern_lt = /&lt;/g;
+var pattern_gt = /&gt;/g;
+var pattern_para = /\n/g;
+for (var x = 0; x &lt; diffs.length; x++) {
+  var op = diffs[x][0];    // Operation (insert, delete, equal)
+  var data = diffs[x][1];  // Text of change.
+  //var text = data.replace(pattern_amp, '&amp;amp;').replace(pattern_lt, '&amp;lt;')
+  //    .replace(pattern_gt, '&amp;gt;').replace(pattern_para, '&amp;para;&lt;br&gt;');
+  var text = data.replace(pattern_amp, '&amp;amp;').replace(pattern_lt, '&amp;lt;')
+      .replace(pattern_gt, '&amp;gt;').replace(pattern_para, '&lt;br&gt;');
+  switch (op) {
+    case DIFF_INSERT:
+      html[x] = '&lt;ins style="background:#e6ffe6;"&gt;' + text + '&lt;/ins&gt;';
+      break;
+    case DIFF_DELETE:
+      html[x] = '&lt;del style="background:#ffe6e6;"&gt;' + text + '&lt;/del&gt;';
+      break;
+    case DIFF_EQUAL:
+      html[x] = '&lt;span&gt;' + text + '&lt;/span&gt;';
+      break;
+  }
+}
+return html.join('');
+</code></pre>
+
+<p>  };
+```</p>
 
 <p>So I wrote a library to wrap around it - so the client doesn't have to
 repeat this wherever they need to use it. You can find more on
@@ -95,12 +97,11 @@ be downloaded from the
 
 <p>Now, with this library you'd have to write just a couple of lines to
 produce a beautiful looking diff, like this:
-<div><script src='https://gist.github.com/4700669.js?file=pretty-diff-with-textdiff-plugin.js'></script>
-<noscript><pre><code>$(selector).prettyTextDiff({
+<code>js
+$(selector).prettyTextDiff({
   // options
 });
-</code></pre></noscript></div>
-</p>
+</code></p>
 
 <p>Peek inside the fiddle demo to see more. You can also customize many
 of the options - check out the documentation in the github repo.</p>
