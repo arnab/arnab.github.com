@@ -4,7 +4,7 @@
   <title><![CDATA[Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-02-05T13:36:55+05:30</updated>
+  <updated>2013-02-05T15:04:14+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -12,6 +12,152 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging warnings in tests]]></title>
+    <link href="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests/"/>
+    <updated>2013-02-05T14:28:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Object#id will be deprecated; use Object#object_id
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hate seeing warnings in your test output? Yeah me too. Came across a
+fairly weird bug today and this is how I debugged it.</p>
+
+<!--more-->
+
+
+<p>With a recent checkin I started seeing some warnings in the test
+output, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ruby -I <span class="s2">&quot;lib:test&quot;</span> path/to/example_controller_test.rb
+</span><span class='line'>Loaded suite example_controller_test.rb <span class="o">[</span>app_name<span class="o">]</span> init ...
+</span><span class='line'>Started
+</span><span class='line'>........../path/to/some/_partial.html.erb:48: warning: Object#id will
+</span><span class='line'>be deprecated; use Object#object_id
+</span><span class='line'>.............../path/to/some/_partial.html.erb:48: warning: Object#id
+</span><span class='line'>will be deprecated; use Object#object_id
+</span><span class='line'>..........................................................................................
+</span><span class='line'>Finished in 12.545861 seconds.
+</span><span class='line'>
+</span><span class='line'> 58 tests, 198 assertions, 0 failures, 0 errors
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If life&#8217;s easy, you&#8217;ll see the test files name along with the
+warnings. However, in this case, the trace only contains an erb
+partial. The partial looked something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;li&gt;</span>
+</span><span class='line'>  <span class="err">&lt;</span>%= @something.try(:id) %&gt;
+</span><span class='line'><span class="nt">&lt;/li&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Typically this warning happens when you call <code>#id</code> on an object that
+evaluates to <code>nil</code>. In this case, looks like someone already thought
+of that - and used
+<a href="http://api.rubyonrails.org/classes/Object.html#method-i-try"><code>#try</code></a>
+specifically to avoid this warning.</p>
+
+<p>What gives? What complicates this is that our test suite has 1000+
+tests and the partial that shows the erorr is used widely. (You could
+try deleting the partial and see what fails but in this case 90% of
+the tests would fail).</p>
+
+<p>After some more trial and error, I started reading the Test::Unit
+source on github. That with some introspection showed that you can get
+the running test&#8217;s name at runtime with the <code>#name</code> method. Duh!</p>
+
+<p>So I added a <code>teardown</code> to the suite:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">ExampleControllerTest</span> <span class="o">&lt;</span> <span class="ss">Test</span><span class="p">:</span><span class="ss">:Unit</span>
+</span><span class='line'>  <span class="c1"># setup etc.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">teardown</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="nb">test</span> <span class="s2">&quot;something should do something&quot;</span> <span class="k">do</span>
+</span><span class='line'>     <span class="n">get</span> <span class="ss">:new</span>
+</span><span class='line'>     <span class="c1"># assert something</span>
+</span><span class='line'>   <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="c1"># more tests</span>
+</span><span class='line'> <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With that, my test suit printed out the name of every test right after
+the <code>.</code> - and looking through the output for the warning showed me the
+test that was causing it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/path/to/some/_partial.html.erb:48: warning: Object#id will be
+</span><span class='line'>deprecated; use Object#object_id
+</span><span class='line'>.test_something_should_do_something<span class="o">(</span>ExampleControllerTest<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This gave me the lead I needed. Now it took some more debugging to
+figure out the details (I&#8217;ll spare you the rest) but it turns out a
+method 4-5 levels down was retruning <code>false</code> instead of <code>nil</code>. And
+<code>#try</code> works beautifully for <code>nil</code> but not for <code>false</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">nil</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:id</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">false</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:id</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">9</span><span class="p">:</span> <span class="ss">warning</span><span class="p">:</span> <span class="no">Object</span><span class="c1">#id will be deprecated; use Object#object_id</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'><span class="o">&gt;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So there you go. It sure was an entertaining session for me. And if
+you read it till here&#8230;</p>
+
+<p>More techniques about how I could have debugged this more easily are
+most welcome.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hello jQuery.PrettyTextDiff]]></title>
@@ -905,122 +1051,6 @@ big bang for the buck.</p>
 *   [![ARCL Summer 2008 3rd Place Trophy (Eagles)][23]][23]
 *   [![Arnab Deka][24]][24]
 *   [![Arnab][25]][25]</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby dup vs clone]]></title>
-    <link href="http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone/"/>
-    <updated>2009-07-28T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone</id>
-    <content type="html"><![CDATA[<blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
-certainly much before it became popular. Those were the days when
-programmers had find out answers themselves ;)
-This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
-
-<p>I have had this question about the difference between Ruby&#8217;s <code>clone</code>
-and <code>dup</code> method multiple times now. And I have always had this fuzzy
-feeling that &#8220;they are almost the same thing&#8221;. Today my colleague
-asked it again and I decided to dig it out. Here&#8217;s what
-<a href="http://www.joelonsoftware.com/items/2008/09/15.html">Ruby API docs</a> say about them:</p>
-
-<h3><code>Object#clone</code></h3>
-
-<blockquote><p>Produces a shallow copy of obj - the instance variables of obj are
-copied, but not the objects they reference. Copies the frozen and
-tainted state of obj.</p></blockquote>
-
-<h3><code>Object#dup</code></h3>
-
-<blockquote><p>Produces a shallow copy of obj—the instance variables of obj are
-copied, but not the objects they reference. dup copies the tainted
-state of obj. See also the discussion under Object#clone. In general,
-clone and dup may have different semantics in descendant classes.
-While clone is used to duplicate an object, including its internal
-state, dup typically uses the class of the descendant object to create
-the new instance.</p>
-
-<p>This method may have class-specific behavior. If so, that behavior
-will be documented under the #initialize_copy method of the class.</p></blockquote>
-
-<p>So in essence, both produce shallow-copies of the object. <code>clone</code>
-copies the frozen <strong>and</strong> tainted state while <code>dup</code> copies only the
-tainted state. Even after reading that documentation twice, it&#8217;s still
-murky in my head (probably coz I have not had <em>a chance</em> to write code
-to notice the frozen or tainted state specifically.)</p>
-
-<p>Here&#8217;s a gem from ruby-talk that Google brought up. So
-<a href="3">Matz says</a>:</p>
-
-<blockquote><p><code>clone</code> copies everything; internal state, singleton methods, etc.
-<code>dup</code> copies object contents only (plus taintness status).</p></blockquote>
-
-<p>And so I wrote a bit of code to see it myself (and thus remember it).
-Here&#8217;s a very simple <code>Person</code> class:</p>
-
-<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
-<noscript><pre><code>class Person
-  attr_accessor :name
-end
-</code></pre></noscript></div>
-
-
-<p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
-
-<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
-<noscript><pre><code>p = Person.new
-p.name = &quot;The Man&quot;
-
-# now add a singleton method on p:
-def p.say_hi
-  &quot;'sup&quot;
-end
-</code></pre></noscript></div>
-
-
-<p>See that it&#8217;s all working:</p>
-
-<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
-<noscript><pre><code>irb(main):014:0&gt; puts p.inspect
-#&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
-=&gt; nil
-irb(main):015:0&gt; puts p.say_hi
-'sup
-=&gt; nil
-</code></pre></noscript></div>
-
-
-<p>Now create a clone and a dup of it:</p>
-
-<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
-<noscript><pre><code>the_clone = p.clone
-the_dup = p.dup
-</code></pre></noscript></div>
-
-
-<p>Both the clone and the dup have the same instance variables (which are
-shallow-copies BTW), but only the clone has the singleton method
-(<code>#say_hi</code>) in it:</p>
-
-<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
-<noscript><pre><code>irb(main):018:0&gt; the_clone.name
-=&gt; &quot;The Man&quot;
-irb(main):019:0&gt; the_dup.name
-=&gt; &quot;The Man&quot;
-irb(main):020:0&gt; the_clone.say_hi
-=&gt; &quot;'sup&quot;
-irb(main):021:0&gt; the_dup.say_hi
-NoMethodError: undefined method `say_hi' for 
-(Person :0xb7e83340 @name=&quot;The Man&quot;)
-        from (irb):21
-        from :0
-irb(main):022:0&gt; 
-</code></pre></noscript></div>
-
-
-<p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
-does. Hence <code>#dup</code> might be more beneficial for performance compared to
-<code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
 ]]></content>
   </entry>
   
