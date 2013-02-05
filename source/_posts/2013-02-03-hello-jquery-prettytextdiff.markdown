@@ -41,7 +41,35 @@ that uses this is not particularly pleasing to look at.
 
 Here's an example of the code you would have to write to produce a
 good looking diff:
-{% gist 4700669 pretty-diff.js %}
+```js
+diff_match_patch.prototype.diff_prettyHtml = function(diffs) {
+    var html = [];
+    var pattern_amp = /&/g;
+    var pattern_lt = /</g;
+    var pattern_gt = />/g;
+    var pattern_para = /\n/g;
+    for (var x = 0; x < diffs.length; x++) {
+      var op = diffs[x][0];    // Operation (insert, delete, equal)
+      var data = diffs[x][1];  // Text of change.
+      //var text = data.replace(pattern_amp, '&amp;').replace(pattern_lt, '&lt;')
+      //    .replace(pattern_gt, '&gt;').replace(pattern_para, '&para;<br>');
+      var text = data.replace(pattern_amp, '&amp;').replace(pattern_lt, '&lt;')
+          .replace(pattern_gt, '&gt;').replace(pattern_para, '<br>');
+      switch (op) {
+        case DIFF_INSERT:
+          html[x] = '<ins style="background:#e6ffe6;">' + text + '</ins>';
+          break;
+        case DIFF_DELETE:
+          html[x] = '<del style="background:#ffe6e6;">' + text + '</del>';
+          break;
+        case DIFF_EQUAL:
+          html[x] = '<span>' + text + '</span>';
+          break;
+      }
+    }
+    return html.join('');
+  };
+```
 
 So I wrote a library to wrap around it - so the client doesn't have to
 repeat this wherever they need to use it. You can find more on
@@ -51,7 +79,11 @@ be downloaded from the
 
 Now, with this library you'd have to write just a couple of lines to
 produce a beautiful looking diff, like this:
-{% gist 4700669 pretty-diff-with-textdiff-plugin.js %}
+```js
+$(selector).prettyTextDiff({
+  // options
+});
+```
 
 Peek inside the fiddle demo to see more. You can also customize many
 of the options - check out the documentation in the github repo.
