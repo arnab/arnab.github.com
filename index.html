@@ -425,7 +425,7 @@ in my search.</p>
   
 
 
-<time datetime="2012-09-19T00:00:00+05:30" pubdate data-updated="true">Wednesday, September the 19<span>th</span>, 2012</time>
+<time datetime="2012-09-19T14:28:00+05:30" pubdate data-updated="true">Wednesday, September the 19<span>th</span>, 2012</time>
         
          | <a href="/posts/2012/09/allowing-and-testing-cors-requests-in-rails/#disqus_thread">Comments</a>
         
@@ -434,11 +434,19 @@ in my search.</p>
   </header>
 
 
-  <p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
+  <p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going
+to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
 
-<blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it possible for AJAX requests to directly talk to HTTP-services outside it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
+<blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it
+  possible for AJAX requests to directly talk to HTTP-services outside
+  it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
 
-<p>While there are lots of examples that show how to allow CORS requests in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them. While it’s simple to test the HTTP headers, you may have to look around a little (or a lot) on how to test a HTTP “OPTIONS” request. When you make CORS requests, the browser may make a pre-flight “OPTIONS” request to verify that the server allows CORS.</p>
+<p>While there are lots of examples that show how to allow CORS requests
+in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them.
+While it’s simple to test the HTTP headers, you may have to look
+around a little (or a lot) on how to test a HTTP “OPTIONS” request.
+When you make CORS requests, the browser may make a pre-flight
+“OPTIONS” request to verify that the server allows CORS.</p>
 
 
   

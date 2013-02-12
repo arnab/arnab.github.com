@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/programming/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-02-06T17:48:00+05:30</updated>
+  <updated>2013-02-12T12:35:47+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -44,87 +44,6 @@
 </p>
 
 <p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Allowing and testing CORS requests in Rails
-]]></title>
-    <link href="http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails/"/>
-    <updated>2012-09-19T00:00:00+05:30</updated>
-    <id>http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails</id>
-    <content type="html"><![CDATA[<p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
-
-<blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it possible for AJAX requests to directly talk to HTTP-services outside it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
-
-<p>While there are lots of examples that show how to allow CORS requests in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them. While it’s simple to test the HTTP headers, you may have to look around a little (or a lot) on how to test a HTTP “OPTIONS” request. When you make CORS requests, the browser may make a pre-flight “OPTIONS” request to verify that the server allows CORS.</p>
-
-<!-- more -->
-
-
-<p>To make Rails set the right HTTP headers to allow CORS requests, you can do something like this:
-<div><script src='https://gist.github.com/3749227.js?file=controller.rb'></script>
-<noscript><pre><code>before_filter: allow_cors_requests
-
-def allow_cors
-  headers[&quot;Access-Control-Allow-Origin&quot;] = &quot;*&quot;
-  headers[&quot;Access-Control-Allow-Methods&quot;] = %w{GET POST PUT DELETE}.join(&quot;,&quot;)
-  headers[&quot;Access-Control-Allow-Headers&quot;] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(&quot;,&quot;)
-  head(:ok) if request.request_method == &quot;OPTIONS&quot;
-  # or, render text: ''
-  # if that's more your style
-end
-</code></pre></noscript></div>
-</p>
-
-<p>A few things to note here:</p>
-
-<ol>
-<li>You can set the <code>Access-Control-Allow-Origin</code> header to your domain to further restrict it.</li>
-<li>While Rails is one place to do this in, you can certainly do this in your webserver (nginx etc.). Again, just google. I prefer things to be more testable – maybe when I see a performance problem, I’d revise this decision (although, performance bottlenecks would probably not be in setting HTTP headers.)</li>
-</ol>
-
-
-<p>Another thing to consider when you allow CORS, is authentication – you should do some HTTP based auth (token auth for example) so only <em>your</em> apps can talk to this service. The thing with JS is, however uglified it is, any developer worth his salt can figure out how to call your backend service after reading your JS by loading your site up in a browser.</p>
-
-<p>In any case, how do you test this? It’s fairly trivial to test that the right HTTP headers were set with something like this:
-<div><script src='https://gist.github.com/3749227.js?file=testing_cors_spec.rb'></script>
-<noscript><pre><code>response.headers['Access-Control-Allow-Origin'].should == '*'
-</code></pre></noscript></div>
-</p>
-
-<p>To make a HTTP <code>options</code> request in RSpec, I had to dig through some code. And googling didn’t help here, at least the way I google. Here’s the low-down: RSpec <em>delegates</em> the request methods (like <code>get</code>/<code>post</code>/<code>put</code> etc. in the controller specs) to Rails’ <code>ActionController Tests</code>. All these methods invoke <code>ActionController::TestCase#process</code> with specific args, one of which is the method name. Now Rails master already has support for making “options” requests in tests (thanks to <a href="https://github.com/rails/rails/commit/0303c2325fab253adf5e4a0b738cb469c048f008#L0R438">this commit</a>), but that’s not available in the latest Rails release (3.2.8). I think this would make it’s way into Rails 4. Looking into this commit, we get the idea though: basically we also call the <code>process</code> method with a “OPTIONS” argument for the request-method. Putting it all together, my tests looked something like this:
-<div><script src='https://gist.github.com/3749227.js?file=controller_spec.rb'></script>
-<noscript><pre><code>shared_examples_for &quot;any request&quot; do
-  context &quot;CORS requests&quot; do
-    it &quot;should set the Access-Control-Allow-Origin header to allow CORS from anywhere&quot; do
-      response.headers['Access-Control-Allow-Origin'].should == '*'
-    end
-
-    it &quot;should allow general HTTP methods thru CORS (GET/POST/PUT/DELETE)&quot; do
-      allowed_http_methods = response.header['Access-Control-Allow-Methods']
-      %w{GET POST PUT DELETE}.each do |method|
-        allowed_http_methods.should include(method)
-      end
-    end
-
-    # etc etc
-  end
-end
-
-describe &quot;HTTP OPTIONS requests&quot; do
-  # With Rails 4 (currently in master) we'll be able to `options :index`
-  before(:each) { process :index, nil, nil, nil, 'OPTIONS' }
-
-  it_should_behave_like &quot;any request&quot;
-
-  it &quot;should be succesful&quot; do
-    response.should be_success
-  end
-end
-
-# And similar tests for GET/POST what have you which actually test the functionality...</code></pre></noscript></div>
-</p>
 ]]></content>
   </entry>
   
@@ -195,6 +114,60 @@ end
     <updated>2010-03-17T00:00:00+05:30</updated>
     <id>http://arnab-deka.com/posts/2010/03/quick-macbook-setup</id>
     <content type="html"><![CDATA[<p>Just put in my notes about setting up a MacBook in <a href="http://www.arnab-deka.com/posts/notes/macbook-setup" title="MacBook setup">the notes section here</a>. I’ll keep updating – please add your thoughts in!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing GLPK on a Mac]]></title>
+    <link href="http://arnab-deka.com/posts/2010/02/installing-glpk-on-a-mac/"/>
+    <updated>2010-02-26T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/02/installing-glpk-on-a-mac</id>
+    <content type="html"><![CDATA[<h2>Obsolation note:</h2>
+
+<p>Thanks to <a href="#comment-2787">Dave Coleman’s comment</a> I found out that glpk is available through homebrew now! So you just need these 2 steps to get glpk now:</p>
+
+<ol>
+<li><a href="http://mxcl.github.com/homebrew/" title="homebrew">homebrew</a></li>
+<li><code>brew install glpk</code></li>
+</ol>
+
+
+<p>If you still want to read on, the old way is still here…</p>
+
+<p>So you want copy-paste instructions to install <a href="http://www.gnu.org/software/glpk">GLPK</a> on your Macbook? Here are the steps:</p>
+
+<ol>
+<li>Download the latest version of GLPK from <a href="http://www.gnu.org/software/glpk/#downloading">http://www.gnu.org/software/glpk/#downloading</a></li>
+<li><em>Optional:</em> Follow the instructions to verify the download (you might need to get GNU Privacy Guard or gpg for this. You can get it at <a href="http://gnupg.org">http://gnupg.org</a>)</li>
+<li><p>Say it’s downloaded to your “Downloads” directory, go there and execute the following commands (using the terminal)</p>
+
+<pre><code>cd ~/Downloads
+tar -xzf glpk-4.43.tar.gz
+./configure --prefix=/usr/local # see note [1]
+make
+sudo make install
+</code></pre></li>
+<li><p>At this point, you should have GLPK installed. Verify it:</p>
+
+<pre><code>which glpsol
+/usr/local/bin/glpsol
+</code></pre></li>
+<li><p>… and try help:</p>
+
+<pre><code>glpsol --help
+</code></pre></li>
+</ol>
+
+
+<p>Now that you are all set-up, read up this excellent introduction using GLPK: <a href="http://www.ibm.com/developerworks/linux/library/l-glpk1">http://www.ibm.com/developerworks/linux/library/l-glpk1</a></p>
+
+<p>Notes:</p>
+
+<ul>
+<li>HiveLogic article on <a href="http://hivelogic.com/articles/using_usr_local">why using /usr/local is better</a></li>
+<li>If you want MySQL support (or something “extra”) check out the INSTALL file in the package</li>
+</ul>
+
 ]]></content>
   </entry>
   
