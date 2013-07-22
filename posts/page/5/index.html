@@ -19,13 +19,14 @@ certainly much before it &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arnab-deka.com/posts/page/5/">
+  <link rel="canonical" href="http://arnab-deka.com/posts/page/5">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -125,7 +126,7 @@ certainly much before it &hellip;">
     <article class="post">
       <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -172,15 +173,15 @@ certainly much before it became popular. Those were the days when
 programmers had find out answers themselves ;)
 This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
 
-<p>I have had this question about the difference between Ruby&#8217;s <code>clone</code>
+<p>I have had this question about the difference between Ruby&rsquo;s <code>clone</code>
 and <code>dup</code> method multiple times now. And I have always had this fuzzy
-feeling that &#8220;they are almost the same thing&#8221;. Today my colleague
-asked it again and I decided to dig it out. Here&#8217;s what
+feeling that &ldquo;they are almost the same thing&rdquo;. Today my colleague
+asked it again and I decided to dig it out. Here&rsquo;s what
 <a href="http://www.joelonsoftware.com/items/2008/09/15.html">Ruby API docs</a> say about them:</p>
 
 <h3><code>Object#clone</code></h3>
 
-<blockquote><p>Produces a shallow copy of obj - the instance variables of obj are
+<blockquote><p>Produces a shallow copy of obj &ndash; the instance variables of obj are
 copied, but not the objects they reference. Copies the frozen and
 tainted state of obj.</p></blockquote>
 
@@ -199,18 +200,18 @@ will be documented under the #initialize_copy method of the class.</p></blockquo
 
 <p>So in essence, both produce shallow-copies of the object. <code>clone</code>
 copies the frozen <strong>and</strong> tainted state while <code>dup</code> copies only the
-tainted state. Even after reading that documentation twice, it&#8217;s still
+tainted state. Even after reading that documentation twice, it&rsquo;s still
 murky in my head (probably coz I have not had <em>a chance</em> to write code
 to notice the frozen or tainted state specifically.)</p>
 
-<p>Here&#8217;s a gem from ruby-talk that Google brought up. So
+<p>Here&rsquo;s a gem from ruby-talk that Google brought up. So
 <a href="3">Matz says</a>:</p>
 
 <blockquote><p><code>clone</code> copies everything; internal state, singleton methods, etc.
 <code>dup</code> copies object contents only (plus taintness status).</p></blockquote>
 
 <p>And so I wrote a bit of code to see it myself (and thus remember it).
-Here&#8217;s a very simple <code>Person</code> class:</p>
+Here&rsquo;s a very simple <code>Person</code> class:</p>
 
 <div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
 <noscript><pre><code>class Person
@@ -232,7 +233,7 @@ end
 </code></pre></noscript></div>
 
 
-<p>See that it&#8217;s all working:</p>
+<p>See that it&rsquo;s all working:</p>
 
 <div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
 <noscript><pre><code>irb(main):014:0&gt; puts p.inspect
@@ -286,7 +287,7 @@ does. Hence <code>#dup</code> might be more beneficial for performance compared 
     <article class="post">
       <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -400,7 +401,7 @@ Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/ima
     <article class="post">
       <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -472,7 +473,7 @@ Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/ima
     <article class="post">
       <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -537,7 +538,7 @@ W00t! My browser is back. And my work is saved (the only other way would have be
 
 <p>If you have not already, give it a spin – here’s the page for the <a href="http://labs.mozilla.com/projects/ubiquity/">Ubiquity project</a></p>
 
-<p>If you want more, watch this screencast (you can also find it on the Ubiquity page) -</p>
+<p>If you want more, watch this screencast (you can also find it on the Ubiquity page) &ndash;</p>
 
 <p><a href="http://vimeo.com/1561578">Ubiquity for Firefox</a> from <a href="http://vimeo.com/user532161">Aza Raskin</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
 
@@ -553,7 +554,7 @@ W00t! My browser is back. And my work is saved (the only other way would have be
     <article class="post">
       <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -613,7 +614,7 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
 
 <p>But we did go over to <a href="http://www.nps.gov/deva/">Death Valley National Park</a> Area and <a href="http://www.redrockcanyonlv.org/">Red Rock Canyon</a> – was rocking!</p>
 
-<p><strong>My top five</strong> of the trip are -
+<p><strong>My top five</strong> of the trip are &ndash;
 1) <a href="http://www.cirquedusoleil.com/CirqueDuSoleil/en/showstickets/mystere/mystere-Las-Vegas.htm">Cirque Du Soleil Mystere show</a>
 2) <a href="http://www.redrockcanyonlv.org/">Red Rock Canyon</a>
 3) <a href="http://en.wikipedia.org/wiki/Badwater">Badwater Basin</a> (and the drive to/from)
@@ -692,7 +693,7 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -714,7 +715,7 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

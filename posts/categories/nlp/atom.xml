@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nlp | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/nlp/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-02-12T12:35:47+05:30</updated>
+  <updated>2013-07-22T13:26:58+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -22,13 +22,13 @@
 A visual diff makes it easy for the user to understand what exactly
 changed with a quick scan.</p>
 
-<p>There's an excellent library from Google, called
+<p>There&rsquo;s an excellent library from Google, called
 <a href="http://code.google.com/p/google-diff-match-patch/">diff_match_patch</a>
 that does a really good job of analyzing the text and producing the
 diffs in a programatic manner. However, it lacks the sauce to visually
 present it to the user.</p>
 
-<p>So I wrote a jQuery library which is a wrapper around Google's library
+<p>So I wrote a jQuery library which is a wrapper around Google&rsquo;s library
 and makes it trivial to wow your users.</p>
 
 <!-- more -->
@@ -45,16 +45,16 @@ and makes it trivial to wow your users.</p>
 </iframe>
 
 
-<p>While Google's library is excellent from a NLP-perspective, it does
+<p>While Google&rsquo;s library is excellent from a NLP-perspective, it does
 not provide a way to show the diff in a beautiful manner. They have a
 reference implementation to produce the diff in HTML, but recommend
 you write your own (also this implmentation is inflexible in terms of
 changing style/elements etc.).</p>
 
-<p>Also, this library is produced in 7 different languages - so the code
+<p>Also, this library is produced in 7 different languages &ndash; so the code
 that uses this is not particularly pleasing to look at.</p>
 
-<p>Here's an example of the code you would have to write to produce a
+<p>Here&rsquo;s an example of the code you would have to write to produce a
 good looking diff:
 ```js
 diff_match_patch.prototype.diff_prettyHtml = function(diffs) {</p>
@@ -89,13 +89,13 @@ return html.join('');
 <p>  };
 ```</p>
 
-<p>So I wrote a library to wrap around it - so the client doesn't have to
+<p>So I wrote a library to wrap around it &ndash; so the client doesn&rsquo;t have to
 repeat this wherever they need to use it. You can find more on
 <a href="https://github.com/arnab/jQuery.PrettyTextDiff/">github</a> and it can
 be downloaded from the
 <a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a>.</p>
 
-<p>Now, with this library you'd have to write just a couple of lines to
+<p>Now, with this library you&rsquo;d have to write just a couple of lines to
 produce a beautiful looking diff, like this:
 <code>js
 $(selector).prettyTextDiff({
@@ -104,12 +104,12 @@ $(selector).prettyTextDiff({
 </code></p>
 
 <p>Peek inside the fiddle demo to see more. You can also customize many
-of the options - check out the documentation in the github repo.</p>
+of the options &ndash; check out the documentation in the github repo.</p>
 
 <p>Hope you enjoy it!</p>
 
 <p>PS: Some of the motivation was also to flex my muscles with
-CofeeScript (haven't had a chance to use it for the last 2-3 months)
+CofeeScript (haven&rsquo;t had a chance to use it for the last 2-3 months)
 and setting up compile and uglifying/compressing  of the Javascript
 with <code>cake</code>. Check out the simple
 <a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/jquery.pretty-text-diff.coffee">coffeescript code</a>
@@ -119,7 +119,7 @@ and the
 <h3>Links</h3>
 
 <ul>
-<li><a href="http://code.google.com/p/google-diff-match-patch/">Google's diff_match_patch library</a></li>
+<li><a href="http://code.google.com/p/google-diff-match-patch/">Google&rsquo;s diff_match_patch library</a></li>
 <li><a href="https://github.com/arnab/jQuery.PrettyTextDiff/">Plugin source on github</a></li>
 <li><a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a></li>
 <li><a href="http://jsfiddle.net/arnab/YwSVY/">jsFiddle demo</a></li>

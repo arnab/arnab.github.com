@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/">
+  <link rel="canonical" href="http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -121,7 +122,7 @@
     <article class="post">
   <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -182,7 +183,7 @@ W00t! My browser is back. And my work is saved (the only other way would have be
 
 <p>If you have not already, give it a spin – here’s the page for the <a href="http://labs.mozilla.com/projects/ubiquity/">Ubiquity project</a></p>
 
-<p>If you want more, watch this screencast (you can also find it on the Ubiquity page) -</p>
+<p>If you want more, watch this screencast (you can also find it on the Ubiquity page) &ndash;</p>
 
 <p><a href="http://vimeo.com/1561578">Ubiquity for Firefox</a> from <a href="http://vimeo.com/user532161">Aza Raskin</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
 
@@ -191,12 +192,6 @@ W00t! My browser is back. And my work is saved (the only other way would have be
 
 
 </article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
 
 
     <nav role="navigation" id="pagination">
@@ -211,10 +206,7 @@ W00t! My browser is back. And my work is saved (the only other way would have be
       var disqus_shortname = 'arnabdeka';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/';
-        var disqus_url = 'http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -229,7 +221,7 @@ W00t! My browser is back. And my work is saved (the only other way would have be
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -251,7 +243,7 @@ W00t! My browser is back. And my work is saved (the only other way would have be
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

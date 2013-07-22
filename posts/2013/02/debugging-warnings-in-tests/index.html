@@ -19,13 +19,14 @@ Object#id will be deprecated; use Object#object_id Hate seeing &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests/">
+  <link rel="canonical" href="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -122,7 +123,7 @@ Object#id will be deprecated; use Object#object_id Hate seeing &hellip;">
     <article class="post">
   <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests/" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -199,7 +200,7 @@ output, like this:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>If life&#8217;s easy, you&#8217;ll see the test files name along with the
+<p>If life&rsquo;s easy, you&rsquo;ll see the test files name along with the
 warnings. However, in this case, the trace only contains an erb
 partial. The partial looked something like this:</p>
 
@@ -214,7 +215,7 @@ partial. The partial looked something like this:</p>
 
 <p>Typically this warning happens when you call <code>#id</code> on an object that
 evaluates to <code>nil</code>. In this case, looks like someone already thought
-of that - and used
+of that &ndash; and used
 <a href="http://api.rubyonrails.org/classes/Object.html#method-i-try"><code>#try</code></a>
 specifically to avoid this warning.</p>
 
@@ -225,7 +226,7 @@ the tests would fail).</p>
 
 <p>After some more trial and error, I started reading the Test::Unit
 source on github. That with some introspection showed that you can get
-the running test&#8217;s name at runtime with the <code>#name</code> method. Duh!</p>
+the running test&rsquo;s name at runtime with the <code>#name</code> method. Duh!</p>
 
 <p>So I added a <code>teardown</code> to the suite:</p>
 
@@ -261,7 +262,7 @@ the running test&#8217;s name at runtime with the <code>#name</code> method. Duh
 
 
 <p>With that, my test suit printed out the name of every test right after
-the <code>.</code> - and looking through the output for the warning showed me the
+the <code>.</code> &ndash; and looking through the output for the warning showed me the
 test that was causing it:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -274,7 +275,7 @@ test that was causing it:</p>
 
 
 <p>This gave me the lead I needed. Now it took some more debugging to
-figure out the details (I&#8217;ll spare you the rest) but it turns out a
+figure out the details (I&rsquo;ll spare you the rest) but it turns out a
 method 4-5 levels down was retruning <code>false</code> instead of <code>nil</code>. And
 <code>#try</code> works beautifully for <code>nil</code> but not for <code>false</code>:</p>
 
@@ -294,7 +295,7 @@ method 4-5 levels down was retruning <code>false</code> instead of <code>nil</co
 
 
 <p>So there you go. It sure was an entertaining session for me. And if
-you read it till here&#8230;</p>
+you read it till here&hellip;</p>
 
 <p>More techniques about how I could have debugged this more easily are
 most welcome.</p>
@@ -340,7 +341,7 @@ most welcome.</p>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -362,7 +363,7 @@ most welcome.</p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

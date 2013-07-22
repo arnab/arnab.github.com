@@ -19,13 +19,14 @@ practise. If &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/">
+  <link rel="canonical" href="http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -122,7 +123,7 @@ practise. If &hellip;">
     <article class="post">
   <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -166,17 +167,16 @@ practise. If not, get an overview in <a href="http://publib.boulder.ibm.com/info
 <p>Basically it is the practice of checking if a particular log message
 will indeed be outputted to the log (based on the severity level)
 before calling the log statement. This is a performance improvement.
-Here&#8217;s a Java example:</p>
+Here&rsquo;s a Java example:</p>
 
 <div><script src='https://gist.github.com/4585349.js?file=example.java'></script>
 <noscript><pre><code>if( logger.isLoggable(Level.INFO) ) {
-    // or logger.info?
     logger.info( &quot;this is a &quot; + &quot;info&quot; + &quot;message&quot; );
 }
 </code></pre></noscript></div>
 
 
-<p>So I heard from one of my colleagues that Ruby&#8217;s logging performance
+<p>So I heard from one of my colleagues that Ruby&rsquo;s logging performance
 can also be improved the same way, by putting the message in a block
 (instead of just passing it as an string arg to the method):</p>
 
@@ -186,10 +186,10 @@ can also be improved the same way, by putting the message in a block
 
 
 <p>See various ways to log a message at the <a href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/">ruby-docs</a> (search for
-&#8220;How to log a message&#8221; in that page). I looked into the source-code
+&ldquo;How to log a message&rdquo; in that page). I looked into the source-code
 and, just like in Java, the first thing that is done is to check the
 severity and return (true) if the severity is higher than the
-message&#8217;s. So like in Java, it should not have any effect (except
+message&rsquo;s. So like in Java, it should not have any effect (except
 creating the strings etc.).</p>
 
 <p>Just to test it out, I wrote a benchmark test:</p>
@@ -238,7 +238,7 @@ LoggerBenchmark.new.benchmark
 </code></pre></noscript></div>
 
 
-<p>Here&#8217;s what I noticed:</p>
+<p>Here&rsquo;s what I noticed:</p>
 
 <ul>
 <li><p>with <code>n &lt;= 10,000</code> (number of logging calls), there was really no
@@ -263,11 +263,11 @@ ruby logger_benchmark.rb  4.72s user 0.62s system 99% cpu 5.351 total
 string-arg) still performs the best:
 <div><script src='https://gist.github.com/4585349.js?file=results_medium_n.sh'></script>
 <noscript><pre><code>$ time ruby logger_benchmark.rb
-Rehearsal ---------------------------------------------------------------
+Rehearsal &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;
 with block            7.630000   1.030000   8.660000 (  8.669890)
 with string           6.410000   0.840000   7.250000 (  7.270509)
 with severity check   6.570000   0.890000   7.460000 (  7.472230)
------------------------------------------------------ total: 23.370000sec</p>
+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; total: 23.370000sec</p>
 
 <pre><code>                            user     system      total        real
 </code></pre>
@@ -289,12 +289,6 @@ big bang for the buck.</p>
 
 </article>
 
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
 
     <nav role="navigation" id="pagination">
 
@@ -308,10 +302,7 @@ big bang for the buck.</p>
       var disqus_shortname = 'arnabdeka';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/';
-        var disqus_url = 'http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -326,7 +317,7 @@ big bang for the buck.</p>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -348,7 +339,7 @@ big bang for the buck.</p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby,rails,test-unit,testing,debugging,obsecure | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/ruby-rails-test-unit-testing-debugging-obsecure/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-02-12T12:35:47+05:30</updated>
+  <updated>2013-07-22T13:26:58+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -30,20 +30,20 @@ fairly weird bug today and this is how I debugged it.</p>
 <p>With a recent checkin I started seeing some warnings in the test
 output, like this:
 ```sh
-$ ruby -I "lib:test" path/to/example_controller_test.rb
-Loaded suite example_controller_test.rb [app_name] init ...
+$ ruby -I &ldquo;lib:test&rdquo; path/to/example_controller_test.rb
+Loaded suite example_controller_test.rb [app_name] init &hellip;
 Started
-........../path/to/some/<em>partial.html.erb:48: warning: Object#id will
+&hellip;&hellip;&hellip;./path/to/some/<em>partial.html.erb:48: warning: Object#id will
 be deprecated; use Object#object_id
-.............../path/to/some/</em>partial.html.erb:48: warning: Object#id
+&hellip;&hellip;&hellip;&hellip;&hellip;/path/to/some/</em>partial.html.erb:48: warning: Object#id
 will be deprecated; use Object#object_id
-..........................................................................................
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
 Finished in 12.545861 seconds.</p>
 
 <p> 58 tests, 198 assertions, 0 failures, 0 errors
 ```</p>
 
-<p>If life's easy, you'll see the test files name along with the
+<p>If life&rsquo;s easy, you&rsquo;ll see the test files name along with the
 warnings. However, in this case, the trace only contains an erb
 partial. The partial looked something like this:</p>
 
@@ -55,7 +55,7 @@ partial. The partial looked something like this:</p>
 
 <p>Typically this warning happens when you call <code>#id</code> on an object that
 evaluates to <code>nil</code>. In this case, looks like someone already thought
-of that - and used
+of that &ndash; and used
 <a href="http://api.rubyonrails.org/classes/Object.html#method-i-try"><code>#try</code></a>
 specifically to avoid this warning.</p>
 
@@ -66,7 +66,7 @@ the tests would fail).</p>
 
 <p>After some more trial and error, I started reading the Test::Unit
 source on github. That with some introspection showed that you can get
-the running test's name at runtime with the <code>#name</code> method. Duh!</p>
+the running test&rsquo;s name at runtime with the <code>#name</code> method. Duh!</p>
 
 <p>So I added a <code>teardown</code> to the suite:
 ```rb
@@ -80,7 +80,7 @@ class ExampleControllerTest &lt; Test::Unit
 
 <p>  end</p>
 
-<p>   test "something should do something" do</p>
+<p>   test &ldquo;something should do something&rdquo; do</p>
 
 <pre><code> get :new
  # assert something
@@ -93,7 +93,7 @@ class ExampleControllerTest &lt; Test::Unit
 ```</p>
 
 <p>With that, my test suit printed out the name of every test right after
-the <code>.</code> - and looking through the output for the warning showed me the
+the <code>.</code> &ndash; and looking through the output for the warning showed me the
 test that was causing it:
 <code>sh
 /path/to/some/_partial.html.erb:48: warning: Object#id will be
@@ -102,7 +102,7 @@ deprecated; use Object#object_id
 </code></p>
 
 <p>This gave me the lead I needed. Now it took some more debugging to
-figure out the details (I'll spare you the rest) but it turns out a
+figure out the details (I&rsquo;ll spare you the rest) but it turns out a
 method 4-5 levels down was retruning <code>false</code> instead of <code>nil</code>. And
 <code>#try</code> works beautifully for <code>nil</code> but not for <code>false</code>:</p>
 
@@ -117,7 +117,7 @@ false.try(:id)
 <p>```</p></blockquote></blockquote>
 
 <p>So there you go. It sure was an entertaining session for me. And if
-you read it till here...</p>
+you read it till here&hellip;</p>
 
 <p>More techniques about how I could have debugged this more easily are
 most welcome.</p>

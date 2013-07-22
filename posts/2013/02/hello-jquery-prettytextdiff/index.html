@@ -19,13 +19,14 @@ A &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/">
+  <link rel="canonical" href="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -122,7 +123,7 @@ A &hellip;">
     <article class="post">
   <div class="sharing-box">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/" data-size="large">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -164,13 +165,13 @@ A &hellip;">
 A visual diff makes it easy for the user to understand what exactly
 changed with a quick scan.</p>
 
-<p>There&#8217;s an excellent library from Google, called
+<p>There&rsquo;s an excellent library from Google, called
 <a href="http://code.google.com/p/google-diff-match-patch/">diff_match_patch</a>
 that does a really good job of analyzing the text and producing the
 diffs in a programatic manner. However, it lacks the sauce to visually
 present it to the user.</p>
 
-<p>So I wrote a jQuery library which is a wrapper around Google&#8217;s library
+<p>So I wrote a jQuery library which is a wrapper around Google&rsquo;s library
 and makes it trivial to wow your users.</p>
 
 <!-- more -->
@@ -187,16 +188,16 @@ and makes it trivial to wow your users.</p>
 </iframe>
 
 
-<p>While Google&#8217;s library is excellent from a NLP-perspective, it does
+<p>While Google&rsquo;s library is excellent from a NLP-perspective, it does
 not provide a way to show the diff in a beautiful manner. They have a
 reference implementation to produce the diff in HTML, but recommend
 you write your own (also this implmentation is inflexible in terms of
 changing style/elements etc.).</p>
 
-<p>Also, this library is produced in 7 different languages - so the code
+<p>Also, this library is produced in 7 different languages &ndash; so the code
 that uses this is not particularly pleasing to look at.</p>
 
-<p>Here&#8217;s an example of the code you would have to write to produce a
+<p>Here&rsquo;s an example of the code you would have to write to produce a
 good looking diff:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -256,13 +257,13 @@ good looking diff:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>So I wrote a library to wrap around it - so the client doesn&#8217;t have to
+<p>So I wrote a library to wrap around it &ndash; so the client doesn&rsquo;t have to
 repeat this wherever they need to use it. You can find more on
 <a href="https://github.com/arnab/jQuery.PrettyTextDiff/">github</a> and it can
 be downloaded from the
 <a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a>.</p>
 
-<p>Now, with this library you&#8217;d have to write just a couple of lines to
+<p>Now, with this library you&rsquo;d have to write just a couple of lines to
 produce a beautiful looking diff, like this:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -275,12 +276,12 @@ produce a beautiful looking diff, like this:</p>
 
 
 <p>Peek inside the fiddle demo to see more. You can also customize many
-of the options - check out the documentation in the github repo.</p>
+of the options &ndash; check out the documentation in the github repo.</p>
 
 <p>Hope you enjoy it!</p>
 
 <p>PS: Some of the motivation was also to flex my muscles with
-CofeeScript (haven&#8217;t had a chance to use it for the last 2-3 months)
+CofeeScript (haven&rsquo;t had a chance to use it for the last 2-3 months)
 and setting up compile and uglifying/compressing  of the Javascript
 with <code>cake</code>. Check out the simple
 <a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/jquery.pretty-text-diff.coffee">coffeescript code</a>
@@ -290,7 +291,7 @@ and the
 <h3>Links</h3>
 
 <ul>
-<li><a href="http://code.google.com/p/google-diff-match-patch/">Google&#8217;s diff_match_patch library</a></li>
+<li><a href="http://code.google.com/p/google-diff-match-patch/">Google&rsquo;s diff_match_patch library</a></li>
 <li><a href="https://github.com/arnab/jQuery.PrettyTextDiff/">Plugin source on github</a></li>
 <li><a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a></li>
 <li><a href="http://jsfiddle.net/arnab/YwSVY/">jsFiddle demo</a></li>
@@ -338,7 +339,7 @@ and the
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  js = d.createElement(s); js.id = id; js.async = true;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -360,7 +361,7 @@ and the
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
