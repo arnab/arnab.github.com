@@ -133,6 +133,27 @@ end
 # And similar tests for GET/POST what have you which actually test the functionality...
 ```
 
+## Update for Rails 4
+So
+[@ekampp on twitter](https://twitter.com/ekampp/status/385800059687690241)
+brought it to my attention that this test does not work
+anymore. It appears that the `options` method was
+[added](https://github.com/rails/rails/commit/0303c23) and then
+[removed](https://github.com/rails/rails/commit/6a4ff5c) from Rails
+master (since a method named `options` conflicts with a lot of stuff,
+as you can imagine).
+
+So, in Rails 4 (and current master) you can call `process` directly
+like this:
+```
+process :index, 'OPTIONS' # and other args as needed
+```
+
+For example,
+[this](https://github.com/rails/rails/blob/2de0cca/actionpack/lib/action_controller/test_case.rb#L499)
+is how `head` is implemented. So you are basically doing the same
+thing for an `OPTIONS` request.
+
  [1]: http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/ "Cross Domain AJAX with CORS"
  [2]: http://goo.gl/d8g3j
  [3]: https://github.com/rails/rails/commit/0303c2325fab253adf5e4a0b738cb469c048f008#L0R438
