@@ -259,10 +259,14 @@ to notice the frozen or tainted state specifically.)</p>
 Here&rsquo;s a very simple <code>Person</code> class:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585462/raw/person.rb'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>class Person
   attr_accessor :name
 end
@@ -272,10 +276,14 @@ end
 <p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585462/raw/person_say_hi.rb'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>p = Person.new
 p.name = &quot;The Man&quot;
 
@@ -293,10 +301,14 @@ end
 <p>See that it&rsquo;s all working:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585462/raw/validate.rb'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>irb(main):014:0&gt; puts p.inspect
 #&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
 =&gt; nil
@@ -313,10 +325,14 @@ irb(main):015:0&gt; puts p.say_hi
 <p>Now create a clone and a dup of it:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585462/raw/clone_and_dup.rb'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>the_clone = p.clone
 the_dup = p.dup
 </code></pre></noscript></div>
@@ -327,10 +343,14 @@ shallow-copies BTW), but only the clone has the singleton method
 (<code>#say_hi</code>) in it:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585462/raw/dup_vs_clone.rb'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>irb(main):018:0&gt; the_clone.name
 =&gt; &quot;The Man&quot;
 irb(main):019:0&gt; the_dup.name

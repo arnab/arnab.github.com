@@ -569,10 +569,14 @@ end
 <p><code>:joins</code> is the only way to do this, using <code>:includes</code> does <strong>NOT</strong> respect the select clause. Here a gist:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/223925.js'></script>
 <noscript><pre><code></code></pre></noscript></div>
 =======
 <div><script src='https://gist.github.com/arnab/223925/raw'></script>
+=======
+<div><script src='https://gist.github.com/223925.js'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>    metrics_with_inputs = Revision.find(
       :all,
       :conditions =&gt; { :id =&gt; self.revisions.map { |r| r.id } },

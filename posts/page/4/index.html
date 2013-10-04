@@ -524,10 +524,14 @@ before calling the log statement. This is a performance improvement.
 Here&rsquo;s a Java example:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585349.js?file=example.java'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585349/raw/example.java'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585349.js?file=example.java'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>if( logger.isLoggable(Level.INFO) ) {
     logger.info( &quot;this is a &quot; + &quot;info&quot; + &quot;message&quot; );
 }
@@ -539,10 +543,14 @@ can also be improved the same way, by putting the message in a block
 (instead of just passing it as an string arg to the method):</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585349.js?file=example.rb'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585349/raw/example.rb'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585349.js?file=example.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>logger.debug { &quot;this is a &quot; + &quot;debug&quot; + &quot;message&quot; }
 </code></pre></noscript></div>
 
@@ -557,11 +565,15 @@ creating the strings etc.).</p>
 <p>Just to test it out, I wrote a benchmark test:</p>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585349.js?file=benchmarking_example.rb'></script>
 <noscript><pre><code>require 'benchmark'
 require 'logger'
 =======
 <div><script src='https://gist.github.com/arnab/4585349/raw/benchmarking_example.rb'></script>
+=======
+<div><script src='https://gist.github.com/4585349.js?file=benchmarking_example.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>require &#39;benchmark&#39;
 require &#39;logger&#39;
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
@@ -612,10 +624,14 @@ LoggerBenchmark.new.benchmark
 <li><p>with <code>n &lt;= 10,000</code> (number of logging calls), there was really no
 difference between the three ways:
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585349.js?file=results_small_n.sh'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585349/raw/results_small_n.sh'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585349.js?file=results_small_n.sh'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>$ time ruby logger_benchmark.rb
 Rehearsal —————————————————————
 with block            1.340000   0.160000   1.500000 (  1.500111)
@@ -634,10 +650,14 @@ ruby logger_benchmark.rb  4.72s user 0.62s system 99% cpu 5.351 total
 <li><p>with <code>n = 100,000</code>: It looked like the simplest way to log (with a
 string-arg) still performs the best:
 <<<<<<< HEAD
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585349.js?file=results_medium_n.sh'></script>
 =======
 <div><script src='https://gist.github.com/arnab/4585349/raw/results_medium_n.sh'></script>
 >>>>>>> Site updated at 2013-10-04 06:03:48 UTC
+=======
+<div><script src='https://gist.github.com/4585349.js?file=results_medium_n.sh'></script>
+>>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>$ time ruby logger_benchmark.rb
 Rehearsal &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;
 with block            7.630000   1.030000   8.660000 (  8.669890)
