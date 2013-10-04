@@ -273,7 +273,29 @@ looked something like this:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>Update for Rails 4</h2>
 
+<p>So
+<a href="https://twitter.com/ekampp/status/385800059687690241">@ekampp on twitter</a>
+brought it to my attention that this test does not work
+anymore. It appears that the <code>options</code> method was
+<a href="https://github.com/rails/rails/commit/0303c23">added</a> and then
+<a href="https://github.com/rails/rails/commit/6a4ff5c">removed</a> from Rails
+master (since a method named <code>options</code> conflicts with a lot of stuff,
+as you can imagine).</p>
+
+<p>So, in Rails 4 (and current master) you can call <code>process</code> directly
+like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">process</span> <span class="ss">:index</span><span class="p">,</span> <span class="s1">&#39;OPTIONS&#39;</span> <span class="c1"># and other args as needed</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For example,
+<a href="https://github.com/rails/rails/blob/2de0cca/actionpack/lib/action_controller/test_case.rb#L499">this</a>
+is how <code>head</code> is implemented. So you are basically doing the same
+thing for an <code>OPTIONS</code> request.</p>
 </div>
 
 
