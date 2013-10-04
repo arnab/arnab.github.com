@@ -4,7 +4,11 @@
   <title><![CDATA[Category: programming | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/programming/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
+<<<<<<< HEAD
   <updated>2013-07-22T13:44:24+05:30</updated>
+=======
+  <updated>2013-10-04T11:29:52+05:30</updated>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -25,8 +29,27 @@
 <!-- more -->
 
 
+<<<<<<< HEAD
 <p><div><script src='https://gist.github.com/3774147.js'></script>
 <noscript><pre><code></code></pre></noscript></div>
+=======
+<p><div><script src='https://gist.github.com/arnab/3774147/raw'></script>
+<noscript><pre><code>;; Gist-ed from in https://github.com/arnab/emacs-starter-kit
+
+(defun fontify-frame (frame)
+  (interactive)
+  (if window-system
+      (progn
+        (if (&gt; (x-display-pixel-width) 2000)
+            (set-frame-parameter frame &#39;font &quot;Inconsolata 19&quot;) ;; Cinema Display
+         (set-frame-parameter frame &#39;font &quot;Inconsolata 16&quot;)))))
+
+;; Fontify current frame
+(fontify-frame nil)
+
+;; Fontify any future frames
+(push &#39;fontify-frame after-make-frame-functions)</code></pre></noscript></div>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 </p>
 
 <p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
@@ -183,7 +206,11 @@ end</p>
 <p><strong>Rails 3</strong>: browse the <a href="https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb">source-code at railties/lib/rails/info.rb</a></p>
 
 <p>Or see:
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
+=======
+<div><script src='https://gist.github.com/arnab/911091/raw/rails_306_properties.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <noscript><pre><code># see https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb
 
 @properties = {
@@ -193,7 +220,11 @@ end</p>
   :rails =&gt; Rails::VERSION::STRING,
   :app_root =&gt; File.expand_path(Rails.root),
   :env =&gt; Rails.env,
+<<<<<<< HEAD
   :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env]['adapter'],
+=======
+  :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env][&#39;adapter&#39;],
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
   :middleware =&gt; Rails.configuration.middleware.map(&amp;:inspect),
 }
@@ -203,7 +234,11 @@ end</p>
 <p><strong>Rails 2</strong>: browse the <a href="https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb">source-code at railties/builtin/rails_info/rails/info.rb</a></p>
 
 <p>Or see:
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
+=======
+<div><script src='https://gist.github.com/arnab/911091/raw/rails_202_properties.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <noscript><pre><code># see https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb
 
 @properties = {
@@ -212,7 +247,11 @@ end</p>
   :rails =&gt; Rails::VERSION::STRING,
   :app_root =&gt; File.expand_path(RAILS_ROOT),
   :env =&gt; RAILS_ENV,
+<<<<<<< HEAD
   :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV]['adapter'],
+=======
+  :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV][&#39;adapter&#39;],
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
 }
 </code></pre></noscript></div>

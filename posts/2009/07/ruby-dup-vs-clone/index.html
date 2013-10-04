@@ -9,8 +9,14 @@
   <meta name="author" content="Arnab Deka">
 
   
+<<<<<<< HEAD
   <meta name="description" content="Tweet Ruby Dup vs Clone Tuesday, July the 28th, 2009 | Comments This was written way before StackOverflow launched, and
 certainly much before it &hellip;">
+=======
+  <meta name="description" content="This was written way before StackOverflow launched, and
+certainly much before it became popular. Those were the days when
+programmers had find out &hellip;">
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -47,6 +53,7 @@ certainly much before it &hellip;">
 
 </head>
 
+<<<<<<< HEAD
 <body >
   <header role="banner" id="sidebar">
     <!-- Logo -->
@@ -98,12 +105,29 @@ certainly much before it &hellip;">
 </ul>
 
 
+=======
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Arnab's Universe</a></h1>
+  
+    <h2>... and all the parallel ones.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:arnab-deka.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
+<<<<<<< HEAD
 
 
 <!-- Octopress Love -->
@@ -137,6 +161,25 @@ certainly much before it &hellip;">
   <header>
     
       <h2 class="entry-title">Ruby Dup vs Clone</h2>
+=======
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/about">About</a></li>
+  <li><a href="/resume">Resume</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ruby Dup vs Clone</h1>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
     
     
       <p class="meta">
@@ -154,14 +197,23 @@ certainly much before it &hellip;">
 
 <time datetime="2009-07-28T00:00:00+05:30" pubdate data-updated="true">Tuesday, July the 28<span>th</span>, 2009</time>
         
+<<<<<<< HEAD
          | <a href="#disqus_thread">Comments</a>
+=======
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://arnab-deka.com">Comments</a>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
         
       </p>
     
   </header>
 
 
+<<<<<<< HEAD
 <blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
+=======
+<div class="entry-content"><blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 certainly much before it became popular. Those were the days when
 programmers had find out answers themselves ;)
 This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
@@ -206,7 +258,11 @@ to notice the frozen or tainted state specifically.)</p>
 <p>And so I wrote a bit of code to see it myself (and thus remember it).
 Here&rsquo;s a very simple <code>Person</code> class:</p>
 
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
+=======
+<div><script src='https://gist.github.com/arnab/4585462/raw/person.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <noscript><pre><code>class Person
   attr_accessor :name
 end
@@ -215,32 +271,52 @@ end
 
 <p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
 
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
+=======
+<div><script src='https://gist.github.com/arnab/4585462/raw/person_say_hi.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <noscript><pre><code>p = Person.new
 p.name = &quot;The Man&quot;
 
 # now add a singleton method on p:
 def p.say_hi
+<<<<<<< HEAD
   &quot;'sup&quot;
+=======
+  &quot;&#39;sup&quot;
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 end
 </code></pre></noscript></div>
 
 
 <p>See that it&rsquo;s all working:</p>
 
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
+=======
+<div><script src='https://gist.github.com/arnab/4585462/raw/validate.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <noscript><pre><code>irb(main):014:0&gt; puts p.inspect
 #&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
 =&gt; nil
 irb(main):015:0&gt; puts p.say_hi
+<<<<<<< HEAD
 'sup
+=======
+&#39;sup
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 =&gt; nil
 </code></pre></noscript></div>
 
 
 <p>Now create a clone and a dup of it:</p>
 
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
+=======
+<div><script src='https://gist.github.com/arnab/4585462/raw/clone_and_dup.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <noscript><pre><code>the_clone = p.clone
 the_dup = p.dup
 </code></pre></noscript></div>
@@ -250,15 +326,25 @@ the_dup = p.dup
 shallow-copies BTW), but only the clone has the singleton method
 (<code>#say_hi</code>) in it:</p>
 
+<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
+=======
+<div><script src='https://gist.github.com/arnab/4585462/raw/dup_vs_clone.rb'></script>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <noscript><pre><code>irb(main):018:0&gt; the_clone.name
 =&gt; &quot;The Man&quot;
 irb(main):019:0&gt; the_dup.name
 =&gt; &quot;The Man&quot;
 irb(main):020:0&gt; the_clone.say_hi
+<<<<<<< HEAD
 =&gt; &quot;'sup&quot;
 irb(main):021:0&gt; the_dup.say_hi
 NoMethodError: undefined method `say_hi' for 
+=======
+=&gt; &quot;&#39;sup&quot;
+irb(main):021:0&gt; the_dup.say_hi
+NoMethodError: undefined method `say_hi&#39; for 
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 (Person :0xb7e83340 @name=&quot;The Man&quot;)
         from (irb):21
         from :0
@@ -269,6 +355,7 @@ irb(main):022:0&gt;
 <p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
 does. Hence <code>#dup</code> might be more beneficial for performance compared to
 <code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
+<<<<<<< HEAD
 
 
 
@@ -281,6 +368,189 @@ does. Hence <code>#dup</code> might be more beneficial for performance compared 
   </section>
   
 
+=======
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Arnab</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-28T00:00:00+05:30" pubdate data-updated="true">Tuesday, July the 28<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/posts/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/posts/2009/07/gnu-screen/" title="Previous Post: GNU Screen">&laquo; GNU Screen</a>
+      
+      
+        <a class="basic-alignment right" href="/posts/2009/08/photos-hamilton-park-and-alki-beach/" title="Next Post: Photos: Hamilton Viewpoint Park and Alki Beach, West Seattle">Photos: Hamilton Viewpoint Park and Alki Beach, West Seattle &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>I am a Software Developer and a regular guy-next-door, passionate
+  about technology. Currently a Senior Engineer at LivingSocial and
+  previously at Amazon and AWS. <a href="/about">more...</a>
+  </p>
+</section>
+<section>
+  <h1>
+    <a href="https://coderwall.com/coderdude"><img alt="Endorse me on Coderwall"
+                                                   src="http://api.coderwall.com/coderdude/endorsecount.png"/></a>
+  </h1>
+</section>
+<section>
+  <h1>
+    <a href="http://in.linkedin.com/in/arnab1981"><img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.png"
+          alt="View Arnab Deka's profile on LinkedIn"></a>
+  </h1>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/posts/2013/02/debugging-warnings-in-tests/">Debugging Warnings in Tests</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2013/02/hello-jquery-prettytextdiff/">Hello jQuery.PrettyTextDiff</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/09/state-of-e-commerce-in-india/">State of E-commerce in India</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/">Emacs: Change Fonts Dynamically Based on Screen Resolution</a>
+      </li>
+    
+      <li class="post">
+        <a href="/posts/2012/09/allowing-and-testing-cors-requests-in-rails/">Allowing and Testing CORS Requests in Rails</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/arnab">@arnab</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'arnab',
+            count: 3,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("arnab_deka", 3, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/arnab_deka" class="twitter-follow-button" data-show-count="true">Follow @arnab_deka</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/arnab.deka?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/arnab.deka">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101426291592553950447?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo">
+</footer>
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   
 
 <script type="text/javascript">
@@ -291,7 +561,11 @@ does. Hence <code>#dup</code> might be more beneficial for performance compared 
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+<<<<<<< HEAD
       dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+=======
+      dsq.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + disqus_shortname + '.disqus.com/' + disqus_script;
+>>>>>>> Site updated at 2013-10-04 06:03:48 UTC
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
