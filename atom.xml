@@ -4,7 +4,7 @@
   <title><![CDATA[Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-10-04T11:39:33+05:30</updated>
+  <updated>2013-10-04T11:55:27+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -482,7 +482,7 @@ can do something like this:</p>
 <span class='line-number'>14</span>
 </pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># some_controller.rb</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">before_filter</span><span class="p">:</span> <span class="n">allow_cors_requests</span>
+</span><span class='line'><span class="n">before_filter</span><span class="p">:</span> <span class="n">allow_cors</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">def</span> <span class="nf">allow_cors</span>
 </span><span class='line'>  <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Access-Control-Allow-Origin&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>

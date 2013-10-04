@@ -4,7 +4,7 @@
   <title><![CDATA[Category: programming | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/programming/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-10-04T11:39:33+05:30</updated>
+  <updated>2013-10-04T11:55:27+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -76,7 +76,7 @@ can do something like this:</p>
 
 <h1>some_controller.rb</h1>
 
-<p>before_filter: allow_cors_requests</p>
+<p>before_filter: allow_cors</p>
 
 <p>def allow_cors
   headers[&ldquo;Access-Control-Allow-Origin&rdquo;] = &ldquo;*&rdquo;
