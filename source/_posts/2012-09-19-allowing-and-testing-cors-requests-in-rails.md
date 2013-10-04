@@ -41,7 +41,7 @@ can do something like this:
 ```rb
 # some_controller.rb
 
-before_filter: allow_cors_requests
+before_filter: allow_cors
 
 def allow_cors
   headers["Access-Control-Allow-Origin"] = "*"
