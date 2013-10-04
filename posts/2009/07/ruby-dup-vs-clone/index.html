@@ -9,14 +9,9 @@
   <meta name="author" content="Arnab Deka">
 
   
-<<<<<<< HEAD
-  <meta name="description" content="Tweet Ruby Dup vs Clone Tuesday, July the 28th, 2009 | Comments This was written way before StackOverflow launched, and
-certainly much before it &hellip;">
-=======
   <meta name="description" content="This was written way before StackOverflow launched, and
 certainly much before it became popular. Those were the days when
 programmers had find out &hellip;">
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -53,59 +48,6 @@ programmers had find out &hellip;">
 
 </head>
 
-<<<<<<< HEAD
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-  <div class="clearfix">
-    <a href="/">Arnab's Universe</a>
-  </div>
-</aside>
-
-<ul id="menu">
-
-  <li class="title">
-    <h1 id="title"><a href="/">Arnab's Universe</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">... and all the parallel ones.</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-  <li class="resume">
-    <a href="/resume/">resume</a>
-  </li>
-
-  <li class="link">
-    <a href="http://twitter.com/arnab_deka/">twitter</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/arnab/">github</a>
-  </li>
-
-  <li class="link">
-    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
-  </li>
-
-  <li class="link">
-    <a href="/blog/archives">archives</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-
-</ul>
-
-
-=======
 <body   >
   <header role="banner"><hgroup>
   <h1><a href="/">Arnab's Universe</a></h1>
@@ -120,48 +62,12 @@ programmers had find out &hellip;">
   
 </ul>
   
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:arnab-deka.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-<<<<<<< HEAD
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-  
-  <header>
-    
-      <h2 class="entry-title">Ruby Dup vs Clone</h2>
-=======
   
 <ul class="main-navigation">
   <li><a href="/">Home</a></li>
@@ -179,7 +85,6 @@ programmers had find out &hellip;">
   <header>
     
       <h1 class="entry-title">Ruby Dup vs Clone</h1>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
     
     
       <p class="meta">
@@ -197,23 +102,15 @@ programmers had find out &hellip;">
 
 <time datetime="2009-07-28T00:00:00+05:30" pubdate data-updated="true">Tuesday, July the 28<span>th</span>, 2009</time>
         
-<<<<<<< HEAD
-         | <a href="#disqus_thread">Comments</a>
-=======
            | <a href="#disqus_thread"
              data-disqus-identifier="http://arnab-deka.com">Comments</a>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
         
       </p>
     
   </header>
 
 
-<<<<<<< HEAD
-<blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
-=======
 <div class="entry-content"><blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 certainly much before it became popular. Those were the days when
 programmers had find out answers themselves ;)
 This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
@@ -258,15 +155,7 @@ to notice the frozen or tainted state specifically.)</p>
 <p>And so I wrote a bit of code to see it myself (and thus remember it).
 Here&rsquo;s a very simple <code>Person</code> class:</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
-=======
-<div><script src='https://gist.github.com/arnab/4585462/raw/person.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
-=======
-<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>class Person
   attr_accessor :name
 end
@@ -275,64 +164,32 @@ end
 
 <p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
-=======
-<div><script src='https://gist.github.com/arnab/4585462/raw/person_say_hi.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
-=======
-<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>p = Person.new
 p.name = &quot;The Man&quot;
 
 # now add a singleton method on p:
 def p.say_hi
-<<<<<<< HEAD
-  &quot;'sup&quot;
-=======
   &quot;&#39;sup&quot;
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 end
 </code></pre></noscript></div>
 
 
 <p>See that it&rsquo;s all working:</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
-=======
-<div><script src='https://gist.github.com/arnab/4585462/raw/validate.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
-=======
-<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>irb(main):014:0&gt; puts p.inspect
 #&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
 =&gt; nil
 irb(main):015:0&gt; puts p.say_hi
-<<<<<<< HEAD
-'sup
-=======
 &#39;sup
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 =&gt; nil
 </code></pre></noscript></div>
 
 
 <p>Now create a clone and a dup of it:</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
-=======
-<div><script src='https://gist.github.com/arnab/4585462/raw/clone_and_dup.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
-=======
-<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>the_clone = p.clone
 the_dup = p.dup
 </code></pre></noscript></div>
@@ -342,29 +199,15 @@ the_dup = p.dup
 shallow-copies BTW), but only the clone has the singleton method
 (<code>#say_hi</code>) in it:</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
-=======
-<div><script src='https://gist.github.com/arnab/4585462/raw/dup_vs_clone.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
-=======
-<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code>irb(main):018:0&gt; the_clone.name
 =&gt; &quot;The Man&quot;
 irb(main):019:0&gt; the_dup.name
 =&gt; &quot;The Man&quot;
 irb(main):020:0&gt; the_clone.say_hi
-<<<<<<< HEAD
-=&gt; &quot;'sup&quot;
-irb(main):021:0&gt; the_dup.say_hi
-NoMethodError: undefined method `say_hi' for 
-=======
 =&gt; &quot;&#39;sup&quot;
 irb(main):021:0&gt; the_dup.say_hi
 NoMethodError: undefined method `say_hi&#39; for 
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 (Person :0xb7e83340 @name=&quot;The Man&quot;)
         from (irb):21
         from :0
@@ -375,20 +218,6 @@ irb(main):022:0&gt;
 <p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
 does. Hence <code>#dup</code> might be more beneficial for performance compared to
 <code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
-<<<<<<< HEAD
-
-
-
-</article>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-=======
 </div>
 
 
@@ -570,7 +399,6 @@ does. Hence <code>#dup</code> might be more beneficial for performance compared 
   </div>
   <footer role="contentinfo">
 </footer>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   
 
 <script type="text/javascript">
@@ -581,11 +409,7 @@ does. Hence <code>#dup</code> might be more beneficial for performance compared 
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-<<<<<<< HEAD
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-=======
       dsq.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + disqus_shortname + '.disqus.com/' + disqus_script;
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

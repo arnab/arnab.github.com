@@ -9,11 +9,7 @@
   <meta name="author" content="Arnab Deka">
 
   
-<<<<<<< HEAD
-  <meta name="description" content="Tweet Quick Howto on Accessing Rails Properties Friday, April the 8th, 2011 | Comments When you create a new Rails app the default static page ( &hellip;">
-=======
   <meta name="description" content="When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show &hellip;">
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,59 +46,6 @@
 
 </head>
 
-<<<<<<< HEAD
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-  <div class="clearfix">
-    <a href="/">Arnab's Universe</a>
-  </div>
-</aside>
-
-<ul id="menu">
-
-  <li class="title">
-    <h1 id="title"><a href="/">Arnab's Universe</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">... and all the parallel ones.</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">about</a>
-  </li>
-  <li class="resume">
-    <a href="/resume/">resume</a>
-  </li>
-
-  <li class="link">
-    <a href="http://twitter.com/arnab_deka/">twitter</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/arnab/">github</a>
-  </li>
-
-  <li class="link">
-    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
-  </li>
-
-  <li class="link">
-    <a href="/blog/archives">archives</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
-
-</ul>
-
-
-=======
 <body   >
   <header role="banner"><hgroup>
   <h1><a href="/">Arnab's Universe</a></h1>
@@ -117,48 +60,12 @@
   
 </ul>
   
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:arnab-deka.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-<<<<<<< HEAD
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-  
-  <header>
-    
-      <h2 class="entry-title">Quick Howto on Accessing Rails Properties</h2>
-=======
   
 <ul class="main-navigation">
   <li><a href="/">Home</a></li>
@@ -176,7 +83,6 @@
   <header>
     
       <h1 class="entry-title">Quick Howto on Accessing Rails Properties</h1>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
     
     
       <p class="meta">
@@ -194,23 +100,15 @@
 
 <time datetime="2011-04-08T00:00:00+05:30" pubdate data-updated="true">Friday, April the 8<span>th</span>, 2011</time>
         
-<<<<<<< HEAD
-         | <a href="#disqus_thread">Comments</a>
-=======
            | <a href="#disqus_thread"
              data-disqus-identifier="http://arnab-deka.com">Comments</a>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
         
       </p>
     
   </header>
 
 
-<<<<<<< HEAD
-<p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
-=======
 <div class="entry-content"><p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
 
 <!-- more -->
 
@@ -219,15 +117,7 @@
 
 <p>Or see:</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
-=======
-<div><script src='https://gist.github.com/arnab/911091/raw/rails_306_properties.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
-=======
-<div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code># see https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb
 
 @properties = {
@@ -237,11 +127,7 @@
   :rails =&gt; Rails::VERSION::STRING,
   :app_root =&gt; File.expand_path(Rails.root),
   :env =&gt; Rails.env,
-<<<<<<< HEAD
-  :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env]['adapter'],
-=======
   :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env][&#39;adapter&#39;],
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
   :middleware =&gt; Rails.configuration.middleware.map(&amp;:inspect),
 }
@@ -252,15 +138,7 @@
 
 <p>Or see:</p>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 <div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
-=======
-<div><script src='https://gist.github.com/arnab/911091/raw/rails_202_properties.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
-=======
-<div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
->>>>>>> Site updated at 2013-10-04 06:05:30 UTC
 <noscript><pre><code># see https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb
 
 @properties = {
@@ -269,31 +147,13 @@
   :rails =&gt; Rails::VERSION::STRING,
   :app_root =&gt; File.expand_path(RAILS_ROOT),
   :env =&gt; RAILS_ENV,
-<<<<<<< HEAD
-  :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV]['adapter'],
-=======
   :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV][&#39;adapter&#39;],
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
 }
 </code></pre></noscript></div>
 
 
 <p>Till the next time…</p>
-<<<<<<< HEAD
-
-
-
-</article>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
-  
-
-=======
 </div>
 
 
@@ -475,7 +335,6 @@
   </div>
   <footer role="contentinfo">
 </footer>
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
   
 
 <script type="text/javascript">
@@ -486,11 +345,7 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-<<<<<<< HEAD
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-=======
       dsq.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + disqus_shortname + '.disqus.com/' + disqus_script;
->>>>>>> Site updated at 2013-10-04 06:03:48 UTC
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
