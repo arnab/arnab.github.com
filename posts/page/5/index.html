@@ -9,9 +9,8 @@
   <meta name="author" content="Arnab Deka">
 
   
-  <meta name="description" content="This was written way before StackOverflow launched, and
-certainly much before it became popular. Those were the days when
-programmers had find out &hellip;">
+  <meta name="description" content="Tweet Ruby Dup vs Clone Tuesday, July the 28th, 2009 | Comments This was written way before StackOverflow launched, and
+certainly much before it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,14 +19,13 @@ programmers had find out &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://arnab-deka.com/posts/page/5">
+  <link rel="canonical" href="http://arnab-deka.com/posts/page/5/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -48,46 +46,103 @@ programmers had find out &hellip;">
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Arnab's Universe</a></h1>
-  
-    <h2>... and all the parallel ones.</h2>
-  
-</hgroup>
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Arnab's Universe</a>
+  </div>
+</aside>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Arnab's Universe</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">... and all the parallel ones.</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+  <li class="resume">
+    <a href="/resume/">resume</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/arnab_deka/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/arnab/">github</a>
+  </li>
+
+  <li class="link">
+    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
+  </li>
+
+  <li class="link">
+    <a href="/blog/archives">archives</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+
 </ul>
-  
+
+
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:arnab-deka.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/about">About</a></li>
-  <li><a href="/resume">Resume</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+      
   
   
+    <article class="post">
+      <div class="sharing-box">
   
-    <article>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2009/07/ruby-dup-vs-clone/">Ruby Dup vs Clone</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/07/ruby-dup-vs-clone/">Ruby Dup vs Clone</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -105,15 +160,14 @@ programmers had find out &hellip;">
 
 <time datetime="2009-07-28T00:00:00+05:30" pubdate data-updated="true">Tuesday, July the 28<span>th</span>, 2009</time>
         
-           | <a href="/posts/2009/07/ruby-dup-vs-clone/#disqus_thread"
-             data-disqus-identifier="http://arnab-deka.com/posts/2009/07/ruby-dup-vs-clone/">Comments</a>
+         | <a href="/posts/2009/07/ruby-dup-vs-clone/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
+  <blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
 certainly much before it became popular. Those were the days when
 programmers had find out answers themselves ;)
 This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
@@ -221,7 +275,7 @@ irb(main):022:0&gt;
 <p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
 does. Hence <code>#dup</code> might be more beneficial for performance compared to
 <code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
-</div>
+
   
   
 
@@ -229,11 +283,27 @@ does. Hence <code>#dup</code> might be more beneficial for performance compared 
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2009/07/gnu-screen/">GNU Screen</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/07/gnu-screen/">GNU Screen</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -251,15 +321,14 @@ does. Hence <code>#dup</code> might be more beneficial for performance compared 
 
 <time datetime="2009-07-20T00:00:00+05:30" pubdate data-updated="true">Monday, July the 20<span>th</span>, 2009</time>
         
-           | <a href="/posts/2009/07/gnu-screen/#disqus_thread"
-             data-disqus-identifier="http://arnab-deka.com/posts/2009/07/gnu-screen/">Comments</a>
+         | <a href="/posts/2009/07/gnu-screen/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>If you have nothing to do with Linux you probably can stop reading now. Unless you want to get introduced to a very nice tool in the Linux world. I can say without doubt that this saves me at least an hour every month. In addition it gets you away from doing some mundane “set-up” like things every time to start working. It has a load of features but today I’ll just scratch the surface. But it’ll be enough to start you off and I promise you’ll be glad you found screen.</p>
+  <p>If you have nothing to do with Linux you probably can stop reading now. Unless you want to get introduced to a very nice tool in the Linux world. I can say without doubt that this saves me at least an hour every month. In addition it gets you away from doing some mundane “set-up” like things every time to start working. It has a load of features but today I’ll just scratch the surface. But it’ll be enough to start you off and I promise you’ll be glad you found screen.</p>
 
 <p>One of the programs that I love and can’t go through the day without is <a href="http://www.gnu.org/software/screen/">GNU Screen</a>. It’s like a Window manager, but only for your terminals. You know, like you are working with so many terminals/consoles/terminal-windows all the time (one to the DB, one with vim open, one to run the tests, one to run the program etc., one to watch the logs, a few to prod boxes etc.). And then you disconnect and then reconnect (from home, somewhere else) and you have to set-up all that again?</p>
 
@@ -320,7 +389,7 @@ altscreen on
 
 <p>And finally, my delicious links for screen. </p>
 Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
-</div>
+
   
   
 
@@ -328,11 +397,27 @@ Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/ima
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2009/03/where-is-the-quality-in-e-commerce/">Where Is the Quality in E-commerce?</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/03/where-is-the-quality-in-e-commerce/">Where Is the Quality in E-commerce?</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -350,15 +435,14 @@ Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/ima
 
 <time datetime="2009-03-29T00:00:00+05:30" pubdate data-updated="true">Sunday, March the 29<span>th</span>, 2009</time>
         
-           | <a href="/posts/2009/03/where-is-the-quality-in-e-commerce/#disqus_thread"
-             data-disqus-identifier="http://arnab-deka.com/posts/2009/03/where-is-the-quality-in-e-commerce/">Comments</a>
+         | <a href="/posts/2009/03/where-is-the-quality-in-e-commerce/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I have been buying most of my stuff (on the net) from Amazon ever since I moved to the US, in 2006. That’s probably why this thought/blog is coming now, after 3 years.</p>
+  <p>I have been buying most of my stuff (on the net) from Amazon ever since I moved to the US, in 2006. That’s probably why this thought/blog is coming now, after 3 years.</p>
 
 <p>It’s about the quality, mostly about the customer experience in e-commerce stores. First, I have to say kudos to the handful of places I have had a good experience in – <a href="http://www.amazon.com">Amazon</a> (and <a href="http://www.endless.com">endless</a>, <a href="http://www.amazonfresh.com">AmazonFresh</a>, <a href="http://www.windowshop.com">windowshop</a> etc.), <a href="http://www.ebay.com">eBay</a>, <a href="http://www.zappos.com">zappos</a>, <a href="http://www.bn.com">BN</a> and <a href="http://www.netflix.com">Netflix</a>. These places make it easy for the customer – easy to choose, to place an order and easy to track or follow in case there is a need. It’s (most of the time) easy to use them (categorization, search, find more related info, edit orders, cancel, return – the whole deal).</p>
 
@@ -377,7 +461,7 @@ Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/ima
 <p>After filling out all the details, there is no preview of which text goes where in the card. There are no hints as to which section is optional (left top text, right top text) – so if I leave out a section I don’t know if that will result in a blotch of blank in the card. Oh and the shipping was about $20 for standard ground shipping <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> (and I don’t know the post-checkout experience yet).</p>
 
 <p>Now I think I know why Amazon/eBay etc. are where they are in the e-commerce world. Maybe the “invitation cards” industry specifically lacks good sites (which makes me wonder if it is easier to make a difference there), but it seems that most of the “e-commerce” sites are still in the 90s. It seems the internet as a whole has advanced light years ahead of it’s e-commerce children. “web2.0″ is a distant reality for now.</p>
-</div>
+
   
   
 
@@ -385,11 +469,27 @@ Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/ima
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2009/03/how-ubiquity-saved-me-today/">How Ubiquity Saved Me Today</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/03/how-ubiquity-saved-me-today/">How Ubiquity Saved Me Today</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -407,15 +507,14 @@ Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/ima
 
 <time datetime="2009-03-07T00:00:00+05:30" pubdate data-updated="true">Saturday, March the 7<span>th</span>, 2009</time>
         
-           | <a href="/posts/2009/03/how-ubiquity-saved-me-today/#disqus_thread"
-             data-disqus-identifier="http://arnab-deka.com/posts/2009/03/how-ubiquity-saved-me-today/">Comments</a>
+         | <a href="/posts/2009/03/how-ubiquity-saved-me-today/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I know how I shouldn’t be pointy-clicky on all links I get. Specially the tiny url ones.</p>
+  <p>I know how I shouldn’t be pointy-clicky on all links I get. Specially the tiny url ones.</p>
 
 <p>Well yesterday I got a link (internal – so can’t share) in a mailing group in office. The URL was a shortened one (something like tinyurl, but used inside Amazon) and it did come with adequate warning about not opening it. But like a few other dumbos I did click it.</p>
 
@@ -443,7 +542,7 @@ W00t! My browser is back. And my work is saved (the only other way would have be
 <p><a href="http://vimeo.com/1561578">Ubiquity for Firefox</a> from <a href="http://vimeo.com/user532161">Aza Raskin</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
 
 <p>If you are using it already, don’t you love it? If not using it yet – try it out and let me know how it goes. (Ubiquity is also on twitter – <a href="http://twitter.com/mozillaubiquity">@mozillaubiquity</a>)</p>
-</div>
+
   
   
 
@@ -451,11 +550,27 @@ W00t! My browser is back. And my work is saved (the only other way would have be
     </article>
   
   
-    <article>
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
       
   <header>
     
-      <h1 class="entry-title"><a href="/posts/2009/02/las-vegas-trip-photos/">Las Vegas Trip Photos</a></h1>
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/02/las-vegas-trip-photos/">Las Vegas Trip Photos</a>
+        
+      </h2>
     
     
       <p class="meta">
@@ -473,15 +588,14 @@ W00t! My browser is back. And my work is saved (the only other way would have be
 
 <time datetime="2009-02-13T00:00:00+05:30" pubdate data-updated="true">Friday, February the 13<span>th</span>, 2009</time>
         
-           | <a href="/posts/2009/02/las-vegas-trip-photos/#disqus_thread"
-             data-disqus-identifier="http://arnab-deka.com/posts/2009/02/las-vegas-trip-photos/">Comments</a>
+         | <a href="/posts/2009/02/las-vegas-trip-photos/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>And I have to remember this blog for ever. I wrote it right at 1234567890 UTC (and on Friday the 13th!)
+  <p>And I have to remember this blog for ever. I wrote it right at 1234567890 UTC (and on Friday the 13th!)
 <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
 
 <pre><code>$ watch -n1 -d &amp;#039;date +%s; expr 1234567890 - `date +%s`&amp;#039;
@@ -535,143 +649,28 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
 <li>[![Arnab][38]][38]</li>
 </ul>
 
-</div>
+
   
   
 
 
     </article>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/posts/page/6/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/posts/page/4/">Newer &rarr;</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
+
+    <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/posts/page/6/" rel="next">Continue &rarr;</a>
+  </span>
+
+
+  <span class="prev">
+    <a href="/posts/page/4/" rel="prev">Newer &larr;</a>
+  </span>
+
+</nav>
+  </section>
   
-    <section>
-  <h1>About Me</h1>
-  <p>I am a Software Developer and a regular guy-next-door, passionate
-  about technology. Currently a Senior Engineer at LivingSocial and
-  previously at Amazon and AWS. <a href="/about">more&#8230;</a>
-  </p>
-</section>
-<section>
-  <h1>
-    <a href="https://coderwall.com/coderdude"><img alt="Endorse me on Coderwall"
-                                                   src="http://api.coderwall.com/coderdude/endorsecount.png"/></a>
-  </h1>
-</section>
-<section>
-  <h1>
-    <a href="http://in.linkedin.com/in/arnab1981"><img src="http://www.linkedin.com/img/webpromo/btn_profile_bluetxt_80x15.png"
-          alt="View Arnab Deka's profile on LinkedIn"></a>
-  </h1>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/posts/2013/02/debugging-warnings-in-tests/">Debugging Warnings in Tests</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2013/02/hello-jquery-prettytextdiff/">Hello jQuery.PrettyTextDiff</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/09/state-of-e-commerce-in-india/">State of E-commerce in India</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/">Emacs: Change Fonts Dynamically Based on Screen Resolution</a>
-      </li>
-    
-      <li class="post">
-        <a href="/posts/2012/09/allowing-and-testing-cors-requests-in-rails/">Allowing and Testing CORS Requests in Rails</a>
-      </li>
-    
-  </ul>
-</section>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/arnab">@arnab</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'arnab',
-            count: 3,
-            skip_forks: false,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("arnab_deka", 3, true);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/arnab_deka" class="twitter-follow-button" data-show-count="true">Follow @arnab_deka</a>
-  
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/arnab.deka?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/arnab.deka">My Delicious Bookmarks &raquo;</a></p>
-</section>
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/101426291592553950447?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo">
-</footer>
   
 
 <script type="text/javascript">
@@ -682,7 +681,7 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -693,7 +692,7 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
+  js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
@@ -715,7 +714,7 @@ Every 1s: date +%s; expr 1234567890 - `date +%s`
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
