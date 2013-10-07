@@ -42,14 +42,6 @@ ul {
 }
 
 // Logo
-aside#logo {
-  background-color: white;
-}
-
-aside#logo div {
-  background-color: white;
-}
-
 aside#logo div a {
   border-radius: 50%;
   -moz-border-radius: 50%;
@@ -63,9 +55,6 @@ ul#menu a {
   color: #999;
 }
 
-#octopress_linkback {
-  background-color: rgba(255, 255, 255, 0.7);
-}
 /* Article rules */
 article a:link, article a:visited, article a:hover, article a:active {
   text-decoration: none;
