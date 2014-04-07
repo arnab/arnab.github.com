@@ -1,8 +1,7 @@
 ---
 layout: page
 title: About me
-date: 2013-02-03 18:49
-comments: false
+comments: true
 sharing: false
 footer: false
 ---
@@ -25,17 +24,14 @@ years at Pune, Bangalore  and NYC I moved to Seattle to work for
 supply chain tech team and then at [AWS](http://aws.amazon.com/).
 
 I usually work with Ruby and Ruby on Rails, Javascript and related
-technologies but am always tinkering with the next new thing. I am big
-into aglie practices and developing software in the TDD/BDD style. (For
-history's sake I have to mention that I am very much familiar with the
-Java-world and remember bits and pieces of the C/C++ life that I
-started out with).
+technologies but am always tinkering with the next new thing, lately
+Clojure. I am big into aglie practices and developing software in the
+TDD/BDD style. (For history's sake I have to mention that I am very
+much familiar with the Java-world and remember bits and pieces of the
+C/C++ life that I started out with).
 
-## Contact
+My resume is available [here](/resume/). However, know that I am not looking for
+a change at this point. Unless, it's like insanely awesome. According
+to at least one person excluding you.
 
-+ [resume](/resume/)
-+ email: [arnab.deka@gmail.com](mailto:arnab.deka@gmail.com)
-+ twitter: [@{{ site.twitter_user }}](http://twitter.com/{{site.twitter_user }})
-+ facebook: [arnab.deka](https://www.facebook.com/arnab.deka)
-+ Google+: [arnab.deka](https://plus.google.com/{{ site.googleplus_user }}?rel=author)
-+ LinkedIn: [arnab1981](http://linkedin.com/in/arnab1981/)
+You can find my contact information [here](/contact).
