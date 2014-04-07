@@ -1,0 +1,1187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Arnab's Universe]]></title>
+  <link href="http://arnab-deka.com/atom.xml" rel="self"/>
+  <link href="http://arnab-deka.com/"/>
+  <updated>2013-10-07T19:27:15+05:30</updated>
+  <id>http://arnab-deka.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Debugging warnings in tests]]></title>
+    <link href="http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests/"/>
+    <updated>2013-02-05T14:28:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2013/02/debugging-warnings-in-tests</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Object#id will be deprecated; use Object#object_id
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hate seeing warnings in your test output? Yeah me too. Came across a
+fairly weird bug today and this is how I debugged it.</p>
+
+<!--more-->
+
+
+<p>With a recent checkin I started seeing some warnings in the test
+output, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ruby -I <span class="s2">&quot;lib:test&quot;</span> path/to/example_controller_test.rb
+</span><span class='line'>Loaded suite example_controller_test.rb <span class="o">[</span>app_name<span class="o">]</span> init ...
+</span><span class='line'>Started
+</span><span class='line'>........../path/to/some/_partial.html.erb:48: warning: Object#id will
+</span><span class='line'>be deprecated; use Object#object_id
+</span><span class='line'>.............../path/to/some/_partial.html.erb:48: warning: Object#id
+</span><span class='line'>will be deprecated; use Object#object_id
+</span><span class='line'>..........................................................................................
+</span><span class='line'>Finished in 12.545861 seconds.
+</span><span class='line'>
+</span><span class='line'> 58 tests, 198 assertions, 0 failures, 0 errors
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If life&rsquo;s easy, you&rsquo;ll see the test files name along with the
+warnings. However, in this case, the trace only contains an erb
+partial. The partial looked something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;li&gt;</span>
+</span><span class='line'>  <span class="err">&lt;</span>%= @something.try(:id) %&gt;
+</span><span class='line'><span class="nt">&lt;/li&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Typically this warning happens when you call <code>#id</code> on an object that
+evaluates to <code>nil</code>. In this case, looks like someone already thought
+of that &ndash; and used
+<a href="http://api.rubyonrails.org/classes/Object.html#method-i-try"><code>#try</code></a>
+specifically to avoid this warning.</p>
+
+<p>What gives? What complicates this is that our test suite has 1000+
+tests and the partial that shows the erorr is used widely. (You could
+try deleting the partial and see what fails but in this case 90% of
+the tests would fail).</p>
+
+<p>After some more trial and error, I started reading the Test::Unit
+source on github. That with some introspection showed that you can get
+the running test&rsquo;s name at runtime with the <code>#name</code> method. Duh!</p>
+
+<p>So I added a <code>teardown</code> to the suite:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">ExampleControllerTest</span> <span class="o">&lt;</span> <span class="ss">Test</span><span class="p">:</span><span class="ss">:Unit</span>
+</span><span class='line'>  <span class="c1"># setup etc.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">teardown</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="nb">test</span> <span class="s2">&quot;something should do something&quot;</span> <span class="k">do</span>
+</span><span class='line'>     <span class="n">get</span> <span class="ss">:new</span>
+</span><span class='line'>     <span class="c1"># assert something</span>
+</span><span class='line'>   <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="c1"># more tests</span>
+</span><span class='line'> <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With that, my test suit printed out the name of every test right after
+the <code>.</code> &ndash; and looking through the output for the warning showed me the
+test that was causing it:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/path/to/some/_partial.html.erb:48: warning: Object#id will be
+</span><span class='line'>deprecated; use Object#object_id
+</span><span class='line'>.test_something_should_do_something<span class="o">(</span>ExampleControllerTest<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This gave me the lead I needed. Now it took some more debugging to
+figure out the details (I&rsquo;ll spare you the rest) but it turns out a
+method 4-5 levels down was retruning <code>false</code> instead of <code>nil</code>. And
+<code>#try</code> works beautifully for <code>nil</code> but not for <code>false</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">nil</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:id</span><span class="p">)</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'><span class="o">&gt;&gt;</span> <span class="kp">false</span><span class="o">.</span><span class="n">try</span><span class="p">(</span><span class="ss">:id</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">9</span><span class="p">:</span> <span class="ss">warning</span><span class="p">:</span> <span class="no">Object</span><span class="c1">#id will be deprecated; use Object#object_id</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'><span class="o">&gt;&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So there you go. It sure was an entertaining session for me. And if
+you read it till here&hellip;</p>
+
+<p>More techniques about how I could have debugged this more easily are
+most welcome.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hello jQuery.PrettyTextDiff]]></title>
+    <link href="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/"/>
+    <updated>2013-02-03T10:56:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff</id>
+    <content type="html"><![CDATA[<p>For some work I did recently, I had to produce a visual diff of text.
+A visual diff makes it easy for the user to understand what exactly
+changed with a quick scan.</p>
+
+<p>There&rsquo;s an excellent library from Google, called
+<a href="http://code.google.com/p/google-diff-match-patch/">diff_match_patch</a>
+that does a really good job of analyzing the text and producing the
+diffs in a programatic manner. However, it lacks the sauce to visually
+present it to the user.</p>
+
+<p>So I wrote a jQuery library which is a wrapper around Google&rsquo;s library
+and makes it trivial to wow your users.</p>
+
+<!-- more -->
+
+
+<p>First, a demo (the fiddle can be found
+<a href="http://jsfiddle.net/arnab/YwSVY/">here</a>):</p>
+
+<iframe class="jsfiddle"
+        style="height: 430px"
+        src="http://jsfiddle.net/arnab/YwSVY/embedded/result,html,js,resources,css/"
+        allowfullscreen="allowfullscreen"
+        frameborder="0">
+</iframe>
+
+
+<p>While Google&rsquo;s library is excellent from a NLP-perspective, it does
+not provide a way to show the diff in a beautiful manner. They have a
+reference implementation to produce the diff in HTML, but recommend
+you write your own (also this implmentation is inflexible in terms of
+changing style/elements etc.).</p>
+
+<p>Also, this library is produced in 7 different languages &ndash; so the code
+that uses this is not particularly pleasing to look at.</p>
+
+<p>Here&rsquo;s an example of the code you would have to write to produce a
+good looking diff:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">diff_match_patch</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">diff_prettyHtml</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">diffs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_amp</span> <span class="o">=</span> <span class="sr">/&amp;/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_lt</span> <span class="o">=</span> <span class="sr">/&lt;/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_gt</span> <span class="o">=</span> <span class="sr">/&gt;/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_para</span> <span class="o">=</span> <span class="sr">/\n/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">diffs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">op</span> <span class="o">=</span> <span class="nx">diffs</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>    <span class="c1">// Operation (insert, delete, equal)</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">diffs</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>  <span class="c1">// Text of change.</span>
+</span><span class='line'>      <span class="c1">//var text = data.replace(pattern_amp, &#39;&amp;amp;&#39;).replace(pattern_lt, &#39;&amp;lt;&#39;)</span>
+</span><span class='line'>      <span class="c1">//    .replace(pattern_gt, &#39;&amp;gt;&#39;).replace(pattern_para, &#39;&amp;para;&lt;br&gt;&#39;);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_amp</span><span class="p">,</span> <span class="s1">&#39;&amp;amp;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_lt</span><span class="p">,</span> <span class="s1">&#39;&amp;lt;&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_gt</span><span class="p">,</span> <span class="s1">&#39;&amp;gt;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_para</span><span class="p">,</span> <span class="s1">&#39;&lt;br&gt;&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">switch</span> <span class="p">(</span><span class="nx">op</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">DIFF_INSERT</span><span class="o">:</span>
+</span><span class='line'>          <span class="nx">html</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;ins style=&quot;background:#e6ffe6;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nx">text</span> <span class="o">+</span> <span class="s1">&#39;&lt;/ins&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">DIFF_DELETE</span><span class="o">:</span>
+</span><span class='line'>          <span class="nx">html</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;del style=&quot;background:#ffe6e6;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nx">text</span> <span class="o">+</span> <span class="s1">&#39;&lt;/del&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">DIFF_EQUAL</span><span class="o">:</span>
+</span><span class='line'>          <span class="nx">html</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;span&gt;&#39;</span> <span class="o">+</span> <span class="nx">text</span> <span class="o">+</span> <span class="s1">&#39;&lt;/span&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">html</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So I wrote a library to wrap around it &ndash; so the client doesn&rsquo;t have to
+repeat this wherever they need to use it. You can find more on
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/">github</a> and it can
+be downloaded from the
+<a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a>.</p>
+
+<p>Now, with this library you&rsquo;d have to write just a couple of lines to
+produce a beautiful looking diff, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">prettyTextDiff</span><span class="p">({</span>
+</span><span class='line'>  <span class="c1">// options</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Peek inside the fiddle demo to see more. You can also customize many
+of the options &ndash; check out the documentation in the github repo.</p>
+
+<p>Hope you enjoy it!</p>
+
+<p>PS: Some of the motivation was also to flex my muscles with
+CofeeScript (haven&rsquo;t had a chance to use it for the last 2-3 months)
+and setting up compile and uglifying/compressing  of the Javascript
+with <code>cake</code>. Check out the simple
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/jquery.pretty-text-diff.coffee">coffeescript code</a>
+and the
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/Cakefile">Cakefile</a>.</p>
+
+<h3>Links</h3>
+
+<ul>
+<li><a href="http://code.google.com/p/google-diff-match-patch/">Google&rsquo;s diff_match_patch library</a></li>
+<li><a href="https://github.com/arnab/jQuery.PrettyTextDiff/">Plugin source on github</a></li>
+<li><a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a></li>
+<li><a href="http://jsfiddle.net/arnab/YwSVY/">jsFiddle demo</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[State of e-commerce in India]]></title>
+    <link href="http://arnab-deka.com/posts/2012/09/state-of-e-commerce-in-india/"/>
+    <updated>2012-09-23T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2012/09/state-of-e-commerce-in-india</id>
+    <content type="html"><![CDATA[<p>So, since moving back to India 4 months ago, we’ve trying to buy stuff
+off the internet, like we did back in Seattle (oh Amazon), from
+diapers to audio CDs (whaaaat? I know). While the world is much much
+better compared to 2006, there are still some Idiocracies in the UX
+and process. There are the big players (<a href="http://www.flipkart.com/">FlipKart</a>, <a href="http://www.infibeam.com/">infibeam</a>
+and the like) where (from the 4 months experience) you’d find what you
+are looking almost 6-7 times out of 10. The long-tail of e-commerce in
+India is the real deal though – the tail is really really long. I use
+<a href="http://www.junglee.com/">Junglee.com</a> to find the long time and almost always (9+ out of
+10) the things I am looking for are found somewhere. Funny thing is
+that you’ll never find two things you need in one site. Over these 4
+months, I don’t think any of these sites have come up more than once
+in my search.</p>
+
+<!-- more -->
+
+
+<p>To highlight some of the other differences:</p>
+
+<ul>
+<li><strong>No guest checkout</strong>: Almost nobody has guest checkout. Everybody
+  requires you to register and require your email and phone. Most
+  the package tracking is done thru SMS so that’s ok, but I’ve had
+  some spam (email and SMS) originating from here as well. But for
+  the most part, they are well behaved (I don&rsquo;t know why they need
+  my birthday or gender to ship stuff me though– anyway they get
+  wrong info for such questions ;))</li>
+<li><strong>Weak integration with backend</strong>: More than once I have placed
+  orders (after signing up etc.) only to be informed later that
+  the item is not in stock. The websites are more like marketing
+  websites with a cart/checkout process and it looks like the
+  orders are processed completely separately.</li>
+<li><strong>Cash-On-Delivery</strong>: Almost everyone takes COD orders. I know
+  some people don’t like the idea, but for Indian e-commerce it’s
+  a must. Mostly because if you pay when you order on the site and
+  then you don’t get the thing or get something else, there’s
+  pretty much nothing you can do. Most sites will process a refund
+  but you have to call them a few times to get that done. And some
+  sites only give you a coupon that you can use in their site. So
+  COD is heaven-sent and must-needed for such small sites.
+  <a href="http://www.flipkart.com/s/help/payments">FlipKart has started doing Card-On-Delivery</a>, which is even better!</li>
+<li><strong>Faaaaaast and FREE shipping</strong>: Almost every order I have made
+  has been delivered within a few days. In one-third of the cases it’s
+  within 2 days. And it’s 99% of the time free shipping.</li>
+</ul>
+
+
+<p>To summarize, for the most part, it’s all good. You can find 9/10
+things online and of that you can get 9/10 items delivered at your
+doorstep within a reasonable amount of time and pay after you
+get/inspect it. But that’s not why I started writing this piece today…</p>
+
+<h2>A uniquely horrible experience at ezmaal.com</h2>
+
+<p>What I wanted to do today was share a very bad experience on one of
+these small player’s sites today. Remember the band called
+<a href="http://www.amazon.com/Route-Indian-Music-Hindi-Modern/dp/B0013LKL36/">Silk Route</a>? Heard them on radio and remembered how awesome their
+music was. Unfortunately the album’s not on spotify or in Amazon/MP3.
+So I looked up FlipKart (out of stock) and Junglee. That’s where I
+found <a href="http://www.ezmaal.com/">ezmaal.com</a> – and they had it in stock! So I went through
+the registration process and signed up for an account.</p>
+
+<p>Now, I use the <a href="https://agilebits.com/onepassword">most excellent 1Password</a> for creating random
+passwords for every site and to manage signing-in/out. Did the same on
+ezmaal too – and it was all fine and dandy and got an account created.
+Now, just before checking out I wanted to see if the login/logout was
+working (you never know with small sites). So I opened up the site in
+an <a href="http://support.google.com/chrome/bin/answer.py?hl=en&amp;answer=95464">incognito window</a> and tried loggin in. Here’s the screenshot of
+what I got back: [![ezmaal login failure][11]][11]
+click to see larger image</p>
+
+<ol>
+<li>They throw a really garbage un-customized ASP.net error in the
+customer’s face. It means nothing to me!</li>
+<li>They are trying to validate my password for script-injection. I
+don’t think they are actively doing this, but it’s probably part of
+ASP.net and they have not tested and not coded to handle login
+failures. Really really bad if the login on your site throws up gibberish.</li>
+<li><strong>Password displayed on screen</strong>: The worst part is that they
+print my password three times on the screen, verbatim. Thank God I use
+1Password and have a random (and more importantly, different) password
+on every site. But like most customer’s if I had a
+one-password-for-all and used that in here, it’s as good as being
+leaked. If nowhere else, this will be on their server-logs. An
+employee only need to grep for <code>Password\=</code> in the logs. On top of
+this, with this kind of an experience, I have no faith that they
+salt/hash the passwords. I am more willing to believe that they keep
+it all in cleartext in a SQLServer database.</li>
+</ol>
+
+
+<p>I have seen bad e-commerce sites before, but will I shop at a place
+which does not care about my online security? No way in hell (yeah, I
+did not complete that order)!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs: change fonts dynamically based on screen resolution]]></title>
+    <link href="http://arnab-deka.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/"/>
+    <updated>2012-09-23T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution</id>
+    <content type="html"><![CDATA[<p>I regularly switch between a <a href="http://www.apple.com/thunderbolt/">Thunderbolt display</a> at home and the <a href="http://www.apple.com/macbook-pro/features/">Mac’s native retina display</a> when I’m in a coffee shop or the like.</p>
+
+<p>It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:</p>
+
+<!-- more -->
+
+
+
+
+<div><script src='https://gist.github.com/3774147.js'></script>
+<noscript><pre><code>;; Gist-ed from in https://github.com/arnab/emacs-starter-kit
+
+(defun fontify-frame (frame)
+  (interactive)
+  (if window-system
+      (progn
+        (if (&gt; (x-display-pixel-width) 2000)
+            (set-frame-parameter frame &#39;font &quot;Inconsolata 19&quot;) ;; Cinema Display
+         (set-frame-parameter frame &#39;font &quot;Inconsolata 16&quot;)))))
+
+;; Fontify current frame
+(fontify-frame nil)
+
+;; Fontify any future frames
+(push &#39;fontify-frame after-make-frame-functions)</code></pre></noscript></div>
+
+
+<p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Allowing and testing CORS requests in Rails]]></title>
+    <link href="http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails/"/>
+    <updated>2012-09-19T14:28:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails</id>
+    <content type="html"><![CDATA[<p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going
+to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
+
+<blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it
+  possible for AJAX requests to directly talk to HTTP-services outside
+  it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
+
+<p>While there are lots of examples that show how to allow CORS requests
+in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them.
+While it’s simple to test the HTTP headers, you may have to look
+around a little (or a lot) on how to test a HTTP “OPTIONS” request.
+When you make CORS requests, the browser may make a pre-flight
+“OPTIONS” request to verify that the server allows CORS.</p>
+
+<!-- more -->
+
+
+<p>To make Rails set the right HTTP headers to allow CORS requests, you
+can do something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># some_controller.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">before_filter</span><span class="p">:</span> <span class="n">allow_cors</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">allow_cors</span>
+</span><span class='line'>  <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Access-Control-Allow-Origin&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span>
+</span><span class='line'>  <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Access-Control-Allow-Methods&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="sx">%w{GET POST PUT DELETE}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Access-Control-Allow-Headers&quot;</span><span class="o">]</span> <span class="o">=</span>
+</span><span class='line'>    <span class="sx">%w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">head</span><span class="p">(</span><span class="ss">:ok</span><span class="p">)</span> <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">request_method</span> <span class="o">==</span> <span class="s2">&quot;OPTIONS&quot;</span>
+</span><span class='line'>  <span class="c1"># or, render text: &#39;&#39;</span>
+</span><span class='line'>  <span class="c1"># if that&#39;s more your style</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A few things to note here:</p>
+
+<ol>
+<li><p>You can set the <code>Access-Control-Allow-Origin</code> header to your
+domain to further restrict it.</p></li>
+<li><p>While Rails is one place to do this in, you can certainly do this
+in your webserver (nginx etc.). Again, just google. I prefer things to
+be more testable – maybe when I see a performance problem, I’d revise
+this decision (although, performance bottlenecks would probably not be
+in setting HTTP headers).</p></li>
+</ol>
+
+
+<p>Another thing to consider when you allow CORS, is authentication – you
+should do some HTTP based auth (token auth for example) so only <em>your</em>
+apps can talk to this service. The thing with JS is, however uglified
+it is, any developer worth his salt can figure out how to call your
+backend service after reading your JS by loading your site up in a
+browser.</p>
+
+<p>In any case, how do you test this? It’s fairly trivial to test that
+the right HTTP headers were set with something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># testing_cors_spec.rb</span>
+</span><span class='line'><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="o">].</span><span class="n">should</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To make a HTTP <code>options</code> request in RSpec, I had to dig through some
+code. And googling didn’t help here, at least the way I google. Here’s
+the low-down: <code>RSpec</code> <em>delegates</em> the request methods (like
+<code>get</code>/<code>post</code>/<code>put</code> etc. in the controller specs) to Rails’
+<code>ActionController Tests</code>. All these methods invoke
+<code>ActionController::TestCase#process</code> with specific args, one of which
+is the method name.</p>
+
+<p>Now, Rails master already has support for making
+<code>options</code> requests in tests (thanks to <a href="https://github.com/rails/rails/commit/0303c2325fab253adf5e4a0b738cb469c048f008#L0R438">this commit</a>), but that’s
+not available in the latest Rails release (3.2.8). I think this would
+make it’s way into Rails 4.</p>
+
+<p>Looking into this commit, we get the idea
+though: basically we also call the <code>process</code> method with a <code>OPTIONS</code>
+argument for the request-method. Putting it all together, my tests
+looked something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># some_controller_spec.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">shared_examples_for</span> <span class="s2">&quot;any request&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">context</span> <span class="s2">&quot;CORS requests&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;should set the Access-Control-Allow-Origin header to allow CORS from anywhere&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="o">].</span><span class="n">should</span> <span class="o">==</span> <span class="s1">&#39;*&#39;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;should allow general HTTP methods thru CORS (GET/POST/PUT/DELETE)&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">allowed_http_methods</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">header</span><span class="o">[</span><span class="s1">&#39;Access-Control-Allow-Methods&#39;</span><span class="o">]</span>
+</span><span class='line'>      <span class="sx">%w{GET POST PUT DELETE}</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="nb">method</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">allowed_http_methods</span><span class="o">.</span><span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># etc etc</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="s2">&quot;HTTP OPTIONS requests&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="c1"># With Rails 4 (currently in master) we&#39;ll be able to `options :index`</span>
+</span><span class='line'>  <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="p">{</span> <span class="n">process</span> <span class="ss">:index</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="s1">&#39;OPTIONS&#39;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it_should_behave_like</span> <span class="s2">&quot;any request&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;should be succesful&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">be_success</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># And similar tests for GET/POST what have you which actually test the functionality...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Update for Rails 4</h2>
+
+<p>So
+<a href="https://twitter.com/ekampp/status/385800059687690241">@ekampp on twitter</a>
+brought it to my attention that this test does not work
+anymore. It appears that the <code>options</code> method was
+<a href="https://github.com/rails/rails/commit/0303c23">added</a> and then
+<a href="https://github.com/rails/rails/commit/6a4ff5c">removed</a> from Rails
+master (since a method named <code>options</code> conflicts with a lot of stuff,
+as you can imagine).</p>
+
+<p>So, in Rails 4 (and current master) you can call <code>process</code> directly
+like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="n">process</span> <span class="ss">:index</span><span class="p">,</span> <span class="s1">&#39;OPTIONS&#39;</span> <span class="c1"># and other args as needed</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For example,
+<a href="https://github.com/rails/rails/blob/2de0cca/actionpack/lib/action_controller/test_case.rb#L499">this</a>
+is how <code>head</code> is implemented. So you are basically doing the same
+thing for an <code>OPTIONS</code> request.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick howto on accessing Rails Properties]]></title>
+    <link href="http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties/"/>
+    <updated>2011-04-08T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties</id>
+    <content type="html"><![CDATA[<p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
+
+<!-- more -->
+
+
+<p><strong>Rails 3</strong>: browse the <a href="https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb">source-code at railties/lib/rails/info.rb</a></p>
+
+<p>Or see:</p>
+
+<div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rack =&gt; ::Rack.release,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(Rails.root),
+  :env =&gt; Rails.env,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env][&#39;adapter&#39;],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+  :middleware =&gt; Rails.configuration.middleware.map(&amp;:inspect),
+}
+</code></pre></noscript></div>
+
+
+<p><strong>Rails 2</strong>: browse the <a href="https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb">source-code at railties/builtin/rails_info/rails/info.rb</a></p>
+
+<p>Or see:</p>
+
+<div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(RAILS_ROOT),
+  :env =&gt; RAILS_ENV,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV][&#39;adapter&#39;],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+}
+</code></pre></noscript></div>
+
+
+<p>Till the next time…</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Notes on Emacs + CL + Clojure + Slime...]]></title>
+    <link href="http://arnab-deka.com/posts/2010/12/notes-on-emacs-cl-clojure-slime/"/>
+    <updated>2010-12-30T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/12/notes-on-emacs-cl-clojure-slime</id>
+    <content type="html"><![CDATA[<p>After a day of struggling finally Emacs+CL+Clojure+Slime setup is working. I noted it all in the <a href="http://www.arnab-deka.com/posts/notes/emacs-setup/">notes section</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[1Password for Mac. Free. Really.]]></title>
+    <link href="http://arnab-deka.com/posts/2010/11/1password-for-mac-free-really/"/>
+    <updated>2010-11-26T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/11/1password-for-mac-free-really</id>
+    <content type="html"><![CDATA[<p>I use and love <a href="http://agilewebsolutions.com/onepassword">1Password</a> on my Mac every day – it has become one of those things I can’t live without, and is easily worth the $40 price.</p>
+
+<p>Yesterday they announced their very generous ThanksGiving offer: <a href="http://agile.ws/ThankYou">Free 1-for-1 license</a>. So I can give away a Free 1Password for Mac license – and since no one else in my family has started using a Mac full-time yet, I will give it away to you!</p>
+
+<p>Just add a comment here – saying why I should give it away to you and wait for a few hours. I will pick one person here and send them the license. Make sure you leave some contact so I can get back to you. How will I pick? The most entertaining comment of course. But yeah – don’t hold me to it, I might just randomly pick someone.</p>
+
+<p>Thank you for playing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[On the Coastal Classic Train to Seward.]]></title>
+    <link href="http://arnab-deka.com/posts/2010/08/on-the-coastal-classic-train-to-seward/"/>
+    <updated>2010-08-14T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/08/on-the-coastal-classic-train-to-seward</id>
+    <content type="html"><![CDATA[<p><img src="http://posterous.com/getfile/files.posterous.com/arnab/nrJwodabpHxsDoxudxwGdGICCFpbecttjjjuIcvrsgzjEqzhyzaJbDcBuHJg/file.jpeg.scaled500.jpg" alt="" /></p>
+
+<p>On the Coastal Classic Train to Seward. Look at the route. #Alaska #vacation via <a href="http://www.osfoora.com">Osfoora</a></p>
+
+<p><a href="http://posterous.com">Posted via email</a> from <a href="http://arnab.posterous.com/on-the-coastal-classic-train-to-seward">arnab’s posterous</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick MacBook setup]]></title>
+    <link href="http://arnab-deka.com/posts/2010/03/quick-macbook-setup/"/>
+    <updated>2010-03-17T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/03/quick-macbook-setup</id>
+    <content type="html"><![CDATA[<p>Just put in my notes about setting up a MacBook in <a href="http://www.arnab-deka.com/posts/notes/macbook-setup" title="MacBook setup">the notes section here</a>. I’ll keep updating – please add your thoughts in!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Installing GLPK on a Mac]]></title>
+    <link href="http://arnab-deka.com/posts/2010/02/installing-glpk-on-a-mac/"/>
+    <updated>2010-02-26T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/02/installing-glpk-on-a-mac</id>
+    <content type="html"><![CDATA[<h2>Obsolation note:</h2>
+
+<p>Thanks to <a href="#comment-2787">Dave Coleman’s comment</a> I found out that glpk is available through homebrew now! So you just need these 2 steps to get glpk now:</p>
+
+<ol>
+<li><a href="http://mxcl.github.com/homebrew/" title="homebrew">homebrew</a></li>
+<li><code>brew install glpk</code></li>
+</ol>
+
+
+<p>If you still want to read on, the old way is still here…</p>
+
+<p>So you want copy-paste instructions to install <a href="http://www.gnu.org/software/glpk">GLPK</a> on your Macbook? Here are the steps:</p>
+
+<ol>
+<li>Download the latest version of GLPK from <a href="http://www.gnu.org/software/glpk/#downloading">http://www.gnu.org/software/glpk/#downloading</a></li>
+<li><em>Optional:</em> Follow the instructions to verify the download (you might need to get GNU Privacy Guard or gpg for this. You can get it at <a href="http://gnupg.org">http://gnupg.org</a>)</li>
+<li><p>Say it’s downloaded to your “Downloads” directory, go there and execute the following commands (using the terminal)
+    cd ~/Downloads
+    tar -xzf glpk-4.43.tar.gz
+    ./configure &mdash;prefix=/usr/local # see note <a href="#comment-2787">1</a>
+    make
+    sudo make install</p></li>
+<li><p>At this point, you should have GLPK installed. Verify it:
+    which glpsol
+    /usr/local/bin/glpsol</p></li>
+<li><p>… and try help:
+    glpsol &mdash;help</p></li>
+</ol>
+
+
+<p>Now that you are all set-up, read up this excellent introduction using GLPK: <a href="http://www.ibm.com/developerworks/linux/library/l-glpk1">http://www.ibm.com/developerworks/linux/library/l-glpk1</a></p>
+
+<p>Notes:</p>
+
+<ul>
+<li>HiveLogic article on <a href="http://hivelogic.com/articles/using_usr_local">why using /usr/local is better</a></li>
+<li>If you want MySQL support (or something “extra”) check out the INSTALL file in the package</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Russian Peasant Multiplication in Ruby]]></title>
+    <link href="http://arnab-deka.com/posts/2010/02/russian-peasant-multiplication-in-ruby/"/>
+    <updated>2010-02-01T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/02/russian-peasant-multiplication-in-ruby</id>
+    <content type="html"><![CDATA[<p>Russian Peasant Multiplication: a very simple and elegant way to multiple.</p>
+
+<p>Read more: <a href="http://mathforum.org/dr.math/faq/faq.peasant.html">School-boy example of how and why it works</a> and about <a href="http://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication">Ancient Egyptian Multiplication on wikipedia</a></p>
+
+<p>So here’s my simple implementation: (or as a <a href="http://gist.github.com/290219">gist on github</a>)</p>
+
+<pre><code>module RussianPeasantMultiplication
+  def russian_peasant_multiply(b)
+    numbers_to_add = []
+    a, b = [self, b].sort #So we have the smaller number as the first
+
+    negative_operands = [a, b].select { |n| n &lt; 0 }
+    result_should_be_negative = negative_operands.size.odd? # or negative_operands.size == 1
+
+    # Now get the absoultes
+    a, b = [a, b].map { |n| n.abs }
+
+    while( a &gt; 1 )
+      a = a &gt;&gt; 1 # halv it
+      b = b &lt; &lt; 1 # double it
+      if a.odd? # or (a % 2 == 0 )
+        numbers_to_add &lt;&lt; b
+      else
+      end
+    end
+    result = numbers_to_add.inject(0) { |sum, n| sum += n }
+    result = result * -1 if result_should_be_negative
+    result
+  end
+end
+
+class Integer
+  include RussianPeasantMultiplication
+end
+
+# Tests
+require "test/unit"
+
+class TestInteger &lt; Test::Unit::TestCase
+  def test_russian_peasant_multiply
+    assert_equal(22 * 70, 22.russian_peasant_multiply(70))
+  end
+
+  def test_russian_peasant_multiply_for_negative_numbers
+    assert_equal(-22 * 70, -22.russian_peasant_multiply(70))
+  end
+
+  def test_russian_peasant_multiply_for_negative_arguments
+    assert_equal(22 * -70, 22.russian_peasant_multiply(-70))
+  end
+
+  def test_russian_peasant_multiply_for_negative_numbers_and_arguments
+    assert_equal(-22 * -70, -22.russian_peasant_multiply(-70))
+  end
+
+  def test_russian_peasant_multiply_for_zero
+    assert_equal(0 * -70, 0.russian_peasant_multiply(-70))
+  end
+
+  def test_russian_peasant_multiply_for_zero_arguments
+    assert_equal(-22 * 0, -22.russian_peasant_multiply(0))
+  end
+
+  def test_russian_peasant_multiply_for_zero_numbers_and_arguments
+    assert_equal(0 * 0, 0.russian_peasant_multiply(0))
+  end
+end
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Colorado Pictures (2009 Nov)]]></title>
+    <link href="http://arnab-deka.com/posts/2009/12/colorado-pictures-2009-nov/"/>
+    <updated>2009-12-20T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/12/colorado-pictures-2009-nov</id>
+    <content type="html"><![CDATA[<p>Pics from the Colorado trip back in November, 2009 (with Ujwala and Maa). We spent two days in Rocky Mountain National Park and a day over in Colorado Springs and around (Manitou Springs, Pikes Peak – highest peak in that area).</p>
+
+<p>It’s heavenly – have to go there again in Spring 2010 )along with the parks in Wyoming, Montana).</p>
+
+<p>Click on the photo to get to my SmugMug page – feel free to leave a comment <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" />
+[![][3]][3]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails - Table join with specified fields in select]]></title>
+    <link href="http://arnab-deka.com/posts/2009/11/rails-join-with-select/"/>
+    <updated>2009-11-01T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/11/rails-join-with-select</id>
+    <content type="html"><![CDATA[<p>Figured this out after a lot of monkeying-around (I mean <code>script/console</code>).</p>
+
+<p>Situation:</p>
+
+<ul>
+<li>I have two tables (Revisions <code>has_many</code> Inputs)</li>
+<li>I can load Revisions and then for each I can find Inputs, but quickly found out that for my situation, it leads to a lot of queries. So I want to load the required fields from both tables together</li>
+</ul>
+
+
+<p><code>:joins</code> is the only way to do this, using <code>:includes</code> does <strong>NOT</strong> respect the select clause. Here a gist:</p>
+
+<div><script src='https://gist.github.com/223925.js'></script>
+<noscript><pre><code>    metrics_with_inputs = Revision.find(
+      :all,
+      :conditions =&gt; { :id =&gt; self.revisions.map { |r| r.id } },
+      :select =&gt; &#39;revisions.metric, revisions.snap_date, revisions.updated_at,
+        inputs.author, inputs.as_of_date, inputs.units&#39;,
+      :joins =&gt; &#39;join inputs on inputs.revision_id = revisions.id&#39;,
+      :order =&gt; &#39;revisions.metric, revisions.snap_date, revisions.updated_at&#39;
+    )</code></pre></noscript></div>
+
+
+<p>Admittedly, this is hacky, too hacky for my comfort. Comment/suggest a better/cleaner solution?</p>
+
+<p>Note: Found out that there is a gem to do this: <a href="http://code.google.com/p/ar-select-with-include/">ar-select-with-include</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A beautiful foggy autumn morning]]></title>
+    <link href="http://arnab-deka.com/posts/2009/10/a-beautiful-foggy-autumn-morning-echo-lake-view-from-my-house-iphonepicb/"/>
+    <updated>2009-10-22T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/10/a-beautiful-foggy-autumn-morning-echo-lake-view-from-my-house-iphonepicb</id>
+    <content type="html"><![CDATA[<p>Echo lake, view from my house. Taken with my iPhone and enhanced with the free Photoshop.com app:</p>
+
+<p><img class="left" src="http://posterous.com/getfile/files.posterous.com/arnab/FxteHueeFwrqAflpJqfdjFhCGIiqmxehipFhElFobGurIylFdmjChaegDpBm/image.jpg.scaled500.jpg" title="Echo Lake" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Interesting Job Advertisement]]></title>
+    <link href="http://arnab-deka.com/posts/2009/09/interesting-job-advertisement/"/>
+    <updated>2009-09-22T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/09/interesting-job-advertisement</id>
+    <content type="html"><![CDATA[<p>A recent job opening advert (from <a href="http://vark.com/jobs#feeng">Aardvark, for a Front-End Web Developers</a>) goes:</p>
+
+<blockquote><p>Required Skills:
+* Fluency in HTML and CSS
+* Experience taking mockups and turning them into standards-compliant HTML/CSS
+* Expertise in achieving cross-browser compatibility in IE, Firefox, and Safari
+* Experience in implementing grid-based layouts in HTML/CSS
+* Experience in an agile development environment</p>
+
+<p>Pluses:
+* Interest in user experience design and graphic design
+* Experience in Javascript and Ruby on Rails
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools
+* Experimental, user focused, and iterative
+* Previous startup experience</p></blockquote>
+
+<p>I felt the Pluses section was very interesting, specially (you kinda see the others on Rails related job boards anyway):
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools</p>
+
+<p>Shows how today’s start-ups value people who are really interested in what they do (and not just in for the money). An encouraging view of the world indeed – now I just have to get on it and get those much needed Plusses into my skills bag <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+
+<p>Note to my employers, friends, well wishers and anyone else interested: This does not mean I am looking for a job! I love the job I have right now and am just happy to see the importance of “passion” in the world’s view of an ideal employee increasing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Guides on my Kindle DX!!! (or any webpage for that matter)
+]]></title>
+    <link href="http://arnab-deka.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter/"/>
+    <updated>2009-09-18T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter</id>
+    <content type="html"><![CDATA[<p>I got a <a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a><img src="http://www.assoc-amazon.com/e/ir?t=arnsblo-20&amp;l=as2&amp;o=1&amp;a=B0015TCML0" alt="" /> for a birthday gift! Thanks Ujwala!</p>
+
+<p>And so far I am loving it. It’s better to read on compared to Kindle 1 (which, BTW, Ujwala had gifted to me last year) – and the native PDF support (and the search-anywhere) is awesome! The experimental browser that comes with the DX is much much improved compared to Kindle 1st Gen.</p>
+
+<p>So I was reading more about <a href="http://guides.rubyonrails.org/routing.html">Rails Routing in the rails-guides</a>. And while I was in the bus today morning I wanted to read that on the Kindle (coz it is a pleasure to read on it). So I fired up the guides page on the experimental browser – it works, but reading a PDF or a Kindle-formatted book is so much better.</p>
+
+<p>So I got this simple idea. Print the web page as a PDF and e-mail it to your Kindle. Here’s what I did:</p>
+
+<ol>
+<li>Go to the site</li>
+<li>Print – (PDF format “saved to file” instead of sending it to a printer). I was on Linux – Mac also has the “Print to PDF/PS support by default, for Windows you’ll need to get <a href="http://www.cutepdf.com/">CutePDF</a> installed)</li>
+<li>e-mail it to your Kindle address (I also uploaded it to my dropbox – so I can get it later on) and you are done!</li>
+</ol>
+
+
+<p>(BTW, dropbox is an amazing thing – if you use multiple computers/OS, you have to try this thing. If you are going to try it out (for free), help me out – <a href="https://www.getdropbox.com/referrals/NTEzMDYwMzk">use my Dropbox referral link</a>)</p>
+
+<p>So there you go – another easy way to get web-content for free on your Kindle. Go on enjoy the book now.</p>
+
+<p><strong>Blog-Notes</strong></p>
+
+<ul>
+<li><a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a></li>
+<li><a href="http://guides.rubyonrails.org">Rails Guides – excellent info on the RubyOnRails framework</a></li>
+<li><a href="http://www.cutepdf.com/">CutePDF</a></li>
+<li><a href="https://www.getdropbox.com/">DropBox</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[#songsincode (twitter geek fun)]]></title>
+    <link href="http://arnab-deka.com/posts/2009/08/songsincode-twitter-geek-fun/"/>
+    <updated>2009-08-21T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/08/songsincode-twitter-geek-fun</id>
+    <content type="html"><![CDATA[<blockquote><p>This blog is about twitter hastags. To learn more about twitter hashtags, go <a href="http://twitter.pbworks.com/Hashtags">here</a>.</p></blockquote>
+
+<p>So #songsincode has been <a href="http://twitter.com/#search?q=%23songsincode">ruling the twitter trends</a> for a day now. Didn&rsquo;t follow it? No worries &ndash; <a href="http://www.sitepoint.com/blogs/2009/08/21/geeks-just-wanna-have-fun-songsincode/">here&rsquo;s a recent blog</a> with some good (early) ones.</p>
+
+<p>Basically, it was the most fun I have had reading hashtags. Today, after lunch I took a plunge too :)</p>
+
+<p>Original <a href="http://twitter.com/arnab_deka/status/3460700079">tweet here</a>:</p>
+
+<pre><code>(you.breath + you.move).each { i.missing(you) }
+</code></pre>
+
+<p>Original <a href="http://twitter.com/arnab_deka/status/3460883623">tweet here</a>:</p>
+
+<pre><code>while ( time(you.reverse) &lt; = 1.minute )
+  i = you.steps_behind(2)
+end
+</code></pre>
+
+<p>Oh don&rsquo;t tell me I was so bad you could not even guess the songs (<a href="http://www.amazon.com/Every-Breath-You-Take/dp/B000W299VM/ref=sr_1_2?ie=UTF8&amp;s=dmusic&amp;qid=1250899720&amp;sr=8-2">Every Breath You Take</a> and <a href="http://www.youtube.com/watch?v=qv829hUuYAM">Two Steps Behind</a>).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Guarded logging in Ruby?]]></title>
+    <link href="http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby/"/>
+    <updated>2009-08-07T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/08/guarded-logging-in-ruby</id>
+    <content type="html"><![CDATA[<p>Assuming you know about “guarded logging”, a Java logging best
+practise. If not, get an overview in <a href="http://publib.boulder.ibm.com/infocenter/ledoc/v6r11/index.jsp?topic=/com.ibm.rcp.tools.doc.appdev/serviceability_java.util.loggingbestpractices.html">this IBM article</a> or in <a href="http://www.burlesontech.com/wiki/display/btg/Java+Logging+Standards+and+Guidelines">this blog</a>.</p>
+
+<p>Basically it is the practice of checking if a particular log message
+will indeed be outputted to the log (based on the severity level)
+before calling the log statement. This is a performance improvement.
+Here&rsquo;s a Java example:</p>
+
+<div><script src='https://gist.github.com/4585349.js?file=example.java'></script>
+<noscript><pre><code>if( logger.isLoggable(Level.INFO) ) {
+    logger.info( &quot;this is a &quot; + &quot;info&quot; + &quot;message&quot; );
+}
+</code></pre></noscript></div>
+
+
+<p>So I heard from one of my colleagues that Ruby&rsquo;s logging performance
+can also be improved the same way, by putting the message in a block
+(instead of just passing it as an string arg to the method):</p>
+
+<div><script src='https://gist.github.com/4585349.js?file=example.rb'></script>
+<noscript><pre><code>logger.debug { &quot;this is a &quot; + &quot;debug&quot; + &quot;message&quot; }
+</code></pre></noscript></div>
+
+
+<p>See various ways to log a message at the <a href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/">ruby-docs</a> (search for
+&ldquo;How to log a message&rdquo; in that page). I looked into the source-code
+and, just like in Java, the first thing that is done is to check the
+severity and return (true) if the severity is higher than the
+message&rsquo;s. So like in Java, it should not have any effect (except
+creating the strings etc.).</p>
+
+<p>Just to test it out, I wrote a benchmark test:</p>
+
+<div><script src='https://gist.github.com/4585349.js?file=benchmarking_example.rb'></script>
+<noscript><pre><code>require &#39;benchmark&#39;
+require &#39;logger&#39;
+
+class LoggerBenchmark
+  def initialize
+    @logger = Logger.new(&quot;/dev/null&quot;)
+  end
+
+  def benchmark
+    n = 10000
+    # I use bmbm method and not bm here
+    # so the effects of initializing etc. are abstracted away
+    Benchmark.bmbm do |x|
+      x.report(&quot;with block&quot;) do
+        n.times do |i|
+          # trying to do *some* arithmetic here
+          # so there is *some* work for string-creation
+          @logger.warn { &quot;logging with block - #{rand * 1000 % i}&quot; }
+        end
+      end
+
+      x.report(&quot;with string&quot;) do
+        n.times do |i|
+          @logger.warn &quot;logging with string - #{rand * 1000 % i}&quot;
+        end
+      end
+
+      x.report(&quot;with severity check&quot;) do
+        n.times do |i|
+          if @logger.warn?
+            @logger.warn(&quot;logging with severity check - #{rand * 1000 % i}&quot;)
+          end
+        end
+      end
+
+    end
+  end
+end
+
+LoggerBenchmark.new.benchmark
+</code></pre></noscript></div>
+
+
+<p>Here&rsquo;s what I noticed:</p>
+
+<ul>
+<li><p>with <code>n &lt;= 10,000</code> (number of logging calls), there was really no
+difference between the three ways:
+<div><script src='https://gist.github.com/4585349.js?file=results_small_n.sh'></script>
+<noscript><pre><code>$ time ruby logger_benchmark.rb
+Rehearsal —————————————————————
+with block            1.340000   0.160000   1.500000 (  1.500111)
+with string           0.740000   0.110000   0.850000 (  0.845971)
+with severity check   0.650000   0.080000   0.730000 (  0.736908)
+—————————————————— total: 3.080000sec</p>
+
+<pre><code>                            user     system      total        real
+</code></pre>
+
+<p>with block            0.670000   0.100000   0.770000 (  0.765206)
+with string           0.640000   0.080000   0.720000 (  0.715421)
+with severity check   0.660000   0.080000   0.740000 (  0.733024)
+ruby logger_benchmark.rb  4.72s user 0.62s system 99% cpu 5.351 total
+</code></pre></noscript></div></p></li>
+<li><p>with <code>n = 100,000</code>: It looked like the simplest way to log (with a
+string-arg) still performs the best:
+<div><script src='https://gist.github.com/4585349.js?file=results_medium_n.sh'></script>
+<noscript><pre><code>$ time ruby logger_benchmark.rb
+Rehearsal &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;
+with block            7.630000   1.030000   8.660000 (  8.669890)
+with string           6.410000   0.840000   7.250000 (  7.270509)
+with severity check   6.570000   0.890000   7.460000 (  7.472230)
+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; total: 23.370000sec</p>
+
+<pre><code>                            user     system      total        real
+</code></pre>
+
+<p>with block            6.760000   0.930000   7.690000 (  7.697947)
+with string           6.320000   0.870000   7.190000 (  7.190802)
+with severity check   6.460000   0.930000   7.390000 (  7.394368)
+ruby logger_benchmark.rb  40.20s user 5.50s system 99% cpu 45.755 total
+</code></pre></noscript></div></p></li>
+</ul>
+
+
+<p>Final takeaway: it really does not make that big a difference and
+keeping it simple (with a string-arg) should work. If you are worried
+about performance, this probably is not a trick that will give you a
+big bang for the buck.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Photos: Hamilton Viewpoint Park and Alki Beach, West Seattle]]></title>
+    <link href="http://arnab-deka.com/posts/2009/08/photos-hamilton-park-and-alki-beach/"/>
+    <updated>2009-08-04T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/08/photos-hamilton-park-and-alki-beach</id>
+    <content type="html"><![CDATA[<p>On a photo uploading spree today.</p>
+
+<p>The first album consists photos from Hamilton Park and Alki Beach, a beautiful area in West Seattle. Because of it’s location, you get great views of Seattle and the Harbor from here, specially great in the evening.</p>
+
+<p>Hamilton Viewpoint Park: See details <a href="http://www.gonorthwest.com/Washington/Seattle/viewpoints/hamilton.htm">here</a> and the <a href="http://www.seattle.gov/parks/park_detail.asp?id=454">Seattle gov parks page</a>.</p>
+
+<p><strong>The full album</strong> (only 26 pics – easy to click through and to add comments too) <strong>is on my smugmug site: <a href="http://arnab-o-scope.smugmug.com/gallery/9163956_kwkf7">http://arnab-o-scope.smugmug.com/gallery/9163956_kwkf7</a></strong>.</p>
+
+<p>Here are a few excerpts:*   [![macbook][4]][4]
+*   [![Seattle downtown basking in the evening glory][5]][5]
+*   [![Downtown Seattle Closeup][6]][6]
+*   [![Pinkish sunset over Mt Rainier][7]][7]
+*   [![a couple getting married][8]][8]
+*   [![A state ferry with the Space Needle and Cascade mountains in the backdrop][9]][9]
+*   [![another shot with the mountains and the needle][10]][10]
+*   [![On the way to Death Valley][11]][11]
+*   [![On the way to Death Valley][12]][12]
+*   [![Badwater Basin][13]][13]
+*   [![Bad Water Basin][14]][14]
+*   [![Red Rock Canyon][15]][15]
+*   [![Vegas Strip][16]][16]
+*   [![Fabulous Las Vegas][17]][17]
+*   [![Fabulous Las Vegas][18]][18]
+*   [![Around US][19]][19]
+*   [![Red Rock Canyon][20]][20]
+*   [![Red Rock Canyon][21]][21]
+*   [![Red Rock Canyon][22]][22]
+*   [![ARCL Summer 2008 3rd Place Trophy (Eagles)][23]][23]
+*   [![Arnab Deka][24]][24]
+*   [![Arnab][25]][25]</p>
+]]></content>
+  </entry>
+  
+</feed>

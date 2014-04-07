@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: on life - tech | Arnab's Universe]]></title>
+  <link href="http://arnab-deka.com/posts/categories/on-life-tech/atom.xml" rel="self"/>
+  <link href="http://arnab-deka.com/"/>
+  <updated>2013-10-07T19:27:15+05:30</updated>
+  <id>http://arnab-deka.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Announcing www.arnab-deka.com!]]></title>
+    <link href="http://arnab-deka.com/posts/2009/01/so-this-is-my-new-blog/"/>
+    <updated>2009-01-30T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/01/so-this-is-my-new-blog</id>
+    <content type="html"><![CDATA[<p>People have always been telling me to get move away from blogger. In late 2008, I read a few really good articles on why – and I was convinced. Sorry – but it seems I did not bookmark(<a href="http://delicious.com/arnab.deka/">delicious</a> them). Tried to look for them now, but I get a few business oriented results only.</p>
+
+<p>Anyway, I always wanted to get my own domain. And play around with Rails, Capistrano etc. to launch it. So here it is. I did spend a lot of time creating it. But finally, I think I am going the low-hanging-fruit (agile?) way – so right now it’s the simple, easy and open source <a href="http://wordpress.org">WordPress</a> running on my host.</p>
+
+<p>I am planning to add some dynamic mashup content (like my activity list from all the services I use, and some news that I feed in all mashed up). Let’s see where it goes.</p>
+
+<p>A few of my early 2009 goals were to learn <a href="http://en.wikipedia.org/wiki/Dvorak_Simplified_Keyboard">Dvorak</a>, master vim and Rails and then use all that to prototype my site. Status</p>
+
+<ul>
+<li>Dvorak – home row + 4 top row keys done – progress is slow – but it’s good</li>
+<li>vim – well I have been using it for a couple of years now. But now I am really learning it. I really like Swaroop C H’s <a href="http://www.swaroopch.com/notes/Vim">A Byte of Vim</a>. And with some snazzy plugins (rails.vim, project.vim, surround.vim and fuzzyfind.vim it is really becoming the best editor ever)</li>
+<li>Rails – I have been using it for a year now. And I can do the “good stuff” – but now I am learning in-depth. Feels great to learn the details of the various components</li>
+</ul>
+
+
+<p>Along the way, git came. And I got hooked to that too. But anyway, things <strong>are</strong> moving along and I am happy about that.</p>
+
+<p>So one of my goals (getting my site working) is done. Here it is – <a href="http://www.arnab-deka.com"><strong>www.arnab-deka.com</strong></a> (bye bye blogger – will miss you)</p>
+
+<p>Now it’s up to improving it. Will keep you updated!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iPhone 3G!!!]]></title>
+    <link href="http://arnab-deka.com/posts/2008/08/iphone-3g/"/>
+    <updated>2008-08-23T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2008/08/iphone-3g</id>
+    <content type="html"><![CDATA[<p>yay! yay! yay!</p>
+
+<p>My T-mobile contract got over end of July and I finally gave in to the temptation – I got the iPhone 3G today!!! <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> (yes in spite of all the bad things ppl are saying about the battery and Exchange integration). I get 14 days to return it so why not try it!</p>
+
+<p>Only two problems till now:</p>
+
+<p>1) Yahoo mail won’t sync! I figured it was the non alphanumeric characters in my password! So apple could not figure out this advanced piece o technology – people do have passwords with non-alphanumeric characters in them. Well it’s only been, umm, 20 years since this “technology” started! <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<p>2) While setting up the phone, it crashed my OS twice. A-ha – Windows XP. So it’s a classic case of Microsoft v. Apple <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> And apple slam-dunked you twice Windows! <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<p>But other than that, I love the phone!</p>
+]]></content>
+  </entry>
+  
+</feed>

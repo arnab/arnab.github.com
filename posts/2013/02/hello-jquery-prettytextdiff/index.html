@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Hello jQuery.PrettyTextDiff - Arnab's Universe</title>
+  <meta name="author" content="Arnab Deka">
+
+  
+  <meta name="description" content="Tweet Hello jQuery.PrettyTextDiff Sunday, February the 3rd, 2013 | Comments For some work I did recently, I had to produce a visual diff of text.
+A &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7241491-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Arnab's Universe</a>
+  </div>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Arnab's Universe</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">... and all the parallel ones.</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+  <li class="resume">
+    <a href="/resume/">resume</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/arnab_deka/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/arnab/">github</a>
+  </li>
+
+  <li class="link">
+    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
+  </li>
+
+  <li class="link">
+    <a href="/blog/archives">archives</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:arnab-deka.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+  
+  <header>
+    
+      <h2 class="entry-title">Hello jQuery.PrettyTextDiff</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-03T10:56:00+05:30" pubdate data-updated="true">Sunday, February the 3<span>rd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<p>For some work I did recently, I had to produce a visual diff of text.
+A visual diff makes it easy for the user to understand what exactly
+changed with a quick scan.</p>
+
+<p>There&rsquo;s an excellent library from Google, called
+<a href="http://code.google.com/p/google-diff-match-patch/">diff_match_patch</a>
+that does a really good job of analyzing the text and producing the
+diffs in a programatic manner. However, it lacks the sauce to visually
+present it to the user.</p>
+
+<p>So I wrote a jQuery library which is a wrapper around Google&rsquo;s library
+and makes it trivial to wow your users.</p>
+
+<!-- more -->
+
+
+<p>First, a demo (the fiddle can be found
+<a href="http://jsfiddle.net/arnab/YwSVY/">here</a>):</p>
+
+<iframe class="jsfiddle"
+        style="height: 430px"
+        src="http://jsfiddle.net/arnab/YwSVY/embedded/result,html,js,resources,css/"
+        allowfullscreen="allowfullscreen"
+        frameborder="0">
+</iframe>
+
+
+<p>While Google&rsquo;s library is excellent from a NLP-perspective, it does
+not provide a way to show the diff in a beautiful manner. They have a
+reference implementation to produce the diff in HTML, but recommend
+you write your own (also this implmentation is inflexible in terms of
+changing style/elements etc.).</p>
+
+<p>Also, this library is produced in 7 different languages &ndash; so the code
+that uses this is not particularly pleasing to look at.</p>
+
+<p>Here&rsquo;s an example of the code you would have to write to produce a
+good looking diff:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">diff_match_patch</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">diff_prettyHtml</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">diffs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_amp</span> <span class="o">=</span> <span class="sr">/&amp;/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_lt</span> <span class="o">=</span> <span class="sr">/&lt;/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_gt</span> <span class="o">=</span> <span class="sr">/&gt;/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">pattern_para</span> <span class="o">=</span> <span class="sr">/\n/g</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">diffs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">op</span> <span class="o">=</span> <span class="nx">diffs</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>    <span class="c1">// Operation (insert, delete, equal)</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">diffs</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>  <span class="c1">// Text of change.</span>
+</span><span class='line'>      <span class="c1">//var text = data.replace(pattern_amp, &#39;&amp;amp;&#39;).replace(pattern_lt, &#39;&amp;lt;&#39;)</span>
+</span><span class='line'>      <span class="c1">//    .replace(pattern_gt, &#39;&amp;gt;&#39;).replace(pattern_para, &#39;&amp;para;&lt;br&gt;&#39;);</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_amp</span><span class="p">,</span> <span class="s1">&#39;&amp;amp;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_lt</span><span class="p">,</span> <span class="s1">&#39;&amp;lt;&#39;</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_gt</span><span class="p">,</span> <span class="s1">&#39;&amp;gt;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="nx">pattern_para</span><span class="p">,</span> <span class="s1">&#39;&lt;br&gt;&#39;</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">switch</span> <span class="p">(</span><span class="nx">op</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">DIFF_INSERT</span><span class="o">:</span>
+</span><span class='line'>          <span class="nx">html</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;ins style=&quot;background:#e6ffe6;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nx">text</span> <span class="o">+</span> <span class="s1">&#39;&lt;/ins&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">DIFF_DELETE</span><span class="o">:</span>
+</span><span class='line'>          <span class="nx">html</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;del style=&quot;background:#ffe6e6;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="nx">text</span> <span class="o">+</span> <span class="s1">&#39;&lt;/del&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">case</span> <span class="nx">DIFF_EQUAL</span><span class="o">:</span>
+</span><span class='line'>          <span class="nx">html</span><span class="p">[</span><span class="nx">x</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;span&gt;&#39;</span> <span class="o">+</span> <span class="nx">text</span> <span class="o">+</span> <span class="s1">&#39;&lt;/span&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">html</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So I wrote a library to wrap around it &ndash; so the client doesn&rsquo;t have to
+repeat this wherever they need to use it. You can find more on
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/">github</a> and it can
+be downloaded from the
+<a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a>.</p>
+
+<p>Now, with this library you&rsquo;d have to write just a couple of lines to
+produce a beautiful looking diff, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">prettyTextDiff</span><span class="p">({</span>
+</span><span class='line'>  <span class="c1">// options</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Peek inside the fiddle demo to see more. You can also customize many
+of the options &ndash; check out the documentation in the github repo.</p>
+
+<p>Hope you enjoy it!</p>
+
+<p>PS: Some of the motivation was also to flex my muscles with
+CofeeScript (haven&rsquo;t had a chance to use it for the last 2-3 months)
+and setting up compile and uglifying/compressing  of the Javascript
+with <code>cake</code>. Check out the simple
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/jquery.pretty-text-diff.coffee">coffeescript code</a>
+and the
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/Cakefile">Cakefile</a>.</p>
+
+<h3>Links</h3>
+
+<ul>
+<li><a href="http://code.google.com/p/google-diff-match-patch/">Google&rsquo;s diff_match_patch library</a></li>
+<li><a href="https://github.com/arnab/jQuery.PrettyTextDiff/">Plugin source on github</a></li>
+<li><a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a></li>
+<li><a href="http://jsfiddle.net/arnab/YwSVY/">jsFiddle demo</a></li>
+</ul>
+
+
+
+
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
+  
+
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'arnabdeka';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/';
+        var disqus_url = 'http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

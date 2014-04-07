@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tech | Arnab's Universe]]></title>
+  <link href="http://arnab-deka.com/posts/categories/tech/atom.xml" rel="self"/>
+  <link href="http://arnab-deka.com/"/>
+  <updated>2013-10-07T19:27:15+05:30</updated>
+  <id>http://arnab-deka.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello jQuery.PrettyTextDiff]]></title>
+    <link href="http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff/"/>
+    <updated>2013-02-03T10:56:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2013/02/hello-jquery-prettytextdiff</id>
+    <content type="html"><![CDATA[<p>For some work I did recently, I had to produce a visual diff of text.
+A visual diff makes it easy for the user to understand what exactly
+changed with a quick scan.</p>
+
+<p>There&rsquo;s an excellent library from Google, called
+<a href="http://code.google.com/p/google-diff-match-patch/">diff_match_patch</a>
+that does a really good job of analyzing the text and producing the
+diffs in a programatic manner. However, it lacks the sauce to visually
+present it to the user.</p>
+
+<p>So I wrote a jQuery library which is a wrapper around Google&rsquo;s library
+and makes it trivial to wow your users.</p>
+
+<!-- more -->
+
+
+<p>First, a demo (the fiddle can be found
+<a href="http://jsfiddle.net/arnab/YwSVY/">here</a>):</p>
+
+<iframe class="jsfiddle"
+        style="height: 430px"
+        src="http://jsfiddle.net/arnab/YwSVY/embedded/result,html,js,resources,css/"
+        allowfullscreen="allowfullscreen"
+        frameborder="0">
+</iframe>
+
+
+<p>While Google&rsquo;s library is excellent from a NLP-perspective, it does
+not provide a way to show the diff in a beautiful manner. They have a
+reference implementation to produce the diff in HTML, but recommend
+you write your own (also this implmentation is inflexible in terms of
+changing style/elements etc.).</p>
+
+<p>Also, this library is produced in 7 different languages &ndash; so the code
+that uses this is not particularly pleasing to look at.</p>
+
+<p>Here&rsquo;s an example of the code you would have to write to produce a
+good looking diff:
+```js
+diff_match_patch.prototype.diff_prettyHtml = function(diffs) {</p>
+
+<pre><code>var html = [];
+var pattern_amp = /&amp;/g;
+var pattern_lt = /&lt;/g;
+var pattern_gt = /&gt;/g;
+var pattern_para = /\n/g;
+for (var x = 0; x &lt; diffs.length; x++) {
+  var op = diffs[x][0];    // Operation (insert, delete, equal)
+  var data = diffs[x][1];  // Text of change.
+  //var text = data.replace(pattern_amp, '&amp;amp;').replace(pattern_lt, '&amp;lt;')
+  //    .replace(pattern_gt, '&amp;gt;').replace(pattern_para, '&amp;para;&lt;br&gt;');
+  var text = data.replace(pattern_amp, '&amp;amp;').replace(pattern_lt, '&amp;lt;')
+      .replace(pattern_gt, '&amp;gt;').replace(pattern_para, '&lt;br&gt;');
+  switch (op) {
+    case DIFF_INSERT:
+      html[x] = '&lt;ins style="background:#e6ffe6;"&gt;' + text + '&lt;/ins&gt;';
+      break;
+    case DIFF_DELETE:
+      html[x] = '&lt;del style="background:#ffe6e6;"&gt;' + text + '&lt;/del&gt;';
+      break;
+    case DIFF_EQUAL:
+      html[x] = '&lt;span&gt;' + text + '&lt;/span&gt;';
+      break;
+  }
+}
+return html.join('');
+</code></pre>
+
+<p>  };
+```</p>
+
+<p>So I wrote a library to wrap around it &ndash; so the client doesn&rsquo;t have to
+repeat this wherever they need to use it. You can find more on
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/">github</a> and it can
+be downloaded from the
+<a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a>.</p>
+
+<p>Now, with this library you&rsquo;d have to write just a couple of lines to
+produce a beautiful looking diff, like this:
+<code>js
+$(selector).prettyTextDiff({
+  // options
+});
+</code></p>
+
+<p>Peek inside the fiddle demo to see more. You can also customize many
+of the options &ndash; check out the documentation in the github repo.</p>
+
+<p>Hope you enjoy it!</p>
+
+<p>PS: Some of the motivation was also to flex my muscles with
+CofeeScript (haven&rsquo;t had a chance to use it for the last 2-3 months)
+and setting up compile and uglifying/compressing  of the Javascript
+with <code>cake</code>. Check out the simple
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/jquery.pretty-text-diff.coffee">coffeescript code</a>
+and the
+<a href="https://github.com/arnab/jQuery.PrettyTextDiff/blob/master/Cakefile">Cakefile</a>.</p>
+
+<h3>Links</h3>
+
+<ul>
+<li><a href="http://code.google.com/p/google-diff-match-patch/">Google&rsquo;s diff_match_patch library</a></li>
+<li><a href="https://github.com/arnab/jQuery.PrettyTextDiff/">Plugin source on github</a></li>
+<li><a href="http://plugins.jquery.com/pretty-text-diff/">jQuery plugins site</a></li>
+<li><a href="http://jsfiddle.net/arnab/YwSVY/">jsFiddle demo</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[State of e-commerce in India]]></title>
+    <link href="http://arnab-deka.com/posts/2012/09/state-of-e-commerce-in-india/"/>
+    <updated>2012-09-23T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2012/09/state-of-e-commerce-in-india</id>
+    <content type="html"><![CDATA[<p>So, since moving back to India 4 months ago, we’ve trying to buy stuff
+off the internet, like we did back in Seattle (oh Amazon), from
+diapers to audio CDs (whaaaat? I know). While the world is much much
+better compared to 2006, there are still some Idiocracies in the UX
+and process. There are the big players (<a href="http://www.flipkart.com/">FlipKart</a>, <a href="http://www.infibeam.com/">infibeam</a>
+and the like) where (from the 4 months experience) you’d find what you
+are looking almost 6-7 times out of 10. The long-tail of e-commerce in
+India is the real deal though – the tail is really really long. I use
+<a href="http://www.junglee.com/">Junglee.com</a> to find the long time and almost always (9+ out of
+10) the things I am looking for are found somewhere. Funny thing is
+that you’ll never find two things you need in one site. Over these 4
+months, I don’t think any of these sites have come up more than once
+in my search.</p>
+
+<!-- more -->
+
+
+<p>To highlight some of the other differences:</p>
+
+<ul>
+<li><strong>No guest checkout</strong>: Almost nobody has guest checkout. Everybody
+  requires you to register and require your email and phone. Most
+  the package tracking is done thru SMS so that’s ok, but I’ve had
+  some spam (email and SMS) originating from here as well. But for
+  the most part, they are well behaved (I don&rsquo;t know why they need
+  my birthday or gender to ship stuff me though– anyway they get
+  wrong info for such questions ;))</li>
+<li><strong>Weak integration with backend</strong>: More than once I have placed
+  orders (after signing up etc.) only to be informed later that
+  the item is not in stock. The websites are more like marketing
+  websites with a cart/checkout process and it looks like the
+  orders are processed completely separately.</li>
+<li><strong>Cash-On-Delivery</strong>: Almost everyone takes COD orders. I know
+  some people don’t like the idea, but for Indian e-commerce it’s
+  a must. Mostly because if you pay when you order on the site and
+  then you don’t get the thing or get something else, there’s
+  pretty much nothing you can do. Most sites will process a refund
+  but you have to call them a few times to get that done. And some
+  sites only give you a coupon that you can use in their site. So
+  COD is heaven-sent and must-needed for such small sites.
+  <a href="http://www.flipkart.com/s/help/payments">FlipKart has started doing Card-On-Delivery</a>, which is even better!</li>
+<li><strong>Faaaaaast and FREE shipping</strong>: Almost every order I have made
+  has been delivered within a few days. In one-third of the cases it’s
+  within 2 days. And it’s 99% of the time free shipping.</li>
+</ul>
+
+
+<p>To summarize, for the most part, it’s all good. You can find 9/10
+things online and of that you can get 9/10 items delivered at your
+doorstep within a reasonable amount of time and pay after you
+get/inspect it. But that’s not why I started writing this piece today…</p>
+
+<h2>A uniquely horrible experience at ezmaal.com</h2>
+
+<p>What I wanted to do today was share a very bad experience on one of
+these small player’s sites today. Remember the band called
+<a href="http://www.amazon.com/Route-Indian-Music-Hindi-Modern/dp/B0013LKL36/">Silk Route</a>? Heard them on radio and remembered how awesome their
+music was. Unfortunately the album’s not on spotify or in Amazon/MP3.
+So I looked up FlipKart (out of stock) and Junglee. That’s where I
+found <a href="http://www.ezmaal.com/">ezmaal.com</a> – and they had it in stock! So I went through
+the registration process and signed up for an account.</p>
+
+<p>Now, I use the <a href="https://agilebits.com/onepassword">most excellent 1Password</a> for creating random
+passwords for every site and to manage signing-in/out. Did the same on
+ezmaal too – and it was all fine and dandy and got an account created.
+Now, just before checking out I wanted to see if the login/logout was
+working (you never know with small sites). So I opened up the site in
+an <a href="http://support.google.com/chrome/bin/answer.py?hl=en&amp;answer=95464">incognito window</a> and tried loggin in. Here’s the screenshot of
+what I got back: [![ezmaal login failure][11]][11]
+click to see larger image</p>
+
+<ol>
+<li>They throw a really garbage un-customized ASP.net error in the
+customer’s face. It means nothing to me!</li>
+<li>They are trying to validate my password for script-injection. I
+don’t think they are actively doing this, but it’s probably part of
+ASP.net and they have not tested and not coded to handle login
+failures. Really really bad if the login on your site throws up gibberish.</li>
+<li><strong>Password displayed on screen</strong>: The worst part is that they
+print my password three times on the screen, verbatim. Thank God I use
+1Password and have a random (and more importantly, different) password
+on every site. But like most customer’s if I had a
+one-password-for-all and used that in here, it’s as good as being
+leaked. If nowhere else, this will be on their server-logs. An
+employee only need to grep for <code>Password\=</code> in the logs. On top of
+this, with this kind of an experience, I have no faith that they
+salt/hash the passwords. I am more willing to believe that they keep
+it all in cleartext in a SQLServer database.</li>
+</ol>
+
+
+<p>I have seen bad e-commerce sites before, but will I shop at a place
+which does not care about my online security? No way in hell (yeah, I
+did not complete that order)!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick howto on accessing Rails Properties]]></title>
+    <link href="http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties/"/>
+    <updated>2011-04-08T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties</id>
+    <content type="html"><![CDATA[<p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
+
+<!-- more -->
+
+
+<p><strong>Rails 3</strong>: browse the <a href="https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb">source-code at railties/lib/rails/info.rb</a></p>
+
+<p>Or see:
+<div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rack =&gt; ::Rack.release,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(Rails.root),
+  :env =&gt; Rails.env,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env][&#39;adapter&#39;],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+  :middleware =&gt; Rails.configuration.middleware.map(&amp;:inspect),
+}
+</code></pre></noscript></div>
+</p>
+
+<p><strong>Rails 2</strong>: browse the <a href="https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb">source-code at railties/builtin/rails_info/rails/info.rb</a></p>
+
+<p>Or see:
+<div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(RAILS_ROOT),
+  :env =&gt; RAILS_ENV,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV][&#39;adapter&#39;],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+}
+</code></pre></noscript></div>
+</p>
+
+<p>Till the next time…</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Interesting Job Advertisement]]></title>
+    <link href="http://arnab-deka.com/posts/2009/09/interesting-job-advertisement/"/>
+    <updated>2009-09-22T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/09/interesting-job-advertisement</id>
+    <content type="html"><![CDATA[<p>A recent job opening advert (from <a href="http://vark.com/jobs#feeng">Aardvark, for a Front-End Web Developers</a>) goes:</p>
+
+<blockquote><p>Required Skills:
+* Fluency in HTML and CSS
+* Experience taking mockups and turning them into standards-compliant HTML/CSS
+* Expertise in achieving cross-browser compatibility in IE, Firefox, and Safari
+* Experience in implementing grid-based layouts in HTML/CSS
+* Experience in an agile development environment</p>
+
+<p>Pluses:
+* Interest in user experience design and graphic design
+* Experience in Javascript and Ruby on Rails
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools
+* Experimental, user focused, and iterative
+* Previous startup experience</p></blockquote>
+
+<p>I felt the Pluses section was very interesting, specially (you kinda see the others on Rails related job boards anyway):
+* History of side projects and interest in social media, browsers, and mobile web
+* Obsession with new technologies and open source tools</p>
+
+<p>Shows how today’s start-ups value people who are really interested in what they do (and not just in for the money). An encouraging view of the world indeed – now I just have to get on it and get those much needed Plusses into my skills bag <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+
+<p>Note to my employers, friends, well wishers and anyone else interested: This does not mean I am looking for a job! I love the job I have right now and am just happy to see the importance of “passion” in the world’s view of an ideal employee increasing!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Guides on my Kindle DX!!! (or any webpage for that matter)
+]]></title>
+    <link href="http://arnab-deka.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter/"/>
+    <updated>2009-09-18T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2009/09/rails-guides-on-my-kindle-dx-or-any-webpage-for-that-matter</id>
+    <content type="html"><![CDATA[<p>I got a <a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a><img src="http://www.assoc-amazon.com/e/ir?t=arnsblo-20&amp;l=as2&amp;o=1&amp;a=B0015TCML0" alt="" /> for a birthday gift! Thanks Ujwala!</p>
+
+<p>And so far I am loving it. It’s better to read on compared to Kindle 1 (which, BTW, Ujwala had gifted to me last year) – and the native PDF support (and the search-anywhere) is awesome! The experimental browser that comes with the DX is much much improved compared to Kindle 1st Gen.</p>
+
+<p>So I was reading more about <a href="http://guides.rubyonrails.org/routing.html">Rails Routing in the rails-guides</a>. And while I was in the bus today morning I wanted to read that on the Kindle (coz it is a pleasure to read on it). So I fired up the guides page on the experimental browser – it works, but reading a PDF or a Kindle-formatted book is so much better.</p>
+
+<p>So I got this simple idea. Print the web page as a PDF and e-mail it to your Kindle. Here’s what I did:</p>
+
+<ol>
+<li>Go to the site</li>
+<li>Print – (PDF format “saved to file” instead of sending it to a printer). I was on Linux – Mac also has the “Print to PDF/PS support by default, for Windows you’ll need to get <a href="http://www.cutepdf.com/">CutePDF</a> installed)</li>
+<li>e-mail it to your Kindle address (I also uploaded it to my dropbox – so I can get it later on) and you are done!</li>
+</ol>
+
+
+<p>(BTW, dropbox is an amazing thing – if you use multiple computers/OS, you have to try this thing. If you are going to try it out (for free), help me out – <a href="https://www.getdropbox.com/referrals/NTEzMDYwMzk">use my Dropbox referral link</a>)</p>
+
+<p>So there you go – another easy way to get web-content for free on your Kindle. Go on enjoy the book now.</p>
+
+<p><strong>Blog-Notes</strong></p>
+
+<ul>
+<li><a href="http://www.amazon.com/gp/product/B0015TCML0?ie=UTF8&amp;tag=arnsblo-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B0015TCML0">Amazon Kindle DX</a></li>
+<li><a href="http://guides.rubyonrails.org">Rails Guides – excellent info on the RubyOnRails framework</a></li>
+<li><a href="http://www.cutepdf.com/">CutePDF</a></li>
+<li><a href="https://www.getdropbox.com/">DropBox</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

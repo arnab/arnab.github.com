@@ -1,0 +1,726 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Arnab's Universe</title>
+  <meta name="author" content="Arnab Deka">
+
+  
+  <meta name="description" content="Tweet Ruby Dup vs Clone Tuesday, July the 28th, 2009 | Comments This was written way before StackOverflow launched, and
+certainly much before it &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://arnab-deka.com/posts/page/5/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Arnab's Universe" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7241491-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Arnab's Universe</a>
+  </div>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Arnab's Universe</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">... and all the parallel ones.</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">about</a>
+  </li>
+  <li class="resume">
+    <a href="/resume/">resume</a>
+  </li>
+
+  <li class="link">
+    <a href="http://twitter.com/arnab_deka/">twitter</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/arnab/">github</a>
+  </li>
+
+  <li class="link">
+    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
+  </li>
+
+  <li class="link">
+    <a href="/blog/archives">archives</a>
+  </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+
+</ul>
+
+
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:arnab-deka.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="unicode_square">
+      <span class="unicode_circle">
+        &nbsp;
+      </span>
+    </span>
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+      
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/07/ruby-dup-vs-clone/">Ruby Dup vs Clone</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-28T00:00:00+05:30" pubdate data-updated="true">Tuesday, July the 28<span>th</span>, 2009</time>
+        
+         | <a href="/posts/2009/07/ruby-dup-vs-clone/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <blockquote><p>This was written way before <a href="http://www.joelonsoftware.com/items/2008/09/15.html">StackOverflow launched</a>, and
+certainly much before it became popular. Those were the days when
+programmers had find out answers themselves ;)
+This has since been <a href="http://stackoverflow.com/q/10183370/117750">asked and answered</a> on StackOverflow.</p></blockquote>
+
+<p>I have had this question about the difference between Ruby&rsquo;s <code>clone</code>
+and <code>dup</code> method multiple times now. And I have always had this fuzzy
+feeling that &ldquo;they are almost the same thing&rdquo;. Today my colleague
+asked it again and I decided to dig it out. Here&rsquo;s what
+<a href="http://www.joelonsoftware.com/items/2008/09/15.html">Ruby API docs</a> say about them:</p>
+
+<h3><code>Object#clone</code></h3>
+
+<blockquote><p>Produces a shallow copy of obj &ndash; the instance variables of obj are
+copied, but not the objects they reference. Copies the frozen and
+tainted state of obj.</p></blockquote>
+
+<h3><code>Object#dup</code></h3>
+
+<blockquote><p>Produces a shallow copy of obj—the instance variables of obj are
+copied, but not the objects they reference. dup copies the tainted
+state of obj. See also the discussion under Object#clone. In general,
+clone and dup may have different semantics in descendant classes.
+While clone is used to duplicate an object, including its internal
+state, dup typically uses the class of the descendant object to create
+the new instance.</p>
+
+<p>This method may have class-specific behavior. If so, that behavior
+will be documented under the #initialize_copy method of the class.</p></blockquote>
+
+<p>So in essence, both produce shallow-copies of the object. <code>clone</code>
+copies the frozen <strong>and</strong> tainted state while <code>dup</code> copies only the
+tainted state. Even after reading that documentation twice, it&rsquo;s still
+murky in my head (probably coz I have not had <em>a chance</em> to write code
+to notice the frozen or tainted state specifically.)</p>
+
+<p>Here&rsquo;s a gem from ruby-talk that Google brought up. So
+<a href="3">Matz says</a>:</p>
+
+<blockquote><p><code>clone</code> copies everything; internal state, singleton methods, etc.
+<code>dup</code> copies object contents only (plus taintness status).</p></blockquote>
+
+<p>And so I wrote a bit of code to see it myself (and thus remember it).
+Here&rsquo;s a very simple <code>Person</code> class:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
+<noscript><pre><code>class Person
+  attr_accessor :name
+end
+</code></pre></noscript></div>
+
+
+<p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
+<noscript><pre><code>p = Person.new
+p.name = &quot;The Man&quot;
+
+# now add a singleton method on p:
+def p.say_hi
+  &quot;&#39;sup&quot;
+end
+</code></pre></noscript></div>
+
+
+<p>See that it&rsquo;s all working:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
+<noscript><pre><code>irb(main):014:0&gt; puts p.inspect
+#&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
+=&gt; nil
+irb(main):015:0&gt; puts p.say_hi
+&#39;sup
+=&gt; nil
+</code></pre></noscript></div>
+
+
+<p>Now create a clone and a dup of it:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
+<noscript><pre><code>the_clone = p.clone
+the_dup = p.dup
+</code></pre></noscript></div>
+
+
+<p>Both the clone and the dup have the same instance variables (which are
+shallow-copies BTW), but only the clone has the singleton method
+(<code>#say_hi</code>) in it:</p>
+
+<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
+<noscript><pre><code>irb(main):018:0&gt; the_clone.name
+=&gt; &quot;The Man&quot;
+irb(main):019:0&gt; the_dup.name
+=&gt; &quot;The Man&quot;
+irb(main):020:0&gt; the_clone.say_hi
+=&gt; &quot;&#39;sup&quot;
+irb(main):021:0&gt; the_dup.say_hi
+NoMethodError: undefined method `say_hi&#39; for 
+(Person :0xb7e83340 @name=&quot;The Man&quot;)
+        from (irb):21
+        from :0
+irb(main):022:0&gt; 
+</code></pre></noscript></div>
+
+
+<p>So that makes me feel that <code>#clone</code> has to do more work than <code>#dup</code>
+does. Hence <code>#dup</code> might be more beneficial for performance compared to
+<code>#clone</code> (unless you really need to use clone). Comments are welcome!</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/07/gnu-screen/">GNU Screen</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-20T00:00:00+05:30" pubdate data-updated="true">Monday, July the 20<span>th</span>, 2009</time>
+        
+         | <a href="/posts/2009/07/gnu-screen/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>If you have nothing to do with Linux you probably can stop reading now. Unless you want to get introduced to a very nice tool in the Linux world. I can say without doubt that this saves me at least an hour every month. In addition it gets you away from doing some mundane “set-up” like things every time to start working. It has a load of features but today I’ll just scratch the surface. But it’ll be enough to start you off and I promise you’ll be glad you found screen.</p>
+
+<p>One of the programs that I love and can’t go through the day without is <a href="http://www.gnu.org/software/screen/">GNU Screen</a>. It’s like a Window manager, but only for your terminals. You know, like you are working with so many terminals/consoles/terminal-windows all the time (one to the DB, one with vim open, one to run the tests, one to run the program etc., one to watch the logs, a few to prod boxes etc.). And then you disconnect and then reconnect (from home, somewhere else) and you have to set-up all that again?</p>
+
+<p>Yeah screen can help you with all that. My work pattern involves connecting to a screen session (and I get all the windows/context loaded). Whether I connect from work, home from somewhere else, all I have to say is:</p>
+
+<pre><code>$ screen -ls (to see what sessions I have running)
+$ screen -R some-session-name
+</code></pre>
+
+<p>And it’s wicked-easy to switch between different windows, search through your history etc. You can also configure it to do a few “start-up” things every time. For example, at home, I have screen</p>
+
+<ol>
+<li>configured to Open 4 windows when it starts up and</li>
+<li>have window-0 go to my code dir (to teh root of my <a href="http://rubyonrails.org/">RubyOnRails</a> part of the site)</li>
+<li>start up <a href="http://nubyonrails.com/articles/autotest-rails">auto-test</a> on window-1</li>
+<li>show the logs on window-2</li>
+<li>ssh into the <a href="http://www.bluehost.com/">blue host</a> (which hosts my site)</li>
+</ol>
+
+
+<p>Since the windows are persisted, I don’t have to do all these things every time I connect (for a lazy programmer (and all programmers are lazy aren’t they?) that’s a lot of help). You can even share the screens with someone else (I have not tried that yet though).</p>
+
+<p>Anyway, I hope you are sold by now. Even if you are not, spend some time (shouldn’t be more than a couple of hours) installing/configuring/running screen and you will soon reap the rewards. To get you started:</p>
+
+<ul>
+<li>The GNU Screen home-page: <a href="http://www.gnu.org/software/screen/">http://www.gnu.org/software/screen</a></li>
+<li>A good guide to installing/setting-up/using: <a href="http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen">http://magazine.redhat.com/2007/09/27/a-guide-to-gnu-screen</a></li>
+<li>Once you start liking it you’ll need a cheat-sheet: <a href="http://aperiodic.net/screen/quick_reference?do=show">http://aperiodic.net/screen/quick_reference?do=show</a></li>
+</ul>
+
+
+<p>A word about configuring: heard that Ubuntu will soon shipping with decent .screenrc (sane default configuration) so you don’t have to. Meanwhile you can configure it yourself (as in the Red Hat guide above) or look at these cool options: <a href="http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/">http://linux.dsplabs.com.au/gnu-screen-screenrc-configuration-file-p13/</a>. Here is my .screenrc:</p>
+
+<pre><code>vbell off
+vbell_msg "Ring"
+
+# detach on hangup
+autodetach on
+
+# don&amp;#039;t display copyright page
+startup_message off
+
+# scroll back
+defscrollback 1000
+
+# setup the caption
+hardstatus alwayslastline "%{-b gk}%-w%{+b kg}%50&gt;%n %t%{-b gk}%+w %=%C%&lt; "
+
+# right/left bindings
+bindkey "^[[c" next
+bindkey "^[[d" prev
+bindkey "^[[b" focus
+
+# Set the altscreen so that when you quit vi, it will go back to
+# what it was before
+altscreen on
+</code></pre>
+
+<p>And finally, my delicious links for screen. </p>
+Happy “screen”-ing <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":)" /></p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/03/where-is-the-quality-in-e-commerce/">Where Is the Quality in E-commerce?</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-29T00:00:00+05:30" pubdate data-updated="true">Sunday, March the 29<span>th</span>, 2009</time>
+        
+         | <a href="/posts/2009/03/where-is-the-quality-in-e-commerce/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>I have been buying most of my stuff (on the net) from Amazon ever since I moved to the US, in 2006. That’s probably why this thought/blog is coming now, after 3 years.</p>
+
+<p>It’s about the quality, mostly about the customer experience in e-commerce stores. First, I have to say kudos to the handful of places I have had a good experience in – <a href="http://www.amazon.com">Amazon</a> (and <a href="http://www.endless.com">endless</a>, <a href="http://www.amazonfresh.com">AmazonFresh</a>, <a href="http://www.windowshop.com">windowshop</a> etc.), <a href="http://www.ebay.com">eBay</a>, <a href="http://www.zappos.com">zappos</a>, <a href="http://www.bn.com">BN</a> and <a href="http://www.netflix.com">Netflix</a>. These places make it easy for the customer – easy to choose, to place an order and easy to track or follow in case there is a need. It’s (most of the time) easy to use them (categorization, search, find more related info, edit orders, cancel, return – the whole deal).</p>
+
+<p>However, over the last one week, I have had a “chance” to use a few other sites. Three of these were for techie/geeky t-shirts (which you won’t find, easily, in the aforementioned stores) – <a href="http://www.cafepress.com">CafePress</a>, The <a href="https://usshop.ubuntu.com">Ubuntu US Merchandise Shop</a> and <a href="http://www.zazzle.com">Zazzle</a> (for Mozilla/Firefox merchandise). Maybe, I am spoilt by the bigger, better sites – but I did not find it easy to search for things, find more info on them on these sites. They probably did fine, but not great. However, the experience after placing the order is not nice at all.</p>
+
+<p>The email I received from Ubuntu informing me that my order is complete does not have a single hyper-link. It does not even have a order number. It has the long UPS tracking number in it, but is it so hard to embed a link? And where do I go to see the details of my order? No link, no order number. They don’t have a picture of the T-shirt in the e-mail, so if I want to look it up to show to someone, I have to go to their site (the US one by the way, is harder to find). But if I search for the item by the name they sent in the e-mail nothing turns up. Horrified.</p>
+
+<p>I did not sign up for yet another account at zazzle and checked out as a guest. And now, when I click on the “View Order Details” on their site, it asks me to sign in. They could have told me this before, and I probably would have signed up for an account right? So at this site too I can’t search for or easily find the item I ordered.</p>
+
+<p>The e-mail from CafePress has a UPS link, but no links to their site or a “Order Details” page. Oh man, even here I can’t search for the item I ordered by the name they gave in the email.</p>
+
+<p>Anyway, I’ll say that these 3 sites gave me a sound (not great) experience before checkout (although the post-checkout part leaves a lot to be desired). The extreme example of a poorly-designed site was <a href="http://www.theamericanwedding.com">The American Wedding</a>. Ujwala was looking a site to order some more wedding cards (for friends over here in the US). There were a few sites which were just plain worthless. From their main page you could click on a card type (which will get you to the detail page for that card), but there was no way to start the checkout. No links whatsoever (maybe they do everything over the phone). Maybe they are just ads for a physical business, not e-commerce really.</p>
+
+<p>Anyway, <a href="http://www.theamericanwedding.com">www.theamericanwedding.com</a> looked like the best bet. We could select an invitation type from a good selection. Then came entering the text. You have to give the bride and the groom names in 3 different places! And the “sub-verse” that they suggested, violated their own rule of max 40 characters on a line for “sub-verses”. But the best – A form element called “Enter the first name of the bride and groom” – which has 3 text-boxes to enter (they are even numbered 1,2 and 3). Ok, they are asking for 2 first names, and clearly are expecting 3 different inputs. Hmmm. Guess what? Turns out Box #2 was for the word “and”! And then they ask “The name of the bride is in Line #” – {select 1 to like 50 from a dropdown}. And the same for the bride. Man!</p>
+
+<p>After filling out all the details, there is no preview of which text goes where in the card. There are no hints as to which section is optional (left top text, right top text) – so if I leave out a section I don’t know if that will result in a blotch of blank in the card. Oh and the shipping was about $20 for standard ground shipping <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> (and I don’t know the post-checkout experience yet).</p>
+
+<p>Now I think I know why Amazon/eBay etc. are where they are in the e-commerce world. Maybe the “invitation cards” industry specifically lacks good sites (which makes me wonder if it is easier to make a difference there), but it seems that most of the “e-commerce” sites are still in the 90s. It seems the internet as a whole has advanced light years ahead of it’s e-commerce children. “web2.0″ is a distant reality for now.</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/03/how-ubiquity-saved-me-today/">How Ubiquity Saved Me Today</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-07T00:00:00+05:30" pubdate data-updated="true">Saturday, March the 7<span>th</span>, 2009</time>
+        
+         | <a href="/posts/2009/03/how-ubiquity-saved-me-today/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>I know how I shouldn’t be pointy-clicky on all links I get. Specially the tiny url ones.</p>
+
+<p>Well yesterday I got a link (internal – so can’t share) in a mailing group in office. The URL was a shortened one (something like tinyurl, but used inside Amazon) and it did come with adequate warning about not opening it. But like a few other dumbos I did click it.</p>
+
+<p>I have to share the link in this post – but be warned that I have warned you. It’s no virus r malicious software/code but clever Javascript play. Anyway if you happen to click know that you have no right to sue me whatsoever. And if you really do click – let me know, afterwards, how it goes.</p>
+
+<p>Without further ado, it’s – <a href="http://www.rickrolling.com">http://www.rickrolling.com</a></p>
+
+<p>I am assuming you know what RickRoll is – if not, you should – the <a href="http://en.wikipedia.org/wiki/Rickroll">wikipedia article on RickRoll</a> explains it well (it has given me a lot of laughs till date and has robbed some producive hours too. I hope you enjoy it too <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /> ).</p>
+
+<p>So, anyway, like a real dumbo, even after reading all the warnings I clicked on it. And bam… my browser is not mine anymore. It’s like one of those really annoying moments when you loose control of something you use all the time (maybe not a great analogy, think a driver loosing control of the steering wheel of his bus. Think a bus full of passengers. In this case, it causes no damage – so like, the bus not hitting any thing/body, but dancing around the street).</p>
+
+<p>I had quite a few interesting tabs open on Firefox. And when it started dancing around, I really lost it. For a few seconds that is. Then the ubiquity idea came to me.</p>
+
+<p>ALT+SHIFT. type “close-tab” (actually just type “clo” and hit tab) and then type “RICK ROLL”.
+W00t! My browser is back. And my work is saved (the only other way would have been to kill firefox – after which if I restart and ask it to open All Tabs again, I am back to square-one. If I say “Start with no tabs” I loose all the other interesting ones. Of course you can kill FF, open up the FF tabs xml file (it’s nested inside your FF install dir) and delete this tab – but that’s a lot of work).</p>
+
+<p>I have loved Ubiquity a lot and have evangelized it to a lot of people already. It gives you a really powerful browser (like just type “search Something”, or “email Hi to arnab” and you are done. No opening a tabs or another service even). It’s very liberating. My fav commands are search, wiki, weather, email, map, define and twitter.</p>
+
+<p>But yesterday, for the first time I had the opportunity to really feel myself “Thank God I installed Ubiquity”.</p>
+
+<p>If you have not already, give it a spin – here’s the page for the <a href="http://labs.mozilla.com/projects/ubiquity/">Ubiquity project</a></p>
+
+<p>If you want more, watch this screencast (you can also find it on the Ubiquity page) &ndash;</p>
+
+<p><a href="http://vimeo.com/1561578">Ubiquity for Firefox</a> from <a href="http://vimeo.com/user532161">Aza Raskin</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+
+<p>If you are using it already, don’t you love it? If not using it yet – try it out and let me know how it goes. (Ubiquity is also on twitter – <a href="http://twitter.com/mozillaubiquity">@mozillaubiquity</a>)</p>
+
+  
+  
+
+
+    </article>
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://arnab-deka.com/posts/page/5/index.html" data-via="arnab_deka" data-counturl="http://arnab-deka.com/posts/page/5/index.html" data-size="large">Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/posts/2009/02/las-vegas-trip-photos/">Las Vegas Trip Photos</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-13T00:00:00+05:30" pubdate data-updated="true">Friday, February the 13<span>th</span>, 2009</time>
+        
+         | <a href="/posts/2009/02/las-vegas-trip-photos/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <p>And I have to remember this blog for ever. I wrote it right at 1234567890 UTC (and on Friday the 13th!)
+<img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_smile.gif" alt=":-)" /></p>
+
+<pre><code>$ watch -n1 -d &amp;#039;date +%s; expr 1234567890 - `date +%s`&amp;#039;
+Every 1s: date +%s; expr 1234567890 - `date +%s`
+
+1234567890
+0
+</code></pre>
+
+<p>Last weekend I, <strong>Ujwala </strong>and two of my old time friends, <strong>Daboo </strong>and <strong>Nandini </strong>met up in <strong>Vegas</strong>.</p>
+
+<p>We went around, saw the fabulous (should I say decadently smashing) hotels/resorts/casinos and did a little money-wasting (it would be hard to call slot machines gambling). The <a href="http://www.cirquedusoleil.com/CirqueDuSoleil/en/showstickets/mystere/mystere-Las-Vegas.htm">Cirque Du Soleil Mystere show</a> was really superb – perhaps the best live performance (in theater/circus area) I have seen. The crazy horse show was… well… disappointing.</p>
+
+<p>We had <a href="http://www.nps.gov/grca/">Grand Canyon</a> in mind when we were planning for the trip but heavy snow and bad weather made us cancel it. And <a href="http://www.usbr.gov/lc/hooverdam/">Hoover Dam</a> too… <img src="http://www.arnab-deka.com/posts/wp-includes/images/smilies/icon_sad.gif" alt=":-(" /></p>
+
+<p>But we did go over to <a href="http://www.nps.gov/deva/">Death Valley National Park</a> Area and <a href="http://www.redrockcanyonlv.org/">Red Rock Canyon</a> – was rocking!</p>
+
+<p><strong>My top five</strong> of the trip are &ndash;
+1) <a href="http://www.cirquedusoleil.com/CirqueDuSoleil/en/showstickets/mystere/mystere-Las-Vegas.htm">Cirque Du Soleil Mystere show</a>
+2) <a href="http://www.redrockcanyonlv.org/">Red Rock Canyon</a>
+3) <a href="http://en.wikipedia.org/wiki/Badwater">Badwater Basin</a> (and the drive to/from)
+4) <a href="http://en.wikipedia.org/wiki/Las_Vegas_Strip">The fabulous Vegas Strip</a> – special mention goes to <a href="http://www.bellagio.com/amenities/fountains-of-bellagio.aspx">Bellagio fountains</a>, the <a href="http://en.wikipedia.org/wiki/Wynn_Las_Vegas">Wynn resort</a>, The <a href="http://www.youtube.com/watch?v=qD5yUQqmSLQ&amp;feature=related">Mirage Volcanic fountains</a>
+5) The view from top of <a href="http://en.wikipedia.org/wiki/Stratosphere_Las_Vegas">Stratosphere tower</a></p>
+
+<p>Taking this opportunity, let me showcase a few of my pictures. All my photos from the trip at <strong><a href="http://arnab-o-scope.smugmug.com/gallery/7346028_QEfwd#472798549_SQvyN">arnab-o-scope on smugmug</a></strong>.</p>
+
+<p>Daboo also took some great pictures. They are at <a href="http://picasaweb.google.com/nandini.gogoi/LasVegas?authkey=rV1O2jVklyo#">Nandini’s picasa album</a>)</p>
+
+<ul>
+<li>[![macbook][17]][17]</li>
+<li>[![Seattle downtown basking in the evening glory][18]][18]</li>
+<li>[![Downtown Seattle Closeup][19]][19]</li>
+<li>[![Pinkish sunset over Mt Rainier][20]][20]</li>
+<li>[![a couple getting married][21]][21]</li>
+<li>[![A state ferry with the Space Needle and Cascade mountains in the backdrop][22]][22]</li>
+<li>[![another shot with the mountains and the needle][23]][23]</li>
+<li>[![On the way to Death Valley][24]][24]</li>
+<li>[![On the way to Death Valley][25]][25]</li>
+<li>[![Badwater Basin][26]][26]</li>
+<li>[![Bad Water Basin][27]][27]</li>
+<li>[![Red Rock Canyon][28]][28]</li>
+<li>[![Vegas Strip][29]][29]</li>
+<li>[![Fabulous Las Vegas][30]][30]</li>
+<li>[![Fabulous Las Vegas][31]][31]</li>
+<li>[![Around US][32]][32]</li>
+<li>[![Red Rock Canyon][33]][33]</li>
+<li>[![Red Rock Canyon][34]][34]</li>
+<li>[![Red Rock Canyon][35]][35]</li>
+<li>[![ARCL Summer 2008 3rd Place Trophy (Eagles)][36]][36]</li>
+<li>[![Arnab Deka][37]][37]</li>
+<li>[![Arnab][38]][38]</li>
+</ul>
+
+
+  
+  
+
+
+    </article>
+  
+
+    <nav role="navigation" id="pagination">
+  <span class="next">
+    <a href="/posts/page/6/" rel="next">Continue &rarr;</a>
+  </span>
+
+
+  <span class="prev">
+    <a href="/posts/page/4/" rel="prev">Newer &larr;</a>
+  </span>
+
+</nav>
+  </section>
+  
+
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'arnabdeka';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | Arnab's Universe]]></title>
+  <link href="http://arnab-deka.com/posts/categories/programming/atom.xml" rel="self"/>
+  <link href="http://arnab-deka.com/"/>
+  <updated>2013-10-07T19:27:15+05:30</updated>
+  <id>http://arnab-deka.com/</id>
+  <author>
+    <name><![CDATA[Arnab Deka]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs: change fonts dynamically based on screen resolution]]></title>
+    <link href="http://arnab-deka.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution/"/>
+    <updated>2012-09-23T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2012/09/emacs-change-fonts-dynamically-based-on-screen-resolution</id>
+    <content type="html"><![CDATA[<p>I regularly switch between a <a href="http://www.apple.com/thunderbolt/">Thunderbolt display</a> at home and the <a href="http://www.apple.com/macbook-pro/features/">Mac’s native retina display</a> when I’m in a coffee shop or the like.</p>
+
+<p>It bugs me that I have to adjust emac’s font manually when I switch displays – started “re-using” emacs again last week. So I automated this today:</p>
+
+<!-- more -->
+
+
+<p><div><script src='https://gist.github.com/3774147.js'></script>
+<noscript><pre><code>;; Gist-ed from in https://github.com/arnab/emacs-starter-kit
+
+(defun fontify-frame (frame)
+  (interactive)
+  (if window-system
+      (progn
+        (if (&gt; (x-display-pixel-width) 2000)
+            (set-frame-parameter frame &#39;font &quot;Inconsolata 19&quot;) ;; Cinema Display
+         (set-frame-parameter frame &#39;font &quot;Inconsolata 16&quot;)))))
+
+;; Fontify current frame
+(fontify-frame nil)
+
+;; Fontify any future frames
+(push &#39;fontify-frame after-make-frame-functions)</code></pre></noscript></div>
+</p>
+
+<p>You can see all my emacs customizations in Github <a href="https://github.com/arnab/emacs-starter-kit">arnab/emacs-starter-kit</a> repo, which is based on the excellent <a href="http://technomancy.us/153">ESK v2</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Allowing and testing CORS requests in Rails]]></title>
+    <link href="http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails/"/>
+    <updated>2012-09-19T14:28:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2012/09/allowing-and-testing-cors-requests-in-rails</id>
+    <content type="html"><![CDATA[<p>I’m currently writing a <code>backbone</code>-based <code>Javascript</code> app that’s going
+to directly call a <code>REST</code>-style API (implemented with <code>Rails</code> ).</p>
+
+<blockquote><p>CORS (Cross-Origin Resource Sharing) is new technique makes it
+  possible for AJAX requests to directly talk to HTTP-services outside
+  it’s own domain. Read this <a href="http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/" title="Cross Domain AJAX with CORS">awesome primer</a> to read more on CORS.</p></blockquote>
+
+<p>While there are lots of examples that show how to allow CORS requests
+in Rails (just <a href="http://goo.gl/d8g3j">google</a>), they almost never have tests with them.
+While it’s simple to test the HTTP headers, you may have to look
+around a little (or a lot) on how to test a HTTP “OPTIONS” request.
+When you make CORS requests, the browser may make a pre-flight
+“OPTIONS” request to verify that the server allows CORS.</p>
+
+<!-- more -->
+
+
+<p>To make Rails set the right HTTP headers to allow CORS requests, you
+can do something like this:</p>
+
+<p>```rb</p>
+
+<h1>some_controller.rb</h1>
+
+<p>before_filter: allow_cors</p>
+
+<p>def allow_cors
+  headers[&ldquo;Access-Control-Allow-Origin&rdquo;] = &ldquo;*&rdquo;
+  headers[&ldquo;Access-Control-Allow-Methods&rdquo;] = %w{GET POST PUT DELETE}.join(&ldquo;,&rdquo;)
+  headers[&ldquo;Access-Control-Allow-Headers&rdquo;] =</p>
+
+<pre><code>%w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(",")
+</code></pre>
+
+<p>  head(:ok) if request.request_method == &ldquo;OPTIONS&rdquo;
+  # or, render text: &lsquo;&rsquo;
+  # if that&rsquo;s more your style
+end
+```</p>
+
+<p>A few things to note here:</p>
+
+<ol>
+<li><p>You can set the <code>Access-Control-Allow-Origin</code> header to your
+domain to further restrict it.</p></li>
+<li><p>While Rails is one place to do this in, you can certainly do this
+in your webserver (nginx etc.). Again, just google. I prefer things to
+be more testable – maybe when I see a performance problem, I’d revise
+this decision (although, performance bottlenecks would probably not be
+in setting HTTP headers).</p></li>
+</ol>
+
+
+<p>Another thing to consider when you allow CORS, is authentication – you
+should do some HTTP based auth (token auth for example) so only <em>your</em>
+apps can talk to this service. The thing with JS is, however uglified
+it is, any developer worth his salt can figure out how to call your
+backend service after reading your JS by loading your site up in a
+browser.</p>
+
+<p>In any case, how do you test this? It’s fairly trivial to test that
+the right HTTP headers were set with something like this:</p>
+
+<p>```rb</p>
+
+<h1>testing_cors_spec.rb</h1>
+
+<p>response.headers[&lsquo;Access-Control-Allow-Origin&rsquo;].should == &lsquo;*&rsquo;
+```</p>
+
+<p>To make a HTTP <code>options</code> request in RSpec, I had to dig through some
+code. And googling didn’t help here, at least the way I google. Here’s
+the low-down: <code>RSpec</code> <em>delegates</em> the request methods (like
+<code>get</code>/<code>post</code>/<code>put</code> etc. in the controller specs) to Rails’
+<code>ActionController Tests</code>. All these methods invoke
+<code>ActionController::TestCase#process</code> with specific args, one of which
+is the method name.</p>
+
+<p>Now, Rails master already has support for making
+<code>options</code> requests in tests (thanks to <a href="https://github.com/rails/rails/commit/0303c2325fab253adf5e4a0b738cb469c048f008#L0R438">this commit</a>), but that’s
+not available in the latest Rails release (3.2.8). I think this would
+make it’s way into Rails 4.</p>
+
+<p>Looking into this commit, we get the idea
+though: basically we also call the <code>process</code> method with a <code>OPTIONS</code>
+argument for the request-method. Putting it all together, my tests
+looked something like this:</p>
+
+<p>```rb</p>
+
+<h1>some_controller_spec.rb</h1>
+
+<p>shared_examples_for &ldquo;any request&rdquo; do
+  context &ldquo;CORS requests&rdquo; do</p>
+
+<pre><code>it "should set the Access-Control-Allow-Origin header to allow CORS from anywhere" do
+  response.headers['Access-Control-Allow-Origin'].should == '*'
+end
+
+it "should allow general HTTP methods thru CORS (GET/POST/PUT/DELETE)" do
+  allowed_http_methods = response.header['Access-Control-Allow-Methods']
+  %w{GET POST PUT DELETE}.each do |method|
+    allowed_http_methods.should include(method)
+  end
+end
+
+# etc etc
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>describe &ldquo;HTTP OPTIONS requests&rdquo; do
+  # With Rails 4 (currently in master) we&rsquo;ll be able to <code>options :index</code>
+  before(:each) { process :index, nil, nil, nil, &lsquo;OPTIONS&rsquo; }</p>
+
+<p>  it_should_behave_like &ldquo;any request&rdquo;</p>
+
+<p>  it &ldquo;should be succesful&rdquo; do</p>
+
+<pre><code>response.should be_success
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>And similar tests for GET/POST what have you which actually test the functionality&hellip;</h1>
+
+<p>```</p>
+
+<h2>Update for Rails 4</h2>
+
+<p>So
+<a href="https://twitter.com/ekampp/status/385800059687690241">@ekampp on twitter</a>
+brought it to my attention that this test does not work
+anymore. It appears that the <code>options</code> method was
+<a href="https://github.com/rails/rails/commit/0303c23">added</a> and then
+<a href="https://github.com/rails/rails/commit/6a4ff5c">removed</a> from Rails
+master (since a method named <code>options</code> conflicts with a lot of stuff,
+as you can imagine).</p>
+
+<p>So, in Rails 4 (and current master) you can call <code>process</code> directly
+like this:
+<code>
+process :index, 'OPTIONS' # and other args as needed
+</code></p>
+
+<p>For example,
+<a href="https://github.com/rails/rails/blob/2de0cca/actionpack/lib/action_controller/test_case.rb#L499">this</a>
+is how <code>head</code> is implemented. So you are basically doing the same
+thing for an <code>OPTIONS</code> request.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick howto on accessing Rails Properties]]></title>
+    <link href="http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties/"/>
+    <updated>2011-04-08T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2011/04/quick-howto-accessing-rails-properties</id>
+    <content type="html"><![CDATA[<p>When you create a new Rails app the default static page (public/index.html) page shows a lot of details about the app. Here’s a quick how-to show these details (the idea is to probably show these on a /ping route (or a debug parameter on any page maybe) – so you can quickly monitor your app – it’s state, active_record state etc.).</p>
+
+<!-- more -->
+
+
+<p><strong>Rails 3</strong>: browse the <a href="https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb">source-code at railties/lib/rails/info.rb</a></p>
+
+<p>Or see:
+<div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rack =&gt; ::Rack.release,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(Rails.root),
+  :env =&gt; Rails.env,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[Rails.env][&#39;adapter&#39;],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+  :middleware =&gt; Rails.configuration.middleware.map(&amp;:inspect),
+}
+</code></pre></noscript></div>
+</p>
+
+<p><strong>Rails 2</strong>: browse the <a href="https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb">source-code at railties/builtin/rails_info/rails/info.rb</a></p>
+
+<p>Or see:
+<div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
+<noscript><pre><code># see https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb
+
+@properties = {
+  :ruby =&gt; &quot;#{RUBY_VERSION} (#{RUBY_PLATFORM})&quot;,
+  :rubygem =&gt; Gem::RubyGemsVersion,
+  :rails =&gt; Rails::VERSION::STRING,
+  :app_root =&gt; File.expand_path(RAILS_ROOT),
+  :env =&gt; RAILS_ENV,
+  :db_adapter =&gt; ActiveRecord::Base.configurations[RAILS_ENV][&#39;adapter&#39;],
+  :db_schema_version =&gt; (ActiveRecord::Migrator.current_version || nil),
+}
+</code></pre></noscript></div>
+</p>
+
+<p>Till the next time…</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Notes on Emacs + CL + Clojure + Slime...]]></title>
+    <link href="http://arnab-deka.com/posts/2010/12/notes-on-emacs-cl-clojure-slime/"/>
+    <updated>2010-12-30T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/12/notes-on-emacs-cl-clojure-slime</id>
+    <content type="html"><![CDATA[<p>After a day of struggling finally Emacs+CL+Clojure+Slime setup is working. I noted it all in the <a href="http://www.arnab-deka.com/posts/notes/emacs-setup/">notes section</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quick MacBook setup]]></title>
+    <link href="http://arnab-deka.com/posts/2010/03/quick-macbook-setup/"/>
+    <updated>2010-03-17T00:00:00+05:30</updated>
+    <id>http://arnab-deka.com/posts/2010/03/quick-macbook-setup</id>
+    <content type="html"><![CDATA[<p>Just put in my notes about setting up a MacBook in <a href="http://www.arnab-deka.com/posts/notes/macbook-setup" title="MacBook setup">the notes section here</a>. I’ll keep updating – please add your thoughts in!</p>
+]]></content>
+  </entry>
+  
+</feed>
