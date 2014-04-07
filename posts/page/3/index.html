@@ -65,33 +65,38 @@
     <h2 id="subtitle">... and all the parallel ones.</h2>
   </li>
 
+
+  <li class="link">
+    <a href="/blog/archives">archives</a>
+  </li>
+
+  <li class="link">
+    <a href="/contact/">contact</a>
+  </li>
+
   <li class="link">
     <a href="/about/">about</a>
   </li>
+
   <li class="resume">
     <a href="/resume/">resume</a>
   </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+
 
   <li class="link">
     <a href="http://twitter.com/arnab_deka/">twitter</a>
   </li>
 
 
+
   <li class="link">
     <a href="http://github.com/arnab/">github</a>
   </li>
 
-  <li class="link">
-    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
-  </li>
-
-  <li class="link">
-    <a href="/blog/archives">archives</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
 
 </ul>
 
@@ -451,7 +456,7 @@ end
 
 <p><code>:joins</code> is the only way to do this, using <code>:includes</code> does <strong>NOT</strong> respect the select clause. Here a gist:</p>
 
-<div><script src='https://gist.github.com/223925.js'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/223925.js'></script>
 <noscript><pre><code>    metrics_with_inputs = Revision.find(
       :all,
       :conditions =&gt; { :id =&gt; self.revisions.map { |r| r.id } },

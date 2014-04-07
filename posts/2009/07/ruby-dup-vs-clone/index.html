@@ -66,33 +66,38 @@ certainly much before it &hellip;">
     <h2 id="subtitle">... and all the parallel ones.</h2>
   </li>
 
+
+  <li class="link">
+    <a href="/blog/archives">archives</a>
+  </li>
+
+  <li class="link">
+    <a href="/contact/">contact</a>
+  </li>
+
   <li class="link">
     <a href="/about/">about</a>
   </li>
+
   <li class="resume">
     <a href="/resume/">resume</a>
   </li>
+
+  <li class="link rss">
+    <a href="/atom.xml">rss feed</a>
+  </li>
+
 
   <li class="link">
     <a href="http://twitter.com/arnab_deka/">twitter</a>
   </li>
 
 
+
   <li class="link">
     <a href="http://github.com/arnab/">github</a>
   </li>
 
-  <li class="link">
-    <a href="http://www.linkedin.com/in/arnab1981">linkedin</a>
-  </li>
-
-  <li class="link">
-    <a href="/blog/archives">archives</a>
-  </li>
-
-  <li class="link rss">
-    <a href="/atom.xml">rss feed</a>
-  </li>
 
 </ul>
 
@@ -205,7 +210,7 @@ to notice the frozen or tainted state specifically.)</p>
 <p>And so I wrote a bit of code to see it myself (and thus remember it).
 Here&rsquo;s a very simple <code>Person</code> class:</p>
 
-<div><script src='https://gist.github.com/4585462.js?file=person.rb'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/4585462.js?file=person.rb'></script>
 <noscript><pre><code>class Person
   attr_accessor :name
 end
@@ -214,7 +219,7 @@ end
 
 <p>Now we instantiate a <code>Person</code>, <code>p</code> and add a singleton method to it to say hi:</p>
 
-<div><script src='https://gist.github.com/4585462.js?file=person_say_hi.rb'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/4585462.js?file=person_say_hi.rb'></script>
 <noscript><pre><code>p = Person.new
 p.name = &quot;The Man&quot;
 
@@ -227,7 +232,7 @@ end
 
 <p>See that it&rsquo;s all working:</p>
 
-<div><script src='https://gist.github.com/4585462.js?file=validate.rb'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/4585462.js?file=validate.rb'></script>
 <noscript><pre><code>irb(main):014:0&gt; puts p.inspect
 #&lt;person :0xb7e83340 @name=&quot;The Man&quot;&gt;
 =&gt; nil
@@ -239,7 +244,7 @@ irb(main):015:0&gt; puts p.say_hi
 
 <p>Now create a clone and a dup of it:</p>
 
-<div><script src='https://gist.github.com/4585462.js?file=clone_and_dup.rb'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/4585462.js?file=clone_and_dup.rb'></script>
 <noscript><pre><code>the_clone = p.clone
 the_dup = p.dup
 </code></pre></noscript></div>
@@ -249,7 +254,7 @@ the_dup = p.dup
 shallow-copies BTW), but only the clone has the singleton method
 (<code>#say_hi</code>) in it:</p>
 
-<div><script src='https://gist.github.com/4585462.js?file=dup_vs_clone.rb'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/4585462.js?file=dup_vs_clone.rb'></script>
 <noscript><pre><code>irb(main):018:0&gt; the_clone.name
 =&gt; &quot;The Man&quot;
 irb(main):019:0&gt; the_dup.name

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tech | Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/posts/categories/tech/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2013-10-07T19:27:15+05:30</updated>
+  <updated>2014-04-07T17:41:51+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -243,7 +243,7 @@ did not complete that order)!</p>
 <p><strong>Rails 3</strong>: browse the <a href="https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb">source-code at railties/lib/rails/info.rb</a></p>
 
 <p>Or see:
-<div><script src='https://gist.github.com/911091.js?file=rails_306_properties.rb'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/911091.js?file=rails_306_properties.rb'></script>
 <noscript><pre><code># see https://github.com/rails/rails/blob/v3.0.6/railties/lib/rails/info.rb
 
 @properties = {
@@ -263,7 +263,7 @@ did not complete that order)!</p>
 <p><strong>Rails 2</strong>: browse the <a href="https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb">source-code at railties/builtin/rails_info/rails/info.rb</a></p>
 
 <p>Or see:
-<div><script src='https://gist.github.com/911091.js?file=rails_202_properties.rb'></script>
+<div><script src='https://gist.githubusercontent.com/arnab/911091.js?file=rails_202_properties.rb'></script>
 <noscript><pre><code># see https://github.com/rails/rails/blob/v2.0.2/railties/builtin/rails_info/rails/info.rb
 
 @properties = {
