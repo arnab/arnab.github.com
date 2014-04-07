@@ -43,15 +43,15 @@ module Jekyll
 
     def script_url_for(gist_id, filename)
       if !@github_user.nil?
-        url = "https://gist.github.com/#{@github_user}/#{gist_id}.js"     
+        url = "https://gist.githubusercontent.com/#{@github_user}/#{gist_id}.js"
         url = "#{url}?file=#{filename}" unless filename.nil? or filename.empty?
-        url   
+        url
       end
     end
 
     def get_gist_url_for(gist, file)
       if !@github_user.nil?
-        "https://gist.github.com/#{@github_user}/#{gist}/raw/#{file}"
+        "https://gist.githubusercontent.com/#{@github_user}/#{gist}/raw/#{file}"
       end
     end
 
