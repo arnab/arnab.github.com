@@ -13,12 +13,33 @@ of the Ruby community.
 
 # Upcoming
 
+<h2 id="rulu14">Jun '14: RuLu, Lyon, France</h2>
+
+I'm really excited [to be speaking at the upcoming
+Ruby Lugdunum Conference, or RuLu](http://rulu.eu/speakers#arnab).
+The conference will be held in
+[Lyon, France](https://goo.gl/maps/sy1GF) on the 19th and 20th of
+June.
+
+The talk will be a flavor of my "Modern Concurrency" talk I
+[presented in Sydney](#rubyconfau14). However, this is a shorter
+format; and instead of trying to cover everything from the
+previous iteration, I am going to focus on STM, actors and
+channels (or CSP or co/go routines). Hoping to a go deeper into these
+three topics.
+
+This will be my first visit to France (and to the EU in fact) and I'm
+really excited. I started
+[leveling up](https://www.duolingo.com/arnab.deka) on my French too!
+(BTW, [DuoLingo](https://www.duolingo.com/) is an excellent,
+high-quality way to learn a new language, highly recommended).
+
 Would you would like to have me speak at a conference, meet-up or just any
 gathering? [Get in touch](/contact/).
 
 # At Conferences
 
-## Feb '14: RubyConf Australia, Sydney
+<h2 id="rubyconfau14">Feb '14: RubyConf Australia, Sydney</h2>
 
 My first talk outside of India, presented at the 2nd edition of the
 ever-awesome [*RubyConf AU*](http://www.rubyconf.org.au/). After a
@@ -40,7 +61,7 @@ Ruby.
   + ... and the video
   <iframe src="//player.vimeo.com/video/89489939" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-## Jan '14: Garden City Ruby Conf, Bangalore
+<h2 id="gcrc14">Jan '14: Garden City Ruby Conf, Bangalore</h2>
 
 I gave a 30-minute talk  at the inaugural edition of
 [*Garden City Ruby Conf*](http://www.gardencityruby.org/), introducing
