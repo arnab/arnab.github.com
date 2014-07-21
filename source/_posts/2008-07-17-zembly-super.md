@@ -18,7 +18,7 @@ So all that and stuff like what-I’m-going-to-write-about now is basically what
 
 So I have turned to micro-blogging… Don’t get me worng, I love to write here… but where’s the time? So I turned to twitter recently. If you haven’t seen that yet – try it out – it’s the latest fad. Like sms-ing and blogging… It’s called Twitting! I mean it – go to [twitter][5] right now and see the demo video. It’s cool… and as most people believe, it’s the future… of smsing/blogging/mailing all-in-one.
 
-So if you still wanna see my updates – whatever handful you are anyway – get on to twitter and find me (arnab_deka) and follow me. I’ll still continue to write blogs, but they will be rare – like this.
+So if you still wanna see my updates – whatever handful you are anyway – get on to twitter and find me (or9ob) and follow me. I’ll still continue to write blogs, but they will be rare – like this.
 
 So today I came across this new shiny thing called zembly.
 

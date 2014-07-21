@@ -28,7 +28,7 @@ No more – I just twit it now – with the knowledge that whoever wants to eat 
 That’s why I urge you my friends/social-beings/netizens, give the article above a read – here it is again for effect – </span><http://bit.ly/17q25></p>
 If you do get convinced that twitter is a big idea, can be useful to you and actually help in reducing spam, get an account fast.
 
-You can follow me if you like – </span><http://twitter.com/arnab_deka>
+You can follow me if you like – </span><http://twitter.com/or9ob>
 Or check out the people I follow – there are some interesting folks – and follow them instead.</p>
 And finally, here are some interesting/info on why/how etc. of twitter: <http://delicious.com/arnab.deka/twitter>
 
