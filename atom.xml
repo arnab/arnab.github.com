@@ -4,7 +4,7 @@
   <title><![CDATA[Arnab's Universe]]></title>
   <link href="http://arnab-deka.com/atom.xml" rel="self"/>
   <link href="http://arnab-deka.com/"/>
-  <updated>2014-04-19T00:31:01+05:30</updated>
+  <updated>2014-07-21T10:51:57+05:30</updated>
   <id>http://arnab-deka.com/</id>
   <author>
     <name><![CDATA[Arnab Deka]]></name>
@@ -999,12 +999,12 @@ end
 
 <p>Basically, it was the most fun I have had reading hashtags. Today, after lunch I took a plunge too :)</p>
 
-<p>Original <a href="http://twitter.com/arnab_deka/status/3460700079">tweet here</a>:</p>
+<p>Original <a href="http://twitter.com/or9ob/status/3460700079">tweet here</a>:</p>
 
 <pre><code>(you.breath + you.move).each { i.missing(you) }
 </code></pre>
 
-<p>Original <a href="http://twitter.com/arnab_deka/status/3460883623">tweet here</a>:</p>
+<p>Original <a href="http://twitter.com/or9ob/status/3460883623">tweet here</a>:</p>
 
 <pre><code>while ( time(you.reverse) &lt; = 1.minute )
   i = you.steps_behind(2)
